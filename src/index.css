@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+
+@layer base{
+  :root{
+    font-family: 'Times New Roman', Times, serif;
+    line-height: 1.5;
+  }
+}
