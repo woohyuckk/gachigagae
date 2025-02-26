@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const AuthForm = ({ mode, onSubmit }) => {
   const [formData, setFormData] = useState({
-    id: '',
+    email: '',
     password: '',
     passwordRecheck: '',
     nickname: '',
@@ -17,14 +17,14 @@ const AuthForm = ({ mode, onSubmit }) => {
     <form className="flex flex-col" onSubmit={(e) => handleSubmit(e)}>
       <input
         className="w-full p-4 border border-gray-300 rounded-lg"
-        type="text"
-        name="id"
-        value={formData.id}
+        type="email"
+        name="email"
+        value={formData.email}
         onChange={(e) => {
           const { name, value } = e.target;
           setFormData({ ...formData, [name]: value });
         }}
-        placeholder="아이디"
+        placeholder="이메일 주소"
         required
       />
       <input
@@ -42,7 +42,7 @@ const AuthForm = ({ mode, onSubmit }) => {
       {mode === 'signup' && (
         <div>
           <input
-            type="text"
+            type="password"
             name="passwordRecheck"
             value={formData.passwordRecheck}
             onChange={(e) => {
