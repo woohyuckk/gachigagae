@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
-import AuthForm from '../components/auth/AuthForm';
 import { supabase } from '../libs/api/supabaseClient';
 import { useState } from 'react';
+import AuthForm from '../components/auth/AuthForm';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -12,7 +12,8 @@ const Signup = () => {
     const { email, password, passwordRecheck, nickname } = formData;
 
     // 유효성 검사
-    if (password.length < 6) {
+    const PASSWORD_LENGTH = 6;
+    if (password.length < PASSWORD_LENGTH) {
       setErrorMessage('비밀번호는 최소 6자 이상이어야 합니다.');
       return;
     }
