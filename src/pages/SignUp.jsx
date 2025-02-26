@@ -1,17 +1,9 @@
-// import { register } from '../api/auth';
 import { Link } from 'react-router-dom';
 import AuthForm from '../components/auth/AuthForm';
 
 const Signup = () => {
-  // const navigate = useNavigate();
-
-  const handleSignup = async (formData) => {
-    // try {
-    //   const response = await register(formData); // 인증 서버 회원가입 요청
-    //   response.success && navigate('/login');
-    // } catch (error) {
-    //   throw new Error(error);
-    // }
+  const handleSignup = (formData) => {
+    // 회원가입 로직 구현
   };
 
   return (
