@@ -1,8 +1,22 @@
+import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
+import { supabase } from '../libs/api/supabaseClient';
+
+const QUERY_KEY = ['places'];
 
 const Detail = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState('');
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: QUERY_KEY,
+    queryFn: async () => {
+      const { data: places } = await supabase.from('places').select('*');
+      return places;
+    },
+  });
+
+  console.log(data);
 
   // 이미지 클릭 시 모달 열기
   const openModal = (imageSrc) => {
@@ -14,6 +28,9 @@ const Detail = () => {
   const closeModal = () => {
     setModalOpen(false);
   };
+
+  if (isLoading) return <div>loading...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <div className="flex flex-col md:flex-row items-start gap-6 p-6 bg-pink-100 min-h-screen">
@@ -39,12 +56,6 @@ const Detail = () => {
             className="w-1/2 mx-auto aspect-square object-contain rounded-lg shadow-md hover:scale-105 transition-all duration-300 cursor-pointer"
             onClick={() => openModal('/public/default-image.png')}
           />
-          {/* <img
-          src="/public/default-image.png"
-          alt="default-image"
-          className="w-1/2 h-full object-cover rounded-lg shadow-md hover:scale-110 transition-all duration-300 cursor-pointer"
-          onClick={() => openModal("/public/default-image.png")}
-        /> */}
         </div>
 
         {/* 상세 정보 */}
@@ -79,7 +90,7 @@ const Detail = () => {
         <div className="mt-4">
           <input
             type="text"
-            className="w- border p-2 rounded-lg mt-2 focus:ring-2 focus:ring-pink-400 outline-none"
+            className="w-full border p-2 rounded-lg mt-2 focus:ring-2 focus:ring-pink-400 outline-none"
             placeholder="댓글을 입력하세요..."
           />
           <button className="w-full bg-pink-500 text-white py-2 rounded-lg mt-2 hover:bg-pink-600 transition-all">
