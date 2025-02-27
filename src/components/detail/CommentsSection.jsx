@@ -1,7 +1,11 @@
+import useAuthStore from "../../stores/useAuthstore";
+
 const CommentsSection = () => {
 
 
-  const user = useAuthStore
+  const user = useAuthStore.userInfo
+
+  console.log(user)
 
 
   return (
