@@ -141,22 +141,23 @@ const Mypage = () => {
     };
   }, [formData.imagePreview]);
 
+  // 업데이트 버튼 클릭시 이벤트
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { nickname, userId, file } = formData;
+    const { nickname, userId, file, oldFilePath } = formData;
 
     // 스토리지 이미지 업로드
-    let fileUrl = file;
+    let fileUrl = oldFilePath;
     // 새 파일이 업로드된 경우
     if (file instanceof File) {
       const fileExtension = file.name.split('.').pop();
       const filePath = `uploads/${Date.now()}.${fileExtension}`;
 
       // 기존 이미지 삭제 (이 부분을 새 파일 업로드 전으로 이동)
-      if (formData.oldFilePath) {
+      if (oldFilePath) {
         await supabase.storage
           .from('profile-images')
-          .remove([`public/uploads/${formData.oldFilePath.split('uploads/')[1]}`]);
+          .remove([`public/uploads/${oldFilePath.split('uploads/')[1]}`]);
       }
 
       // 새 이미지 업로드
@@ -172,7 +173,7 @@ const Mypage = () => {
       // 기존 이미지 삭제
       await supabase.storage
         .from('profile-images')
-        .remove([`public/uploads/${formData.oldFilePath.split('uploads/')[1]}`]);
+        .remove([`public/uploads/${oldFilePath.split('uploads/')[1]}`]);
       fileUrl = null;
     }
 
@@ -195,7 +196,6 @@ const Mypage = () => {
       }
       return;
     }
-
     alert('프로필이 성공적으로 업데이트되었습니다!');
   };
   return (
