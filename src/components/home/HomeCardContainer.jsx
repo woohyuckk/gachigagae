@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import HomeCard from './HomeCard';
 import SideBar from './SideBar';
-import HOME_CONSTANT from '../../../constants/HomeConstant';
+import HOME_CONSTANT from '../../constants/HomeConstant';
 import { useNavigate } from 'react-router-dom';
-import utils from '../../../libs/utils/utils';
+import utils from '../../libs/utils/utils';
 
 const HomeCardContainer = ({ getPlaces }) => {
   const [places, setPlaces] = useState(getPlaces);

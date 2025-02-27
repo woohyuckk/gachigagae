@@ -1,4 +1,4 @@
-import utils from '../../../libs/utils/utils';
+import utils from '../../libs/utils/utils';
 
 const HomeCard = ({ title, category1, category2, address, image, onClick }) => {
   return (

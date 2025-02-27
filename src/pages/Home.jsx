@@ -1,4 +1,4 @@
-import HomeCardContainer from '../components/common/home/HomeCardContainer';
+import HomeCardContainer from '../components/home/HomeCardContainer';
 import useGetPlaces from '../libs/hooks/useGetPlaces';
 
 const Home = () => {
