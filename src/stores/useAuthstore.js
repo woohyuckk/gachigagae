@@ -10,7 +10,7 @@ const useAuthStore = create(() => ({
 supabase.auth.onAuthStateChange((_, session) => {
   useAuthStore.setState({
     isLogin: !!session,
-    loginedUser: session?.user || null,
+    loginedUser: session?.user.user_metadata || null,
   });
 });
 
