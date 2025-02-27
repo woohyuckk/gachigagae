@@ -3,8 +3,6 @@ import { supabase } from '../libs/api/supabaseClient';
 import PlaceCard from '../components/detail/PlaceCard';
 import { useParams } from 'react-router-dom';
 
-
-
 const Detail = () => {
   const { id } = useParams();
   const idNumber = Number(id);

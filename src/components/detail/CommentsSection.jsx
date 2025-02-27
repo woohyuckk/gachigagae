@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '../../libs/api/supabaseClient';
 import { useParams } from 'react-router-dom';
+import Comment from './Comment';
 
 const CommentsSection = () => {
   const queryClient = useQueryClient();
@@ -54,13 +55,11 @@ const CommentsSection = () => {
 
       {/* 댓글 입력 */}
       <form onSubmit={handleOnSubmitComment} className="mt-4">
-        <input
-          type="text"
-          name="comment"
+        <textarea
+          className="w-full h-32 p-2 border rounded-lg resize-none overflow-y-auto focus:ring-pink-400 outline-none"
           value={comment}
           onChange={handleOnChagneComment}
-          className="w-full border p-2 rounded-lg mt-2 focus:ring-2 focus:ring-pink-400 outline-none"
-          placeholder="댓글을 입력하세요..."
+          placeholder="댓글을 입력하세요"
         />
         <button
           type="submit"
@@ -77,9 +76,7 @@ const CommentsSection = () => {
             <p className="text-gray-700">{comment.comment}</p>
           </div>
         ))}
-        <div className="p-4 border rounded-lg bg-gray-50 mt-2">
-          <p className="text-gray-700">🐱 고양이: 다음에 꼭 가볼게요! 😻</p>
-        </div>
+        <Comment key={comment.id}></Comment>
       </div>
     </div>
   );
