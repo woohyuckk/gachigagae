@@ -13,6 +13,11 @@ const AuthForm = ({ mode, onSubmit }) => {
     onSubmit(formData);
   };
 
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
   return (
     <form className="flex flex-col" onSubmit={(e) => handleSubmit(e)}>
       <input
@@ -20,10 +25,7 @@ const AuthForm = ({ mode, onSubmit }) => {
         type="email"
         name="email"
         value={formData.email}
-        onChange={(e) => {
-          const { name, value } = e.target;
-          setFormData({ ...formData, [name]: value });
-        }}
+        onChange={handleOnChange}
         placeholder="이메일 주소"
         required
       />
@@ -32,10 +34,7 @@ const AuthForm = ({ mode, onSubmit }) => {
         type="password"
         name="password"
         value={formData.password}
-        onChange={(e) => {
-          const { name, value } = e.target;
-          setFormData({ ...formData, [name]: value });
-        }}
+        onChange={handleOnChange}
         placeholder="비밀번호"
         required
       />
@@ -45,10 +44,7 @@ const AuthForm = ({ mode, onSubmit }) => {
             type="password"
             name="passwordRecheck"
             value={formData.passwordRecheck}
-            onChange={(e) => {
-              const { name, value } = e.target;
-              setFormData({ ...formData, [name]: value });
-            }}
+            onChange={handleOnChange}
             placeholder="비밀번호 확인"
             required
             className="w-full p-4 border border-gray-300 rounded-lg"
@@ -57,10 +53,7 @@ const AuthForm = ({ mode, onSubmit }) => {
             type="text"
             name="nickname"
             value={formData.nickname}
-            onChange={(e) => {
-              const { name, value } = e.target;
-              setFormData({ ...formData, [name]: value });
-            }}
+            onChange={handleOnChange}
             placeholder="닉네임"
             required
             className="w-full p-4 border border-gray-300 rounded-lg"

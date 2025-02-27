@@ -37,7 +37,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center">
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
         <h1 className="text-2xl font-extrabold w-full">로그인</h1>
         {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
