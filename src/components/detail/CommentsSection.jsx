@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '../../libs/api/supabaseClient';
+import { useParams } from 'react-router-dom';
 
 const CommentsSection = () => {
   const queryClient = useQueryClient();
   const [comment, setcomment] = useState('');
-
+  const { id } = useParams();
   const handleOnChagneComment = (e) => {
     setcomment(e.target.value);
   };
@@ -17,7 +18,7 @@ const CommentsSection = () => {
   } = useQuery({
     queryKey: ['comment'],
     queryFn: async () => {
-      const { data } = await supabase.from('comments').select('*').eq('place_id', 307);
+      const { data } = await supabase.from('comments').select('*').eq('place_id', Number(id));
       return data;
     },
   });
@@ -34,7 +35,7 @@ const CommentsSection = () => {
   const handleOnSubmitComment = (e) => {
     e.preventDefault();
     insertCommentMutate(
-      { comment, place_id: 307 },
+      { comment, place_id: Number(id) },
       {
         onSuccess: () => {
           alert('성공적으로 등록되었습니다.');
@@ -44,10 +45,8 @@ const CommentsSection = () => {
     );
   };
 
-  console.log(comments);
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>error</div>;
-  console.log(comments);
 
   return (
     <div className="w-full md:w-1/3 bg-white rounded-xl shadow-lg p-6 border border-gray-200">

@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '../libs/api/supabaseClient';
 import PlaceCard from '../components/detail/PlaceCard';
+import { useParams } from 'react-router-dom';
 
 const QUERY_KEY = ['places'];
 
 const Detail = () => {
+  const { id } = useParams();
   const {
     data: placeInfo,
     isLoading,
@@ -12,7 +14,7 @@ const Detail = () => {
   } = useQuery({
     queryKey: QUERY_KEY,
     queryFn: async () => {
-      const { data: placeInfo } = await supabase.from('places').select('*').eq('id', 307);
+      const { data: placeInfo } = await supabase.from('places').select('*').eq('id',Number(id));
       return placeInfo[0];
     },
   });
