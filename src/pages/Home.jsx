@@ -1,5 +1,5 @@
 import HomeCardContainer from '../components/common/home/HomeCardContainer';
-import useGetPlaces from '../libs/mutations/useGetPlaces';
+import useGetPlaces from '../libs/hooks/useGetPlaces';
 
 const Home = () => {
   const { getPlaces, isLoading, error } = useGetPlaces();
