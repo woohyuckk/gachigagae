@@ -8,7 +8,10 @@ const useAuthListener = () => {
     const { data: authListener } = supabase.auth.onAuthStateChange((_, session) => {
       useAuthStore.setState({
         isLogin: !!session,
-        loginedUser: session?.user.user_metadata || null,
+        userInfo: {
+          email: session?.user.user_metadata.email || '',
+          nickname: session?.user.user_metadata.nickname || '',
+        },
       });
 
       return () => {
