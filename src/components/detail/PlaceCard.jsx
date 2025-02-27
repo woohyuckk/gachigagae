@@ -3,16 +3,13 @@ import CommentsSection from './CommentsSection';
 import ImageModal from './ImageModal';
 import PlaceSection from './PlaceSection';
 
-const PlaceCard = () => {
+const PlaceCard = ({ placeInfo }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState('');
   const [modal, setModal] = useState({
     isModalOpen: false,
-    modalImage : '/public/default-image.png'
+    modalImage: '/public/default-image.png',
   });
-
-
-
 
   // 이미지 클릭 시 모달 열기
   const openModal = (imageSrc) => {
@@ -26,9 +23,9 @@ const PlaceCard = () => {
   };
 
   return (
-    <section className="flex flex-col md:flex-row items-start gap-6 p-6 bg-pink-100 min-h-screen">
+    <section className="flex flex-col md:flex-row items-start gap-6 p-6 bg-pink-100 ">
       {/* 🐾 게시글 영역 */}
-      <PlaceSection handleModalOpen={openModal} />
+      <PlaceSection placeInfo={placeInfo} handleModalOpen={openModal} />
       {/* 💬 코멘트 영역 */}
       <CommentsSection />
       {/* 📸 이미지 모달 */}

@@ -5,27 +5,23 @@ import PlaceCard from '../components/detail/PlaceCard';
 const QUERY_KEY = ['places'];
 
 const Detail = () => {
-
-
-  const { data, isLoading, error } = useQuery({
+  const {
+    data: placeInfo,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: QUERY_KEY,
     queryFn: async () => {
-      const { data: places } = await supabase.from('places').select('*');
-      return places;
+      const { data: placeInfo } = await supabase.from('places').select('*').eq('id', 307);
+      return placeInfo[0];
     },
   });
-
-
-
+  console.log(placeInfo);
 
   if (isLoading) return <div>loading...</div>;
   if (error) return <div>{error}</div>;
 
-  return (
-    <PlaceCard>
-      
-    </PlaceCard>
-  );
+  return <PlaceCard placeInfo={placeInfo}></PlaceCard>;
 };
 
 export default Detail;
