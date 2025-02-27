@@ -1,14 +1,11 @@
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
+
 const PlaceSection = ({ handleModalOpen: openModal, placeInfo }) => {
+
+  console.log(placeInfo)
   const description = placeInfo.description.split('|');
-  // const descriptionObject = description.reduce((acc, res) => {
-  //   const [name, value] = res.split(' : ');
-  //   acc[name] = value;
-  //   return acc;
-  // }, {});
-  // console.log(descriptionObject);
-  console.log(description);
-  console.log(placeInfo);
   const [open, close, parking, isAccompanied, exption] = description;
+  const { coordinates: { latitude, longitude } } = placeInfo;
 
   return (
     <div className="w-full md:w-2/3 h-auto felx flex-col bg-white rounded-xl shadow-lg p-6 border border-gray-200">
@@ -38,11 +35,14 @@ const PlaceSection = ({ handleModalOpen: openModal, placeInfo }) => {
       <div className="mt-4 flex flex-col md:flex-row gap-4">
         {/* 썸네일 */}
         <div className="w-full md:w-1/2 h-72">
-          <img
-            src="/public/default-image.png"
-            alt="default-image"
+          <Map
+            center={{ lat: latitude, lng: longitude }}
             className="w-full h-full object-cover rounded-lg shadow-md  cursor-pointer"
-          />
+          >
+            <MapMarker position={{ lat: latitude, lng: longitude }}>
+              <div style={{ color: '#000' }}>Hello World!</div>
+            </MapMarker>
+          </Map>
         </div>
 
         {/* 정보 텍스트 */}
