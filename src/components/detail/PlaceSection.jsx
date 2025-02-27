@@ -29,15 +29,15 @@ const PlaceSection = ({ handleModalOpen: openModal, placeInfo }) => {
         <img
           src="/public/default-image.png"
           alt="default-image"
-          className="w-1/2 mx-auto aspect-square object-contain rounded-lg shadow-md hover:scale-105 transition-all duration-300 cursor-pointer"
+          className="w-full md:w-1/2 mx-auto aspect-square object-contain rounded-lg shadow-md hover:scale-105 transition-all duration-300 cursor-pointer"
           onClick={() => openModal('/public/default-image.png')}
         />
       </div>
 
       {/* 상세 정보 */}
-      <div className="mt-4 flex gap-4">
+      <div className="mt-4 flex flex-col md:flex-row gap-4">
         {/* 썸네일 */}
-        <div className="w-1/2 h-72">
+        <div className="w-full md:w-1/2 h-72">
           <img
             src="/public/default-image.png"
             alt="default-image"
