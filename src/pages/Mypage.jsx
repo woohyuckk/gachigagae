@@ -14,6 +14,9 @@ const Mypage = () => {
     oldFilePath: '',
   });
 
+  // 제출 중 상태
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   // 파일 입력 필드 접근을 위한 ref
   const fileInputRef = useRef(null);
 
@@ -49,41 +52,13 @@ const Mypage = () => {
         return;
       }
 
-      // 스토리지에서 이미지 파일 다운로드해서 가져오기
-      if (data?.profile_img_url) {
-        try {
-          const imagePath = data.profile_img_url.split('/public/').pop();
-          const { data: fileData, error: downloadError } = await supabase.storage
-            .from('profile-images')
-            .download(`public/${imagePath}`);
-
-          if (downloadError) throw downloadError;
-
-          const file = new File([fileData], imagePath, {
-            type: fileData.type,
-            lastModified: new Date().getTime(),
-          });
-
-          // 가져온 데이터로 변경하기
-          setFormData((prev) => ({
-            ...prev,
-            imagePreview: URL.createObjectURL(file),
-            file: file,
-            nickname: data.nickname,
-            myNickname: data.nickname,
-            oldFilePath: data.profile_img_url,
-          }));
-        } catch (err) {
-          console.error('데이터 가져오기 실패:', err);
-        }
-      } else {
-        // 가져온 데이터로 변경하기
-        setFormData((prev) => ({
-          ...prev,
-          nickname: data.nickname,
-          myNickname: data.nickname,
-        }));
-      }
+      setFormData((prev) => ({
+        ...prev,
+        imagePreview: data.profile_img_url,
+        nickname: data.nickname,
+        myNickname: data.nickname,
+        oldFilePath: data.profile_img_url,
+      }));
     };
 
     fetchUserData();
@@ -98,22 +73,11 @@ const Mypage = () => {
     }));
   };
 
-  // 이미지 url 가져오기
-  const getImageUrl = (imageName) => {
-    return `${
-      import.meta.env.VITE_SUPABASE_URL
-    }/storage/v1/object/public/profile-images/public/${imageName}`;
-  };
-
   // 이미지 파일 변경 핸들러 수정
   const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
+    if (!selectedFile) return;
 
-    if (!selectedFile) {
-      // 파일 선택 취소 시 기존 이미지 유지
-      setFormData((prev) => ({ ...prev, file: prev.file }));
-      return;
-    }
+    const selectedFile = e.target.files[0];
 
     if (selectedFile.size > MAX_FILE_SIZE) {
       alert('50MB 이하의 파일만 업로드 가능합니다.');
@@ -121,6 +85,7 @@ const Mypage = () => {
     }
 
     setFormData((prev) => ({ ...prev, file: selectedFile }));
+
     if (selectedFile.type.startsWith('image/')) {
       const fileURL = URL.createObjectURL(selectedFile);
       setFormData((prev) => ({ ...prev, imagePreview: fileURL }));
@@ -130,7 +95,6 @@ const Mypage = () => {
   // 이미지 제거 핸들러
   const handleRemoveImage = (e) => {
     e.preventDefault();
-    e.stopPropagation();
     setFormData((prev) => ({ ...prev, file: null, imagePreview: '' }));
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
@@ -145,6 +109,11 @@ const Mypage = () => {
   // 업데이트 버튼 클릭시 이벤트
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // 제출 중이면 return
+    if (isSubmitting) return;
+
+    setIsSubmitting(true); // 제출 중 상태로 변경
     const { nickname, userId, file, oldFilePath } = formData;
 
     // 스토리지 이미지 업로드
@@ -154,6 +123,11 @@ const Mypage = () => {
       const fileExtension = file.name.split('.').pop();
       const filePath = `uploads/${Date.now()}.${fileExtension}`;
 
+      // 새 이미지 업로드
+      const { error } = await supabase.storage
+        .from('profile-images')
+        .upload(`public/${filePath}`, file);
+
       // 기존 이미지 삭제
       if (oldFilePath) {
         await supabase.storage
@@ -161,16 +135,13 @@ const Mypage = () => {
           .remove([`public/uploads/${oldFilePath.split('uploads/')[1]}`]);
       }
 
-      // 새 이미지 업로드
-      const { error } = await supabase.storage
-        .from('profile-images')
-        .upload(`public/${filePath}`, file);
-
       if (error) throw error;
-      fileUrl = getImageUrl(filePath);
+      fileUrl = `${
+        import.meta.env.VITE_SUPABASE_URL
+      }/storage/v1/object/public/profile-images/public/${filePath}`;
     }
     // 파일 삭제된 경우 (이 조건문을 별도로 분리)
-    else if (file === null) {
+    if (file === null) {
       // 기존 이미지 삭제
       await supabase.storage
         .from('profile-images')
@@ -190,6 +161,7 @@ const Mypage = () => {
         alert('업데이트에 실패했습니다. 다시 시도해주세요.');
         console.error('업데이트 실패:', error.message);
       }
+      setIsSubmitting(false); // 제출 중 상태 해제
       return;
     }
 
@@ -199,7 +171,9 @@ const Mypage = () => {
     }));
 
     alert('프로필이 성공적으로 업데이트되었습니다!');
+    setIsSubmitting(false); // 제출 중 상태 해제
   };
+
   return (
     <>
       <div className="flex flex-col items-center">
@@ -254,8 +228,14 @@ const Mypage = () => {
               required
               className="w-full p-4 border border-gray-300 rounded-lg mt-2"
             />
-            <button className="rounded-full w-full bg-blue-500 text-white py-3 hover:bg-secondary-color transition duration-300 hover:bg-blue-600">
-              프로필 업데이트
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className={`rounded-full w-full py-3 text-white transition duration-300 ${
+                isSubmitting ? 'bg-gray-500 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
+              }`}
+            >
+              {isSubmitting ? '업데이트 중...' : '프로필 업데이트'}
             </button>
           </form>
         </div>
