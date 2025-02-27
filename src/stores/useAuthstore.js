@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { immer } from 'zustand/middleware/immer';
 
 const initialState = {
   authId: '',
@@ -6,9 +7,25 @@ const initialState = {
   nickname: '',
 };
 
-const useAuthStore = create(() => ({
-  isLogin: false,
-  userInfo: initialState,
-}));
+const useAuthStore = create(
+  immer((set) => {
+    return {
+      isLogin: false,
+      userInfo: initialState,
+      setUserInfo: (userInfo) => {
+        set((state) => {
+          state.userInfo = { ...state.userInfo, ...userInfo };
+          state.isLogin = true;
+        });
+      },
+      logout: () => {
+        set((state) => {
+          state.userInfo = initialState;
+          state.isLogin = false;
+        });
+      },
+    };
+  })
+);
 
 export default useAuthStore;
