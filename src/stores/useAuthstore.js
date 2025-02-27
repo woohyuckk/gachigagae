@@ -6,12 +6,4 @@ const useAuthStore = create(() => ({
   loginedUser: null,
 }));
 
-// 인증 상태 변경 감지 및 자동 업데이트
-supabase.auth.onAuthStateChange((_, session) => {
-  useAuthStore.setState({
-    isLogin: !!session,
-    loginedUser: session?.user.user_metadata || null,
-  });
-});
-
 export default useAuthStore;
