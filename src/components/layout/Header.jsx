@@ -6,7 +6,7 @@ const Header = () => {
 
   return (
     <header className="fixed h-28 w-full">
-      {isLogin ? (
+      {!isLogin ? (
         <Link to="/signin">로그인</Link>
       ) : (
         <>
