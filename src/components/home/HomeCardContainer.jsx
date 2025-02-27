@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import HomeCard from './HomeCard';
 import SideBar from './SideBar';
-import HOME_CONSTANT from '../../constants/HomeConstant';
+import HOME_CONSTANT from '../../constants/homeConstant';
 import { useNavigate } from 'react-router-dom';
-import utils from '../../libs/utils/utils';
+import homeUtils from '../../libs/utils/homeUtils';
 
 const HomeCardContainer = ({ getPlaces }) => {
   const [places, setPlaces] = useState(getPlaces);
@@ -12,18 +12,15 @@ const HomeCardContainer = ({ getPlaces }) => {
   // 카테고리 정렬
   const handleCategory = (e) => {
     const categoryName = e.target.innerText;
-    const translateCategoryName =
-      categoryName === HOME_CONSTANT.CATEGORY_CAFE
-        ? '카페'
-        : categoryName === HOME_CONSTANT.CATEGORY_RESTAURANT
-        ? '식당'
-        : categoryName;
-    if (translateCategoryName === HOME_CONSTANT.CATEGORY_HOME) {
+
+    if (homeUtils.translateCategoryName(categoryName) === HOME_CONSTANT.CATEGORY_HOME) {
       setPlaces(getPlaces);
-      utils.scrollToTop();
+      homeUtils.handleCategoryMove(categoryName, navigate);
+      homeUtils.scrollToTop();
     } else {
-      setPlaces(utils.filterCategory(getPlaces, translateCategoryName));
-      utils.scrollToTop();
+      homeUtils.handleCategoryMove(categoryName, navigate);
+      setPlaces(homeUtils.filterCategory(getPlaces, homeUtils.translateCategoryName(categoryName)));
+      homeUtils.scrollToTop();
     }
   };
 
@@ -36,7 +33,7 @@ const HomeCardContainer = ({ getPlaces }) => {
           <article
             key={place.id}
             onClick={() => {
-              utils.handleGoToDetail(place.id, navigate);
+              homeUtils.handleGoToDetail(place.id, navigate);
             }}
             className={
               idx % 2 === 1
