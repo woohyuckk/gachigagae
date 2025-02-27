@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { supabase } from '../libs/api/supabaseClient';
 
+const MAX_FILE_SIZE = 50 * 1024 * 1024;
+
 const Mypage = () => {
   // 폼 상태 관리
   const [formData, setFormData] = useState({
@@ -14,7 +16,6 @@ const Mypage = () => {
 
   // 파일 입력 필드 접근을 위한 ref
   const fileInputRef = useRef(null);
-  const MAX_FILE_SIZE = 50 * 1024 * 1024;
 
   // 유저 아이디 가져오기
   useEffect(() => {
@@ -49,9 +50,9 @@ const Mypage = () => {
       }
 
       // 스토리지에서 이미지 파일 다운로드해서 가져오기
-      if (data?.profile_image_url) {
+      if (data?.profile_img_url) {
         try {
-          const imagePath = data.profile_image_url.split('/public/').pop();
+          const imagePath = data.profile_img_url.split('/public/').pop();
           const { data: fileData, error: downloadError } = await supabase.storage
             .from('profile-images')
             .download(`public/${imagePath}`);
@@ -70,7 +71,7 @@ const Mypage = () => {
             file: file,
             nickname: data.nickname,
             myNickname: data.nickname,
-            oldFilePath: data.profile_image_url,
+            oldFilePath: data.profile_img_url,
           }));
         } catch (err) {
           console.error('데이터 가져오기 실패:', err);
@@ -153,7 +154,7 @@ const Mypage = () => {
       const fileExtension = file.name.split('.').pop();
       const filePath = `uploads/${Date.now()}.${fileExtension}`;
 
-      // 기존 이미지 삭제 (이 부분을 새 파일 업로드 전으로 이동)
+      // 기존 이미지 삭제
       if (oldFilePath) {
         await supabase.storage
           .from('profile-images')
@@ -177,14 +178,9 @@ const Mypage = () => {
       fileUrl = null;
     }
 
-    if (!nickname) {
-      alert('닉네임을 입력해주세요.');
-      return;
-    }
-
     const { error } = await supabase
       .from('users')
-      .update({ nickname, profile_image_url: fileUrl })
+      .update({ nickname, profile_img_url: fileUrl })
       .eq('id', userId);
 
     if (error) {
@@ -196,6 +192,12 @@ const Mypage = () => {
       }
       return;
     }
+
+    setFormData((prev) => ({
+      ...prev,
+      myNickname: nickname,
+    }));
+
     alert('프로필이 성공적으로 업데이트되었습니다!');
   };
   return (
@@ -217,10 +219,19 @@ const Mypage = () => {
                 />
                 <div>
                   {formData.imagePreview ? (
-                    <>
-                      <img src={formData.imagePreview} alt="이미지 미리보기" />
-                      <button onClick={handleRemoveImage}>×</button>
-                    </>
+                    <div className="relative inline-block">
+                      <img
+                        src={formData.imagePreview}
+                        alt="이미지 미리보기"
+                        className="w-full h-auto rounded-lg border-2 border-gray-300"
+                      />
+                      <button
+                        onClick={handleRemoveImage}
+                        className="absolute top-2 right-2 bg-black/50 text-white rounded-full w-6 h-6 flex items-center justify-center hover:bg-black/70"
+                      >
+                        ×
+                      </button>
+                    </div>
                   ) : (
                     <div>
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
@@ -239,6 +250,7 @@ const Mypage = () => {
               value={formData.nickname}
               onChange={handleInputChange}
               placeholder="닉네임"
+              minLength={1}
               required
               className="w-full p-4 border border-gray-300 rounded-lg mt-2"
             />
