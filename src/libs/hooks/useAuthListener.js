@@ -9,8 +9,9 @@ const useAuthListener = () => {
       useAuthStore.setState({
         isLogin: !!session,
         userInfo: {
+          authId: session?.user.id || '',
           email: session?.user.user_metadata.email || '',
-          nickname: session?.user.user_metadata.nickname || '',
+          nickname: session?.user.user_metadata.nickname || '', // 회원가입 시의 닉네임
         },
       });
 
