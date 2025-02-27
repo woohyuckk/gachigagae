@@ -3,7 +3,7 @@ import fetchPlacesData from '../api/fetchData';
 
 const useGetPlaces = () => {
   const {
-    data: places,
+    data: getPlaces,
     isLoading,
     error,
   } = useQuery({
@@ -11,7 +11,7 @@ const useGetPlaces = () => {
     queryFn: fetchPlacesData,
   });
 
-  return { places, isLoading, error };
+  return { getPlaces, isLoading, error };
 };
 
 export default useGetPlaces;
