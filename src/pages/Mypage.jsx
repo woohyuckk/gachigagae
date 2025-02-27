@@ -1,9 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { supabase } from '../libs/api/supabaseClient';
 
 const Mypage = () => {
   // 닉네임 상태
   const [nickname, setNickName] = useState('');
+  const [userId, setUserId] = useState(null);
+
+  // 유저 정보 가져오기
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data: user, error } = await supabase.auth.getUser();
+      if (error) {
+        console.error('사용자 정보를 가져오는 데 실패:', error.message);
+        return;
+      }
+      setUserId(user.user?.id);
+    };
+
+    fetchUser();
+  }, []);
 
   // 입력 필드 핸들러
   const handleInputChange = (e) => {
@@ -18,18 +33,7 @@ const Mypage = () => {
       return;
     }
 
-    const { data: user, error: userError } = await supabase.auth.getUser();
-
-    if (userError) {
-      console.error('사용자 정보를 가져오는 데 실패:', userError.message);
-      return;
-    }
-
-    const { data, error } = await supabase
-      .from('users')
-      .update({ nickname })
-      .eq('id', user.user.id)
-      .select('*');
+    const { data, error } = await supabase.from('users').update({ nickname }).eq('id', userId);
 
     if (error?.code === '23505') {
       alert('중복된 닉네임이 있습니다.');
