@@ -1,12 +1,9 @@
-import useAuthStore from "../../stores/useAuthstore";
+import useAuthStore from '../../stores/useAuthstore';
 
 const CommentsSection = () => {
+  const user = useAuthStore.userInfo;
 
-
-  const user = useAuthStore.userInfo
-
-  console.log(user)
-
+  console.log(user);
 
   return (
     <div className="w-full md:w-1/3 bg-white rounded-xl shadow-lg p-6 border border-gray-200">

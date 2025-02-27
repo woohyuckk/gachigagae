@@ -1,11 +1,12 @@
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 const PlaceSection = ({ handleModalOpen: openModal, placeInfo }) => {
-
-  console.log(placeInfo)
+  console.log(placeInfo);
   const description = placeInfo.description.split('|');
-  const [open, close, parking, isAccompanied, exption] = description;
-  const { coordinates: { latitude, longitude } } = placeInfo;
+  const [open, close, parking, isAccompanied, exeption] = description;
+  const {
+    coordinates: { latitude, longitude },
+  } = placeInfo;
 
   return (
     <div className="w-full md:w-2/3 h-auto felx flex-col bg-white rounded-xl shadow-lg p-6 border border-gray-200">
@@ -40,19 +41,19 @@ const PlaceSection = ({ handleModalOpen: openModal, placeInfo }) => {
             className="w-full h-full object-cover rounded-lg shadow-md  cursor-pointer"
           >
             <MapMarker position={{ lat: latitude, lng: longitude }}>
-              <div style={{ color: '#000' }}>Hello World!</div>
+              <div style={{ color: '#000' }}>지수네집!</div>
             </MapMarker>
           </Map>
         </div>
 
         {/* 정보 텍스트 */}
-        <div className="w-full md:w-1/2 flex flex-col gap-2 text-gray-700">
+        <div className="w-full md:w-1/2 flex flex-col gap-2 text-grey">
           <p>⏰ {open}</p>
           <p>🚪 {close}</p>
           <p>📍 {placeInfo.address}</p>
           <p>📞 전화번호:{placeInfo.tel || '❌'}</p>
           <p>💡 {isAccompanied}</p>
-          <p>⚠️ {exption}</p>
+          <p>⚠️ {exeption}</p>
           <p>🚗 {parking}</p>
         </div>
       </div>
