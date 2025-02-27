@@ -23,7 +23,7 @@ const PlaceCard = ({ placeInfo }) => {
   };
 
   return (
-    <section className="flex flex-col md:flex-row items-start gap-6 p-6 bg-pink-100 ">
+    <section className="flex flex-col md:flex-row items-start gap-6 p-6 bg-pink">
       {/* 🐾 게시글 영역 */}
       <PlaceSection placeInfo={placeInfo} handleModalOpen={openModal} />
       {/* 💬 코멘트 영역 */}
