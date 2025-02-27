@@ -31,12 +31,12 @@ const HomeCardContainer = ({ getPlaces }) => {
     <div className="lg:w-full lg:max-w-3xl m-auto flex flex-wrap gap-7 justify-evenly p-4 sm:w-1/2 md:gap-20">
       <SideBar onClick={handleCategory} />
 
-      {places.map((item, idx) => {
+      {places.map((place, idx) => {
         return (
           <article
-            key={item.id}
+            key={place.id}
             onClick={() => {
-              utils.handleGoToDetail(item.id, navigate);
+              utils.handleGoToDetail(place.id, navigate);
             }}
             className={
               idx % 2 === 1
@@ -44,7 +44,7 @@ const HomeCardContainer = ({ getPlaces }) => {
                 : 'lg:w-1/3 sm:w-full w-3/4 h-80 bg-white shadow-lg rounded-2xl overflow-hidden p-4 relative flex-col lg:top-16  '
             }
           >
-            <HomeCard {...item} onClick={handleCategory} />
+            <HomeCard place={place} onClick={handleCategory} />
           </article>
         );
       })}
