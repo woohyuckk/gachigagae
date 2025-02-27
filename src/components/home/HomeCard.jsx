@@ -1,7 +1,7 @@
-import utils from '../../libs/utils/utils';
+import utils from '../../libs/utils/homeUtils';
 
-const HomeCard = ({place}) => {
-  const { title, category1, category2, address, image, onClick } = place
+const HomeCard = ({ place, onClick }) => {
+  const { title, category1, category2, address, image } = place;
   return (
     <>
       <h2 className="text-lg font-bold">{title}</h2>

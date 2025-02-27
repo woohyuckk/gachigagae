@@ -1,4 +1,4 @@
-import HOME_CONSTANT from '../../constants/HomeConstant';
+import HOME_CONSTANT from '../../constants/homeConstant';
 
 const SideBar = ({ onClick }) => {
   return (
