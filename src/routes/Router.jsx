@@ -31,7 +31,7 @@ const Router = () => {
         <Route element={<Layout />}>
           {/* shared 페이지 */}
           <Route path="/" element={<Home />} />
-          <Route path="/detail" element={<Detail />} />
+          <Route path="/detail/:id" element={<Detail />} />
           {/* public 라우트 */}
           <Route element={<PublicRoute />}>
             <Route path="/signin" element={<SignIn />} />

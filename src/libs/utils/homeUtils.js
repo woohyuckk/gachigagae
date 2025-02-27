@@ -21,7 +21,7 @@ const scrollToTop = () => {
 
 // detail 페이지로 이동
 const handleGoToDetail = (id, navigate) => {
-  navigate(`/detail?place_id=${id}`);
+  navigate(`/detail/${id}`);
 };
 
 // category queryString
