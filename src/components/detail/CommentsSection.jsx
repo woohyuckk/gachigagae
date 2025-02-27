@@ -10,7 +10,7 @@ const CommentsSection = () => {
   const handleOnChagneComment = (e) => {
     setcomment(e.target.value);
   };
-
+  const idNumber = Number(id);
   const {
     data: comments,
     isLoading,
@@ -18,7 +18,7 @@ const CommentsSection = () => {
   } = useQuery({
     queryKey: ['comment'],
     queryFn: async () => {
-      const { data } = await supabase.from('comments').select('*').eq('place_id', Number(id));
+      const { data } = await supabase.from('comments').select('*').eq('place_id', idNumber);
       return data;
     },
   });
@@ -35,7 +35,7 @@ const CommentsSection = () => {
   const handleOnSubmitComment = (e) => {
     e.preventDefault();
     insertCommentMutate(
-      { comment, place_id: Number(id) },
+      { comment, place_id: idNumber },
       {
         onSuccess: () => {
           alert('성공적으로 등록되었습니다.');
