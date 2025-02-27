@@ -2,9 +2,10 @@ import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
 const initialState = {
-  authId: '',
+  id: '',
   email: '',
   nickname: '',
+  profile_img_url: '',
 };
 
 const useAuthStore = create(

@@ -10,10 +10,10 @@ const useAuthListener = () => {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_, session) => {
+      console.log(session);
       const userInfo = {
         id: session?.user.id,
         email: session?.user.user_metadata.email,
-        nickname: session?.user.user_metadata.nickname,
       };
       setUserInfo(userInfo);
       return () => {
