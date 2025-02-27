@@ -6,10 +6,10 @@ import PlaceSection from './PlaceSection';
 const PlaceCard = ({ placeInfo }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState('');
-  const [modal, setModal] = useState({
-    isModalOpen: false,
-    modalImage: '/public/default-image.png',
-  });
+  // const [modal, setModal] = useState({
+  //   isModalOpen: false,
+  //   modalImage: '/public/default-image.png',
+  // });
 
   // 이미지 클릭 시 모달 열기
   const openModal = (imageSrc) => {

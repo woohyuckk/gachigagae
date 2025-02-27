@@ -1,9 +1,9 @@
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import KaKaoMap from './KaKaoMap';
 
 const PlaceSection = ({ handleModalOpen: openModal, placeInfo }) => {
-  console.log(placeInfo);
   const description = placeInfo.description.split('|');
   const [open, close, parking, isAccompanied, exeption] = description;
+
   const {
     coordinates: { latitude, longitude },
   } = placeInfo;
@@ -36,14 +36,7 @@ const PlaceSection = ({ handleModalOpen: openModal, placeInfo }) => {
       <div className="mt-4 flex flex-col md:flex-row gap-4">
         {/* 썸네일 */}
         <div className="w-full md:w-1/2 h-72">
-          <Map
-            center={{ lat: latitude, lng: longitude }}
-            className="w-full h-full object-cover rounded-lg shadow-md  cursor-pointer"
-          >
-            <MapMarker position={{ lat: latitude, lng: longitude }}>
-              <div style={{ color: '#000' }}>지수네집!</div>
-            </MapMarker>
-          </Map>
+          <KaKaoMap latitude={latitude} longitude={longitude} />
         </div>
 
         {/* 정보 텍스트 */}

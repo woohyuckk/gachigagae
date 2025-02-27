@@ -16,7 +16,6 @@ const Detail = () => {
       return placeInfo[0];
     },
   });
-  console.log(placeInfo);
 
   if (isLoading) return <div>loading...</div>;
   if (error) return <div>{error}</div>;
