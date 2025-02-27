@@ -8,7 +8,6 @@ const Signup = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSignup = async (formData) => {
-    // 회원가입 로직 구현
     const { email, password, passwordRecheck, nickname } = formData;
 
     // 유효성 검사
@@ -22,25 +21,34 @@ const Signup = () => {
       return;
     }
 
+    // 회원가입 처리
     try {
       const { error } = await supabase.auth.signUp({
         email,
         password,
-        options: {
-          data: {
-            nickname,
-          },
-        },
       });
       if (error) {
         setErrorMessage(error.message);
         return;
       }
-      alert('회원가입이 완료되었습니다! 이메일을 확인해주세요.');
-      navigate('/signin');
-    } catch (err) {
+      alert('회원가입이 완료되었습니다!');
+    } catch (error) {
       setErrorMessage('회원가입 중 오류가 발생했습니다.');
-      throw new Error(err);
+      throw new Error(error);
+    }
+
+    // public.users 테이블 내 nickname 저장
+    try {
+      const { error } = await supabase.from('users').upsert({ email, nickname });
+
+      if (error) {
+        setErrorMessage(error.message);
+        return;
+      }
+      navigate('/signin');
+    } catch (error) {
+      setErrorMessage('닉네임 저장 중 오류가 발생했습니다.');
+      throw new Error(error);
     }
   };
 
