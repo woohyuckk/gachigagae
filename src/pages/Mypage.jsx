@@ -9,12 +9,12 @@ const Mypage = () => {
   // 유저 정보 가져오기
   useEffect(() => {
     const fetchUser = async () => {
-      const { data: user, error } = await supabase.auth.getUser();
+      const { data, error } = await supabase.auth.getUser();
       if (error) {
         console.error('사용자 정보를 가져오는 데 실패:', error.message);
         return;
       }
-      setUserId(user.user?.id);
+      setUserId(data.user?.id);
     };
 
     fetchUser();
@@ -33,20 +33,19 @@ const Mypage = () => {
       return;
     }
 
-    const { data, error } = await supabase.from('users').update({ nickname }).eq('id', userId);
+    const { error } = await supabase.from('users').update({ nickname }).eq('id', userId);
 
-    if (error?.code === '23505') {
-      alert('중복된 닉네임이 있습니다.');
+    if (error) {
+      if (error.code === '23505') {
+        alert('중복된 닉네임이 있습니다.');
+      } else {
+        alert('업데이트에 실패했습니다. 다시 시도해주세요.');
+        console.error('업데이트 실패:', error.message);
+      }
       return;
     }
 
-    //이상한 요청을 보내서 데이터에 null값이 들어올때
-    if (data === null) {
-      alert('잘못된 요청입니다. 잠시후 다시 시도해주세요');
-      return;
-    } else {
-      alert('업데이트 성공!');
-    }
+    alert('프로필이 성공적으로 업데이트되었습니다!');
   };
   return (
     <>
