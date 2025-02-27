@@ -5,18 +5,10 @@ import { supabase } from '../../libs/api/supabaseClient';
 const CommentsSection = () => {
   const queryClient = useQueryClient();
   const [comment, setcomment] = useState('');
+
   const handleOnChagneComment = (e) => {
     setcomment(e.target.value);
   };
-
-  const { mutate: insertCommentMutate } = useMutation({
-    mutationFn: async ({ comment, place_id }) => {
-      await supabase.from('comments').insert({ comment, place_id });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries(['comments']);
-    },
-  });
 
   const {
     data: comments,
@@ -29,13 +21,18 @@ const CommentsSection = () => {
       return data;
     },
   });
-  console.log(comments);
-  if (isLoading) <div>Loading...</div>;
-  if (error) <div>error</div>;
+
+  const { mutate: insertCommentMutate } = useMutation({
+    mutationFn: async ({ comment, place_id }) => {
+      await supabase.from('comments').insert({ comment, place_id });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['comments']);
+    },
+  });
 
   const handleOnSubmitComment = (e) => {
     e.preventDefault();
-
     insertCommentMutate(
       { comment, place_id: 307 },
       {
@@ -46,6 +43,11 @@ const CommentsSection = () => {
       }
     );
   };
+
+  console.log(comments);
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>error</div>;
+  console.log(comments);
 
   return (
     <div className="w-full md:w-1/3 bg-white rounded-xl shadow-lg p-6 border border-gray-200">
