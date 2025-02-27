@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { supabase } from '../libs/api/supabaseClient';
-import { MAX_FILE_SIZE } from '../constants/myPageConstant';
 
 const Mypage = () => {
   // 폼 상태 관리
@@ -15,6 +14,7 @@ const Mypage = () => {
 
   // 파일 입력 필드 접근을 위한 ref
   const fileInputRef = useRef(null);
+  const MAX_FILE_SIZE = 50 * 1024 * 1024;
 
   // 유저 아이디 가져오기
   useEffect(() => {
