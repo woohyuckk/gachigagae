@@ -5,10 +5,10 @@ import Detail from '../pages/Detail';
 import Mypage from '../pages/Mypage';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
-import { useState } from 'react';
+import useAuthStore from '../stores/useAuthstore';
 
 const Router = () => {
-  const [isLogin] = useState(false);
+  const { isLogin } = useAuthStore();
 
   // * 인증된 사용자만 접근할 수 있는 라우트
   const PrivateRoute = () => {
