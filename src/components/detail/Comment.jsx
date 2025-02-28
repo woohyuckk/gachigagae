@@ -1,12 +1,15 @@
+import { useMutation } from '@tanstack/react-query';
 import { useState, useRef, useEffect } from 'react';
 import { CiMenuKebab } from 'react-icons/ci';
 import { FaRegPenToSquare } from 'react-icons/fa6';
 import { RiDeleteBin5Line } from 'react-icons/ri';
+import { supabase } from '../../libs/api/supabaseClient';
 
 const Comment = ({ comment }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuRef = useRef(null);
-
+  const [isUpdateComment, setIsUpdateComment] = useState(false)
+  const menuRef = useRef();
+  const commentRef = useRef();
   const profileImage =
     'https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg?w=740';
 
@@ -22,6 +25,21 @@ const Comment = ({ comment }) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  const handleCommentUpdate = (id) => {
+    setIsUpdateComment(true)
+    commentRef.current.focus();
+  }
+
+  const handleCommentDelete = () => {
+
+  }
+
+  // const { mutate: updateCommentMutate } = useMutation({
+  //   mutationFn: async () => {
+  //     const {data, error} = await supabase.from('comments').update({comment :})
+  //   }
+  // })
 
   return (
     <div className="flex flex-col  bg-purple-200 rounded-xl w-full border-b border-gray-400 p-2 my-3 relative ">
@@ -51,10 +69,12 @@ const Comment = ({ comment }) => {
               ref={menuRef}
               className="absolute left-full top-0 ml-2 w-28 bg-white shadow-lg rounded-md z-50 border border-gray-300"
             >
-              <button className="flex items-center w-full px-3 py-2 hover:bg-gray-100">
+              <button className="flex items-center w-full px-3 py-2 hover:bg-gray-100"
+              onClick={handleCommentUpdate}>
                 <FaRegPenToSquare className="mr-2" /> 수정
               </button>
-              <button className="flex items-center w-full px-3 py-2 hover:bg-red-100 text-red-500">
+              <button className="flex items-center w-full px-3 py-2 hover:bg-red-100 text-red-500"
+              onClick={handleCommentDelete}>
                 <RiDeleteBin5Line className="mr-2" /> 삭제
               </button>
             </div>
@@ -65,6 +85,19 @@ const Comment = ({ comment }) => {
       {/* 댓글 내용 */}
       <div className="w-full overflow-hidden p-2">
         <span className="whitespace-pre-wrap break-words">{comment}</span>
+        <form onSubmit={() => {}} className="mt-4">
+          <textarea
+            className="w-full  p-2 border rounded-lg resize-none overflow-y-auto focus:ring-pink-400 outline-none"
+            ref={commentRef}
+            placeholder="댓글을 입력하세요"
+          />
+          <button
+            type="submit"
+            className="w-full bg-pink-500 text-white py-2 rounded-lg mt-2 hover:bg-pink-600 transition-all"
+          >
+            수정하기
+          </button>
+        </form>
       </div>
     </div>
   );

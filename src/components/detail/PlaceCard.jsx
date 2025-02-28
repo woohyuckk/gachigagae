@@ -6,10 +6,6 @@ import PlaceSection from './PlaceSection';
 const PlaceCard = ({ placeInfo }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState('');
-  // const [modal, setModal] = useState({
-  //   isModalOpen: false,
-  //   modalImage: '/public/default-image.png',
-  // });
 
   // 이미지 클릭 시 모달 열기
   const openModal = (imageSrc) => {
@@ -27,7 +23,7 @@ const PlaceCard = ({ placeInfo }) => {
       {/* 🐾 게시글 영역 */}
       <PlaceSection placeInfo={placeInfo} handleModalOpen={openModal} />
       {/* 💬 코멘트 영역 */}
-      <CommentsSection  />
+      <CommentsSection />
       {/* 📸 이미지 모달 */}
       {modalOpen && <ImageModal handleModalClose={closeModal} modalImage={modalImage} />}
     </section>
