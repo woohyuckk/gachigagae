@@ -1,16 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import { supabase } from '../libs/api/supabaseClient';
+import useAuthStore from '../stores/useAuthstore';
 
 const MAX_FILE_SIZE = 50 * 1024 * 1024;
 const Mypage = () => {
+  const { userInfo, setUserInfo } = useAuthStore();
   // 폼 상태 관리
   const [formData, setFormData] = useState({
-    myNickname: '',
-    newNickname: '',
-    userId: '',
-    imagePreview: '',
+    myNickname: userInfo.nickname,
+    newNickname: userInfo.nickname,
+    userId: userInfo.id,
+    imagePreview: userInfo.profile_img_url || null,
     file: null,
-    oldFilePath: '',
+    oldFilePath: userInfo.profile_img_url || null,
   });
 
   // 제출 중 상태
@@ -18,48 +20,6 @@ const Mypage = () => {
 
   // 파일 입력 필드 접근을 위한 ref
   const fileInputRef = useRef(null);
-
-  // 유저 아이디 가져오기
-  useEffect(() => {
-    const fetchUser = async () => {
-      const { data, error } = await supabase.auth.getUser();
-      if (error) {
-        console.error('사용자 정보를 가져오는 데 실패:', error.message);
-        return;
-      }
-      setFormData((prev) => ({ ...prev, userId: data.user?.id }));
-    };
-    fetchUser();
-  }, []);
-
-  useEffect(() => {
-    // userId가 없으면 실행하지 않음
-    if (!formData.userId) return;
-
-    // 유저 정보 가져오기
-    const fetchUserData = async () => {
-      const { data, error } = await supabase
-        .from('users')
-        .select('*')
-        .eq('id', formData.userId)
-        .single();
-
-      if (error) {
-        console.error('데이터 로드 실패:', error);
-        return;
-      }
-
-      setFormData((prev) => ({
-        ...prev,
-        imagePreview: data.profile_img_url,
-        myNickname: data.nickname,
-        newNickname: data.nickname,
-        oldFilePath: data.profile_img_url,
-      }));
-    };
-
-    fetchUserData();
-  }, [formData.userId]);
 
   // 입력 필드 핸들러
   const handleInputChange = (e) => {
@@ -184,11 +144,10 @@ const Mypage = () => {
       return;
     }
 
-    setFormData((prev) => ({
-      ...prev,
-      myNickname: newNickname,
-      oldFilePath: fileUrl,
-    }));
+    setUserInfo({
+      nickname: newNickname,
+      profile_img_url: fileUrl,
+    });
 
     alert('프로필이 성공적으로 업데이트되었습니다!');
     setIsSubmitting(false);
