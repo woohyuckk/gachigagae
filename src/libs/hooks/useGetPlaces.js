@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import fetchPlacesData from '../api/fetchData';
+import fetchData from '../api/fetchData';
+// import fetchPlacesData from '../api/fetchData';
 
 const useGetPlaces = () => {
   const {
@@ -8,7 +9,7 @@ const useGetPlaces = () => {
     error,
   } = useQuery({
     queryKey: ['places'],
-    queryFn: fetchPlacesData,
+    queryFn: fetchData.fetchPlacesData,
   });
 
   return { getPlaces, isLoading, error };
