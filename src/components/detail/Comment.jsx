@@ -4,13 +4,16 @@ import { CiMenuKebab } from 'react-icons/ci';
 import { FaRegPenToSquare } from 'react-icons/fa6';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { supabase } from '../../libs/api/supabaseClient';
+import useAuthStore from '../../stores/useAuthstore';
 
 const Comment = ({ comment: commentData }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUpdateComment, setIsUpdateComment] = useState(false);
+  const { id: authId } = useAuthStore((state) => state.userInfo )
+  console.log(authId)
   const menuRef = useRef();
   const commentRef = useRef();
-  let { id, comment } = commentData;
+  let { id, comment, user_id:commentUserId } = commentData;
   const queryClient = useQueryClient();
   const profileImage =
     'https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg?w=740';
@@ -41,7 +44,25 @@ const Comment = ({ comment: commentData }) => {
     setIsMenuOpen((prev) => !prev);
   };
 
-  const handleCommentDelete = () => {};
+  const handleCommentDelete = (id) => {
+
+    deleteCommentMutate(id)
+  };
+
+  const { mutate: deleteCommentMutate } = useMutation({
+    mutationFn: async (id) => {
+      const { error } = await supabase.from('comments').delete().eq('id', id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      alert('삭제되었습니다');
+      queryClient.invalidateQueries(['comment']);
+    },
+    onError: (error) => {
+      console.error(error);
+    },
+  });
+
   const handleSubmitUdateComment = (e) => {
     e.preventDefault();
     comment = commentRef.current.value;
@@ -50,14 +71,8 @@ const Comment = ({ comment: commentData }) => {
 
   const { mutate: updateCommentMutate } = useMutation({
     mutationFn: async ({ id, comment }) => {
-      console.log(id, comment);
-      const { data, error } = await supabase
-        .from('comments')
-        .update({ comment })
-        .eq('id', id)
-        .select();
+      const { error } = await supabase.from('comments').update({ comment }).eq('id', id);
       if (error) throw error;
-      return data;
     },
     onSuccess: () => {
       alert('수정되었습니다.');
@@ -105,7 +120,7 @@ const Comment = ({ comment: commentData }) => {
               </button>
               <button
                 className="flex items-center w-full px-3 py-2 hover:bg-red-100 text-red-500"
-                onClick={handleCommentDelete}
+                onClick={()=>handleCommentDelete(id)}
               >
                 <RiDeleteBin5Line className="mr-2" /> 삭제
               </button>
