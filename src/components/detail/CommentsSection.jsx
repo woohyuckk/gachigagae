@@ -72,11 +72,9 @@ const CommentsSection = () => {
       {/* 댓글 목록 */}
       <div className="mt-6">
         {comments.map((comment) => (
-          <div className="p-4 border rounded-lg bg-gray-50" key={comment.id}>
-            <p className="text-gray-700">{comment.comment}</p>
-          </div>
+          <Comment key={comment.id} comment={comment.comment}/>
         ))}
-        <Comment key={comment.id}></Comment>
+        
       </div>
     </div>
   );
