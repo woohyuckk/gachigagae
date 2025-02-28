@@ -120,7 +120,7 @@ const Mypage = () => {
       }
 
       // 기존 이미지 삭제된 경우
-      if (!file && oldFilePath) {
+      if (!file && formData.imagePreview === DEFAULT_IMAGE) {
         const success = await removeOldImage(oldFilePath);
         if (!success) throw new Error('기존 이미지 삭제 실패');
         fileUrl = null;
