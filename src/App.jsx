@@ -1,14 +1,14 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import useAuthListener from './libs/hooks/useAuthListener';
 import Router from './routes/Router';
+import AuthListener from './components/auth/AuthListener';
 
 const App = () => {
   const queryClient = new QueryClient();
-  useAuthListener();
 
   return (
     <>
       <QueryClientProvider client={queryClient}>
+        <AuthListener />;
         <Router />
       </QueryClientProvider>
     </>
