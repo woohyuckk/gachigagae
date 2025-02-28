@@ -68,8 +68,8 @@ const CommentsSection = () => {
         </button>
       </form>
 
-      {/* 댓글 목록 overflow-y-auto */}
-      <div className="mt-6 max-h-[500px]  scrollbar-hide  ">
+      {/* 댓글 목록 overflow-y-auto scrollbar-hide*/}
+      <div className="mt-6">
         {comments.map((comment) => {
           return <Comment key={comment.id} comment={comment.comment} />;
         }) || <div className="text-center"> comment가 존재하지 않습니다. </div>}
