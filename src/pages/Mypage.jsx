@@ -53,6 +53,7 @@ const Mypage = () => {
         ...prev,
         imagePreview: data.profile_img_url,
         myNickname: data.nickname,
+        newNickname: data.nickname,
         oldFilePath: data.profile_img_url,
       }));
     };
