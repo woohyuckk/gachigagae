@@ -3,6 +3,12 @@ import LikeButton from '../buttons/LikeButton';
 
 const HomeCard = ({ place, onClick }) => {
   const { title, category1, category2, address, image, isLiked } = place;
+
+  // * 좋아요 버튼 클릭 리스너
+  const handleClickLikeButton = () => {
+    console.log('좋아요 클릭!');
+  };
+
   return (
     <>
       <h2 className="text-lg font-bold">{title}</h2>
@@ -25,7 +31,7 @@ const HomeCard = ({ place, onClick }) => {
         >
           {category2}
         </span>
-        <LikeButton size={24} status={isLiked} />
+        <LikeButton size={24} status={isLiked} onClick={handleClickLikeButton} />
       </div>
     </>
   );

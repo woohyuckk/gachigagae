@@ -15,7 +15,8 @@ import { IoHeartOutline, IoHeart } from 'react-icons/io5';
 const LikeButton = ({ size = 30, onClick, className, status = false }) => {
   const [isLiked, setIsLiked] = useState(status);
 
-  const handleClickLike = () => {
+  const handleClickLike = (e) => {
+    e.stopPropagation();
     setIsLiked(!isLiked);
     onClick();
   };
