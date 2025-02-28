@@ -6,7 +6,7 @@ const Mypage = () => {
   // 폼 상태 관리
   const [formData, setFormData] = useState({
     myNickname: '',
-    nickname: '',
+    newNickname: '',
     userId: '',
     imagePreview: '',
     file: null,
@@ -52,7 +52,6 @@ const Mypage = () => {
       setFormData((prev) => ({
         ...prev,
         imagePreview: data.profile_img_url,
-        nickname: data.nickname,
         myNickname: data.nickname,
         oldFilePath: data.profile_img_url,
       }));
@@ -63,7 +62,7 @@ const Mypage = () => {
 
   // 입력 필드 핸들러
   const handleInputChange = (e) => {
-    setFormData((prev) => ({ ...prev, nickname: e.target.value }));
+    setFormData((prev) => ({ ...prev, newNickname: e.target.value }));
   };
 
   // 이미지 파일 변경 핸들러 수정
@@ -137,7 +136,7 @@ const Mypage = () => {
     if (isSubmitting) return;
     setIsSubmitting(true);
 
-    const { nickname, userId, file, oldFilePath } = formData;
+    const { newNickname, userId, file, oldFilePath } = formData;
 
     let fileUrl = oldFilePath;
 
@@ -173,7 +172,7 @@ const Mypage = () => {
 
     const { error } = await supabase
       .from('users')
-      .update({ nickname, profile_img_url: fileUrl })
+      .update({ nickname: newNickname, profile_img_url: fileUrl })
       .eq('id', userId);
 
     if (error) {
@@ -185,7 +184,7 @@ const Mypage = () => {
 
     setFormData((prev) => ({
       ...prev,
-      myNickname: nickname,
+      myNickname: newNickname,
       oldFilePath: fileUrl,
     }));
 
