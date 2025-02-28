@@ -239,8 +239,8 @@ const Mypage = () => {
           <label className="p-2">닉네임 : {formData.myNickname}</label>
           <input
             type="text"
-            name="nickname"
-            value={formData.nickname}
+            name="newNickname"
+            value={formData.newNickname}
             onChange={handleInputChange}
             placeholder="닉네임"
             minLength={1}
