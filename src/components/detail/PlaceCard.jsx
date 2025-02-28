@@ -27,7 +27,7 @@ const PlaceCard = ({ placeInfo }) => {
       {/* 🐾 게시글 영역 */}
       <PlaceSection placeInfo={placeInfo} handleModalOpen={openModal} />
       {/* 💬 코멘트 영역 */}
-      <CommentsSection />
+      <CommentsSection  />
       {/* 📸 이미지 모달 */}
       {modalOpen && <ImageModal handleModalClose={closeModal} modalImage={modalImage} />}
     </section>

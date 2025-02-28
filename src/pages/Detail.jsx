@@ -18,8 +18,8 @@ const Detail = () => {
       const { data: place } = await supabase.from('places').select('*').eq('id', idNumber).single();
       return place;
     },
+    staleTime: 1000 * 60 * 1,
   });
-  console.log(placeInfo);
 
   if (isLoading) return <div>loading...</div>;
   if (error) return <div>{error}</div>;
