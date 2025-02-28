@@ -14,6 +14,7 @@
     font-family: 'Pretendard-Regular';
     line-height: 1.5;
     font-weight: 800;
+    
   }
 }
 
@@ -22,5 +23,14 @@
   --color-orange : #E78F63;
   --color-yellow : #E2BE62;
   --color-grey : #3D3E3B; 
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE, Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 

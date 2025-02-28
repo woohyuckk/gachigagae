@@ -15,8 +15,8 @@ const Detail = () => {
   } = useQuery({
     queryKey: QUERY_KEY,
     queryFn: async () => {
-      const { data: place } = await supabase.from('places').select('*').eq('id', idNumber);
-      return place[0];
+      const { data: place } = await supabase.from('places').select('*').eq('id', idNumber).single();
+      return place;
     },
   });
   console.log(placeInfo);

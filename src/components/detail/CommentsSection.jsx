@@ -50,7 +50,7 @@ const CommentsSection = () => {
   if (error) return <div>error</div>;
 
   return (
-    <div className="w-full md:w-1/3 bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+    <div className="w-full = md:w-1/3   bg-white rounded-xl shadow-lg p-6 border border-gray-200">
       <h2 className="text-xl font-semibold text-gray-800">💬 코멘트 작성</h2>
 
       {/* 댓글 입력 */}
@@ -70,7 +70,7 @@ const CommentsSection = () => {
       </form>
 
       {/* 댓글 목록 */}
-      <div className="mt-6">
+      <div className="mt-6 max-h-[500px] overflow-y-auto scrollbar-hide ">
         {comments.map((comment) => (
           <Comment key={comment.id} comment={comment.comment}/>
         ))}
