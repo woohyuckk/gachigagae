@@ -1,7 +1,8 @@
 import utils from '../../libs/utils/homeUtils';
+import LikeButton from '../buttons/LikeButton';
 
 const HomeCard = ({ place, onClick }) => {
-  const { title, category1, category2, address, image } = place;
+  const { title, category1, category2, address, image, isLiked } = place;
   return (
     <>
       <h2 className="text-lg font-bold">{title}</h2>
@@ -13,16 +14,19 @@ const HomeCard = ({ place, onClick }) => {
           <div> No image </div>
         )}
       </figure>
-      <span className="text-gray-500 text-sm">#{category1} #</span>
-      <span
-        className="text-gray-500 text-sm cursor-pointer"
-        onClick={(e) => {
-          e.stopPropagation();
-          onClick(e);
-        }}
-      >
-        {category2}
-      </span>
+      <div className="w-full flex">
+        <span className="text-gray-500 text-sm">#{category1} #</span>
+        <span
+          className="text-gray-500 text-sm cursor-pointer"
+          onClick={(e) => {
+            e.stopPropagation();
+            onClick(e);
+          }}
+        >
+          {category2}
+        </span>
+        <LikeButton size={24} status={isLiked} />
+      </div>
     </>
   );
 };
