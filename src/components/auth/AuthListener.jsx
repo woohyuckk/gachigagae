@@ -12,8 +12,8 @@ const AuthListener = () => {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (_, session) => {
       const userInfo = {
-        id: session?.user.id,
-        email: session?.user.email,
+        id: session.user.id,
+        email: session.user.email,
         nickname: userData?.nickname || '',
         profile_img_url: userData?.profile_img_url || '',
       };
