@@ -8,7 +8,7 @@ const App = () => {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <AuthListener />;
+        <AuthListener />
         <Router />
       </QueryClientProvider>
     </>

@@ -2,11 +2,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../libs/api/supabaseClient';
 import { useState } from 'react';
 import AuthForm from '../components/auth/AuthForm';
+import { useAuthMutate } from '../libs/hooks/useAuth.api';
 
 const Signup = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState('');
-
+  const { updateUserInfo } = useAuthMutate();
   const handleSignup = async (formData) => {
     const { email, password, passwordRecheck, nickname } = formData;
 
@@ -39,13 +40,7 @@ const Signup = () => {
 
     // public.users 테이블 내 nickname 저장
     try {
-      // const { error } = await supabase.from('users').upsert({ email, nickname });
-      const { error } = await supabase.from('users').update({ nickname }).eq('email', email);
-
-      if (error) {
-        setErrorMessage(error.message);
-        return;
-      }
+      updateUserInfo({ nickname, email });
       navigate('/signin');
     } catch (error) {
       setErrorMessage('닉네임 저장 중 오류가 발생했습니다.');
