@@ -39,7 +39,8 @@ const Signup = () => {
 
     // public.users 테이블 내 nickname 저장
     try {
-      const { error } = await supabase.from('users').upsert({ email, nickname });
+      // const { error } = await supabase.from('users').upsert({ email, nickname });
+      const { error } = await supabase.from('users').update({ nickname }).eq('email', email);
 
       if (error) {
         setErrorMessage(error.message);
