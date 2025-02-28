@@ -10,23 +10,25 @@ const useAuthListener = () => {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_, session) => {
-      const userInfo = {
-        id: session?.user.id,
-        email: session?.user.email,
-      };
+      if (session) {
+        const userInfo = {
+          id: session.user.id,
+          email: session.user.email,
+        };
 
-      // 즉시 실행 함수 : public.users 추가 정보 가져오기
-      (async () => {
-        const { data } = await supabase
-          .from('users')
-          .select('nickname, profile_img_url')
-          .eq('id', userInfo.id);
-        const extraInfo = data[0];
-        const { nickname, profile_img_url } = extraInfo;
-        userInfo['nickname'] = nickname || '';
-        userInfo['profile_img_url'] = profile_img_url || '';
-        setUserInfo(userInfo); // userInfo set
-      })();
+        // 즉시 실행 함수 : public.users 추가 정보 가져오기
+        (async () => {
+          const { data } = await supabase
+            .from('users')
+            .select('nickname, profile_img_url')
+            .eq('id', userInfo.id);
+          const extraInfo = data[0];
+          const { nickname, profile_img_url } = extraInfo;
+          userInfo['nickname'] = nickname || '';
+          userInfo['profile_img_url'] = profile_img_url || '';
+          setUserInfo(userInfo); // userInfo set
+        })();
+      }
     });
 
     return () => {
