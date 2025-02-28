@@ -6,7 +6,7 @@ const Header = () => {
   const logout = useAuthStore((state) => state.logout);
 
   return (
-    <header className="fixed h-28 w-full">
+    <header className="fixed h-28 w-full z-50">
       <nav className="flex px-15 h-full items-center">
         <h1 className="flex-grow">
           <Link to="/">로고</Link>

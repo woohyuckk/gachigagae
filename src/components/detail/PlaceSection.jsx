@@ -35,7 +35,7 @@ const PlaceSection = ({ handleModalOpen: openModal, placeInfo }) => {
       {/* 상세 정보 */}
       <div className="mt-4 flex flex-col md:flex-row gap-4">
         {/* 썸네일 */}
-        <div className="w-full md:w-1/2 h-72">
+        <div className="w-full md:w-1/2 h-72 ">
           <KaKaoMap latitude={latitude} longitude={longitude} />
         </div>
 
