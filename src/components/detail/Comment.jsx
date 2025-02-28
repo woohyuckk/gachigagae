@@ -1,15 +1,17 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState, useRef, useEffect } from 'react';
 import { CiMenuKebab } from 'react-icons/ci';
 import { FaRegPenToSquare } from 'react-icons/fa6';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { supabase } from '../../libs/api/supabaseClient';
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment: commentData }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isUpdateComment, setIsUpdateComment] = useState(false)
+  const [isUpdateComment, setIsUpdateComment] = useState(false);
   const menuRef = useRef();
   const commentRef = useRef();
+  let { id, comment } = commentData;
+  const queryClient = useQueryClient();
   const profileImage =
     'https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg?w=740';
 
@@ -26,20 +28,46 @@ const Comment = ({ comment }) => {
     };
   }, []);
 
-  const handleCommentUpdate = (id) => {
-    setIsUpdateComment(true)
-    commentRef.current.focus();
-  }
+  //  수정하기 누른후 수정영역에 focus
+  useEffect(() => {
+    if (isUpdateComment) {
+      commentRef.current.focus();
+      commentRef.current.value = comment;
+    }
+  }, [isUpdateComment]);
 
-  const handleCommentDelete = () => {
+  const handleCommentUpdate = () => {
+    setIsUpdateComment((prev) => !prev);
+    setIsMenuOpen((prev) => !prev);
+  };
 
-  }
+  const handleCommentDelete = () => {};
+  const handleSubmitUdateComment = (e) => {
+    e.preventDefault();
+    comment = commentRef.current.value;
+    updateCommentMutate({ id, comment });
+  };
 
-  // const { mutate: updateCommentMutate } = useMutation({
-  //   mutationFn: async () => {
-  //     const {data, error} = await supabase.from('comments').update({comment :})
-  //   }
-  // })
+  const { mutate: updateCommentMutate } = useMutation({
+    mutationFn: async ({ id, comment }) => {
+      console.log(id, comment);
+      const { data, error } = await supabase
+        .from('comments')
+        .update({ comment })
+        .eq('id', id)
+        .select();
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      alert('수정되었습니다.');
+      setIsUpdateComment((prev) => !prev);
+      queryClient.invalidateQueries(['comment']);
+    },
+    onError: (error) => {
+      console.error(error);
+    },
+  });
 
   return (
     <div className="flex flex-col  bg-purple-200 rounded-xl w-full border-b border-gray-400 p-2 my-3 relative ">
@@ -69,12 +97,16 @@ const Comment = ({ comment }) => {
               ref={menuRef}
               className="absolute left-full top-0 ml-2 w-28 bg-white shadow-lg rounded-md z-50 border border-gray-300"
             >
-              <button className="flex items-center w-full px-3 py-2 hover:bg-gray-100"
-              onClick={handleCommentUpdate}>
+              <button
+                className="flex items-center w-full px-3 py-2 hover:bg-gray-100"
+                onClick={handleCommentUpdate}
+              >
                 <FaRegPenToSquare className="mr-2" /> 수정
               </button>
-              <button className="flex items-center w-full px-3 py-2 hover:bg-red-100 text-red-500"
-              onClick={handleCommentDelete}>
+              <button
+                className="flex items-center w-full px-3 py-2 hover:bg-red-100 text-red-500"
+                onClick={handleCommentDelete}
+              >
                 <RiDeleteBin5Line className="mr-2" /> 삭제
               </button>
             </div>
@@ -84,20 +116,24 @@ const Comment = ({ comment }) => {
 
       {/* 댓글 내용 */}
       <div className="w-full overflow-hidden p-2">
-        <span className="whitespace-pre-wrap break-words">{comment}</span>
-        <form onSubmit={() => {}} className="mt-4">
-          <textarea
-            className="w-full  p-2 border rounded-lg resize-none overflow-y-auto focus:ring-pink-400 outline-none"
-            ref={commentRef}
-            placeholder="댓글을 입력하세요"
-          />
-          <button
-            type="submit"
-            className="w-full bg-pink-500 text-white py-2 rounded-lg mt-2 hover:bg-pink-600 transition-all"
-          >
-            수정하기
-          </button>
-        </form>
+        {isUpdateComment ? (
+          <form onSubmit={handleSubmitUdateComment} className="mt-4">
+            <textarea
+              className="w-full  p-2 border rounded-lg resize-none overflow-y-auto focus:ring-pink-400 outline-none"
+              ref={commentRef}
+              name="comment"
+              placeholder="댓글을 입력하세요"
+            />
+            <button
+              type="submit"
+              className="w-full bg-pink-500 text-white py-2 rounded-lg mt-2 hover:bg-pink-600 transition-all"
+            >
+              수정하기
+            </button>
+          </form>
+        ) : (
+          <span className="whitespace-pre-wrap break-words">{comment}</span>
+        )}
       </div>
     </div>
   );

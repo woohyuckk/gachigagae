@@ -25,7 +25,7 @@ const CommentsSection = () => {
       await supabase.from('comments').insert({ comment, place_id });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['comments']);
+      queryClient.invalidateQueries(['comment']);
     },
   });
 
@@ -71,7 +71,7 @@ const CommentsSection = () => {
       {/* 댓글 목록 overflow-y-auto scrollbar-hide*/}
       <div className="mt-6">
         {comments.map((comment) => {
-          return <Comment key={comment.id} comment={comment.comment} />;
+          return <Comment key={comment.id} comment={comment} />;
         }) || <div className="text-center"> comment가 존재하지 않습니다. </div>}
       </div>
     </div>

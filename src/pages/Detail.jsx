@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 const Detail = () => {
   const { id } = useParams();
   const idNumber = Number(id);
-  const QUERY_KEY = ['places', idNumber];
+  const QUERY_KEY = ['place', idNumber];
 
   const {
     data: placeInfo,
