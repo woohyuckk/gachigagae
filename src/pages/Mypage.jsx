@@ -62,7 +62,8 @@ const Mypage = () => {
 
   // 입력 필드 핸들러
   const handleInputChange = (e) => {
-    setFormData((prev) => ({ ...prev, newNickname: e.target.value }));
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   // 이미지 파일 변경 핸들러 수정
