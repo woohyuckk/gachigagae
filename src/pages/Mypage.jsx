@@ -20,12 +20,12 @@ const Mypage = () => {
 
   // userInfo 변경 시 상태 초기화
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo !== null) {
       setFormData({
         newNickname: userInfo.nickname,
-        imagePreview: userInfo.profile_img_url || DEFAULT_IMAGE,
+        imagePreview: userInfo.profile_img_url ?? DEFAULT_IMAGE,
         file: null,
-        oldFilePath: userInfo.profile_img_url || '',
+        oldFilePath: userInfo.profile_img_url ?? null,
       });
     }
   }, [userInfo]);
@@ -161,7 +161,7 @@ const Mypage = () => {
               />
               <div className="relative inline-block w-full h-60">
                 <img
-                  src={formData.imagePreview}
+                  src={formData.imagePreview ?? DEFAULT_IMAGE}
                   alt="이미지 미리보기"
                   className="w-full h-60 rounded-lg border-2 border-gray-300 object-contain"
                 />
@@ -182,7 +182,7 @@ const Mypage = () => {
           <input
             type="text"
             name="newNickname"
-            value={formData.newNickname}
+            value={formData.newNickname ?? ''}
             onChange={handleInputChange}
             placeholder="닉네임"
             minLength={1}
