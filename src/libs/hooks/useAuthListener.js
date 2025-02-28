@@ -4,6 +4,7 @@ import useAuthStore from '../../stores/useAuthstore';
 
 const useAuthListener = () => {
   const setUserInfo = useAuthStore((state) => state.setUserInfo);
+  const logout = useAuthStore((state) => state.logout);
 
   useEffect(() => {
     // 인증 상태 변경 감지 및 자동 업데이트
@@ -28,6 +29,9 @@ const useAuthListener = () => {
           userInfo['profile_img_url'] = profile_img_url || '';
           setUserInfo(userInfo); // userInfo set
         })();
+      } else {
+        // 세션 정보가 없으면 상태 초기화
+        logout();
       }
     });
 
