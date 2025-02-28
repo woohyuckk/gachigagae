@@ -6,13 +6,13 @@ const getUserInfo = async (authId) => {
   let { data, error } = await supabase
     .from('users')
     .select('nickname, profile_img_url')
-    .eq('id', authId);
+    .eq('id', authId)
+    .single();
 
   if (error) {
     throw new Error(error);
   }
-
-  return data[0];
+  return data;
 };
 
 const useGetUserInfo = () => {
