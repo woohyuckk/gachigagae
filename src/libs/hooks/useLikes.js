@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { addLikes, fetchLikes } from '../api/likesData';
+import { addLikes, deleteLikes, fetchLikes } from '../api/likesData';
 import useGetPlaces from './useGetPlaces';
 
 /**
@@ -53,6 +53,23 @@ export const useAddLikes = () => {
     },
     onError: (error) => {
       console.error('addLikes 에러 발생 :', error);
+    },
+  });
+};
+
+/**
+ * * 좋아요 데이터를 삭제하는 커스텀 쿼리 훅
+ * @returns {Object} useQuery의 결과 객체
+ */
+export const useDeleteLikes = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: deleteLikes,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['likes'] });
+    },
+    onError: (error) => {
+      console.error('deleteLikes 에러 발생 :', error);
     },
   });
 };

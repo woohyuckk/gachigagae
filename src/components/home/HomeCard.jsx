@@ -1,4 +1,4 @@
-import { useAddLikes } from '../../libs/hooks/useLikes';
+import { useAddLikes, useDeleteLikes } from '../../libs/hooks/useLikes';
 import utils from '../../libs/utils/homeUtils';
 import LikeButton from '../buttons/LikeButton';
 
@@ -7,12 +7,14 @@ const HomeCard = ({ place, onClick }) => {
 
   const userId = 'temp Data';
   const addLikesMutation = useAddLikes();
+  const deleteLikesMutation = useDeleteLikes();
 
   // * 좋아요 버튼 클릭 리스너
   const handleClickLikeButton = () => {
     if (!isLiked) {
-      console.log('좋아요 추가!');
       addLikesMutation.mutate({ userId, placeId });
+    } else {
+      deleteLikesMutation.mutate({ userId, placeId });
     }
   };
 
