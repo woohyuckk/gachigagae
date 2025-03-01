@@ -7,19 +7,14 @@ export const useAuthMutate = () => {
 
   const { mutate: signUp } = useMutation({
     mutationFn: async ({ email, password }) => {
-      const { data } = await supabase.auth.signUp({ email, password });
-      return data;
-    },
-  });
+      const { data, error } = await supabase.auth.signUp({ email, password });
+      console.log('Sign Up Data:', data);
+      console.log('Sign Up Error:', error);
 
-  const { mutate: loginUserInfo } = useMutation({
-    mutationFn: async ({ id }) => {
-      const { data } = await supabase.from('users').select('*').eq('id', id).single();
+      if (error) {
+        throw new Error(error.message);
+      }
       return data;
-    },
-    onSuccess: (data) => {
-      const { id, email, nickname, profile_img_url } = data;
-      setUserInfo({ id, email, nickname, profile_img_url });
     },
   });
 
@@ -36,6 +31,17 @@ export const useAuthMutate = () => {
     onSuccess: (data) => {
       const { id, nickname, email } = data;
       setUserInfo({ id, email, nickname });
+    },
+  });
+
+  const { mutate: loginUserInfo } = useMutation({
+    mutationFn: async ({ id }) => {
+      const { data } = await supabase.from('users').select('*').eq('id', id).single();
+      return data;
+    },
+    onSuccess: (data) => {
+      const { id, email, nickname, profile_img_url } = data;
+      setUserInfo({ id, email, nickname, profile_img_url });
     },
   });
 
