@@ -1,41 +1,23 @@
-import { useQuery } from '@tanstack/react-query';
-import { supabase } from '../libs/api/supabaseClient';
-import { useParams } from 'react-router-dom';
 import PlaceSection from '../components/detail/PlaceSection';
 import CommentsSection from '../components/detail/CommentsSection';
 import ImageModal from '../components/detail/ImageModal';
 import { useState } from 'react';
+import { useGetPlaceInfo } from '../libs/hooks/useGetPlaces';
 
 const Detail = () => {
-  const { id } = useParams();
-  const idNumber = Number(id);
-  const QUERY_KEY = ['place', idNumber];
-    const [modalOpen, setModalOpen] = useState(false);
-    const [modalImage, setModalImage] = useState('');
-  
-    // 이미지 클릭 시 모달 열기
-    const openModal = (imageSrc) => {
-      setModalImage(imageSrc);
-      setModalOpen(true);
-    };
-  
-    // 모달 닫기
-    const closeModal = () => {
-      setModalOpen(false);
-    };
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalImage, setModalImage] = useState('');
+  const { data: placeInfo, isLoading, error } = useGetPlaceInfo();
+  // 이미지 클릭 시 모달 열기
+  const openModal = (imageSrc) => {
+    setModalImage(imageSrc);
+    setModalOpen(true);
+  };
 
-  const {
-    data: placeInfo,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: QUERY_KEY,
-    queryFn: async () => {
-      const { data: place } = await supabase.from('places').select('*').eq('id', idNumber).single();
-      return place;
-    },
-    staleTime: 1000 * 60 * 1,
-  });
+  // 모달 닫기c
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   if (isLoading) return <div>loading...</div>;
   if (error) return <div>{error}</div>;

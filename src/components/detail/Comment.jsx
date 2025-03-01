@@ -51,10 +51,9 @@ const Comment = ({ comment: commentInfo }) => {
     upsertCommentMutate(
       { id, comment },
       {
-        
         onSuccess: () => {
-          alert("수정되었습니다.")
-          setIsUpdateComment((prev) => !prev)
+          alert('수정되었습니다.');
+          setIsUpdateComment((prev) => !prev);
         },
       }
     );
