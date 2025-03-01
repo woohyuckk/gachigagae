@@ -16,8 +16,11 @@ const useInfinitePlaces = () => {
             }
           : undefined;
 
+        console.log(result);
+
         return result;
       },
+      initialData: { pages: [], pageParams: [] },
     });
 
   if (error) {

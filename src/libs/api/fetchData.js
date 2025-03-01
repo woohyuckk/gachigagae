@@ -19,14 +19,14 @@ const fetchLimitPlacesData = async ({ pageParam = null }) => {
     .limit(10);
 
   if (pageParam) {
+    console.log(pageParam);
     response = response
       .lt('created_at', pageParam.created_at)
       .or(`created_at.eq.${pageParam.created_at}, id.lt.${pageParam.id}`);
   }
-  // console.log(pageParam);
 
   const { data, error } = await response;
-  console.log(data);
+  // console.log(data);
 
   if (error) {
     console.log(error);

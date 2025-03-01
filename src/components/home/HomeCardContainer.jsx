@@ -4,19 +4,21 @@ import SideBar from './SideBar';
 import HOME_CONSTANT from '../../constants/homeConstant';
 import { useNavigate } from 'react-router-dom';
 import homeUtils from '../../libs/utils/homeUtils';
-import { useInView } from 'react-intersection-observer';
+// import { useInView } from 'react-intersection-observer';
 import useInfinitePlaces from '../../libs/hooks/useInfinitePlaces';
+import { useInView } from 'react-intersection-observer';
 
 const HomeCardContainer = ({ getPlaces }) => {
-  const [places, setPlaces] = useState(getPlaces);
+  // const [places, setPlaces] = useState(getPlaces);
   const navigate = useNavigate();
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } = useInfinitePlaces();
+  const places = data.pages[0]
 
   const [ref, inView] = useInView({
     threshold: 0.3,
     onChange: (inView) => {
-      if (!inView || !hasNextPage || !isFetchingNextPage) return;
+      if (!inView || !hasNextPage || isFetchingNextPage) return;
       fetchNextPage();
     },
   });
@@ -37,8 +39,7 @@ const HomeCardContainer = ({ getPlaces }) => {
     }
   };
 
-  if(isFetching) return(<div>Fetching...</div>)
-
+  if (isFetching) return <div>Fetching...</div>;
   return (
     <div className="lg:w-full lg:max-w-3xl m-auto flex flex-wrap gap-7 justify-evenly p-4 sm:w-1/2 md:gap-20">
       <SideBar onClick={handleCategory} />
