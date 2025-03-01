@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import Comment from './Comment';
-import { useComment } from '../../libs/hooks/useComment';
+import { useComment } from '../../../libs/hooks/useComment';
 
 const CommentsSection = () => {
   const { upsertCommentMutate, getCommentsQuery } = useComment({});

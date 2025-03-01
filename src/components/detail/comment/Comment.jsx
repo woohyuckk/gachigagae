@@ -1,9 +1,10 @@
-import { useState, useRef, useEffect } from 'react';
-import { CiMenuKebab } from 'react-icons/ci';
-import { FaRegPenToSquare } from 'react-icons/fa6';
-import { useComment } from '../../libs/hooks/useComment';
-import CommentUserProfile from './comment/CommentUserProfile';
-import ModifyMenu from './comment/ModifyMenu';
+import { useEffect, useRef, useState } from "react";
+import { useComment } from "../../../libs/hooks/useComment";
+import { CiMenuKebab } from "react-icons/ci";
+import CommentUserProfile from "./CommentUserProfile";
+import ModifyMenu from "./ModifyMenu";
+import { FaRegPenToSquare } from "react-icons/fa6";
+
 
 const Comment = ({ comment: commentInfo }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
