@@ -1,5 +1,6 @@
 import { IoHeartOutline, IoHeart } from 'react-icons/io5';
 import { useToggleLikes } from '../../libs/hooks/useLikes';
+import useAuthStore from '../../stores/useAuthstore';
 
 /**
  * * 장소의 좋아요 기능을 추가한 좋아요 버튼 컴포넌트
@@ -11,7 +12,9 @@ import { useToggleLikes } from '../../libs/hooks/useLikes';
  * <LikePlaceButton size={30} placeId={id} isLiked={isLiked} />
  */
 export const LikePlaceButton = ({ isLiked, placeId, ...props }) => {
-  const userId = 'Temp Data';
+  const {
+    userInfo: { id: userId },
+  } = useAuthStore();
   const { toggleLike } = useToggleLikes(isLiked);
 
   const handleClickLikeButton = (e) => {

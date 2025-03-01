@@ -1,8 +1,11 @@
 import HomeCardContainer from '../components/home/HomeCardContainer';
 import useGetPlaces from '../libs/hooks/useGetPlaces';
+import useAuthStore from '../stores/useAuthstore';
 
 const Home = () => {
-  const userId = 'Temp Data';
+  const {
+    userInfo: { id: userId },
+  } = useAuthStore();
   const { data, isLoading } = useGetPlaces(userId);
 
   if (isLoading) return <div>loading...</div>;

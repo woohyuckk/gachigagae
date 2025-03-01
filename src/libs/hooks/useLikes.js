@@ -24,13 +24,37 @@ export const useGetLikes = (userId) => {
  */
 export const useToggleLikes = (isLiked) => {
   const queryClient = useQueryClient();
+  const queryKey = ['places'];
 
+  // * 옵티미스틱 업데이트를 위한 onMutate 함수
+  const handleMutate = async ({ placeId }) => {
+    // 진행중인 쿼리 취소 및 현재 상태 저장
+    await queryClient.cancelQueries({ queryKey });
+    const previousData = queryClient.getQueryData(queryKey);
+    // 클라이언트(캐시) 상태 업데이트
+    queryClient.setQueryData(queryKey, (oldData) => {
+      return oldData.map((place) => {
+        if (place.id === placeId) {
+          return {
+            ...place,
+            isLiked: !place.isLiked,
+          };
+        }
+        return place;
+      });
+    });
+    return { previousData };
+  };
+
+  // mutation 정의
   const toggleLikeMutation = useMutation({
     mutationFn: isLiked ? deleteLikes : addLikes,
+    onMutate: handleMutate,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['places'] });
+      queryClient.invalidateQueries({ queryKey });
     },
-    onError: (error) => {
+    onError: (error, _, context) => {
+      queryClient.setQueryData(queryKey, context.previousData);
       console.error('좋아요 추가 또는 삭제 에러 발생 :', error);
     },
   });
