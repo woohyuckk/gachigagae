@@ -1,33 +1,14 @@
 import { useRef } from 'react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { supabase } from '../../libs/api/supabaseClient';
 import { useParams } from 'react-router-dom';
 import Comment from './Comment';
+import { useComment } from '../../libs/hooks/useComment';
 
 const CommentsSection = () => {
-  const queryClient = useQueryClient();
+  const { upsertCommentMutate, getCommentsQuery } = useComment({});
   const commentRef = useRef();
   const { id } = useParams();
   const idNumber = Number(id);
-  const {
-    data: comments,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ['comment'],
-    queryFn: async () => {
-      const { data } = await supabase.from('comments').select('*').eq('place_id', idNumber);
-      return data;
-    },
-  });
-  const { mutate: insertCommentMutate } = useMutation({
-    mutationFn: async ({ comment, place_id }) => {
-      await supabase.from('comments').insert({ comment, place_id });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries(['comment']);
-    },
-  });
+  const { data: comments, isLoading, error } = getCommentsQuery;
 
   const handleOnSubmitComment = (e) => {
     e.preventDefault();
@@ -35,7 +16,7 @@ const CommentsSection = () => {
 
     if (!comment) return;
 
-    insertCommentMutate(
+    upsertCommentMutate(
       { comment, place_id: idNumber },
       {
         onSuccess: () => {

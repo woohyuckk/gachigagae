@@ -1,6 +1,7 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "../api/supabaseClient";
 import useAuthStore from "../../stores/useAuthstore";
+import { useParams } from "react-router-dom";
 
 
 
@@ -10,7 +11,20 @@ export const useComment = (commentInfo) => {
   const { id: authId } = useAuthStore((state) => state.userInfo);
 
   const isCommenter = commentUserId === authId ? true : false;
-  // 코멘트 삭제
+ 
+  const { id } = useParams();
+  const idNumber = Number(id);
+
+  // get comments included in the post
+  const getCommentsQuery= useQuery({
+    queryKey: ['comment'],
+    queryFn: async () => {
+      const { data } = await supabase.from('comments').select('*').eq('place_id', idNumber);
+      return data;
+    },
+  });
+
+  // delete comment
   const { mutate: deleteCommentMutate } = useMutation({
     mutationFn: async (id) => {
       const { error } = await supabase.from('comments').delete().eq('id', id);
@@ -25,14 +39,13 @@ export const useComment = (commentInfo) => {
     },
   });
 
-  // 코멘트 수정
-  const { mutate: updateCommentMutate } = useMutation({
-    mutationFn: async ({ id, comment }) => {
-      const { error } = await supabase.from('comments').update({ comment }).eq('id', id);
+  // 코멘트 추가 및 수정
+  const { mutate: upsertCommentMutate } = useMutation({
+    mutationFn: async ({ id, comment,place_id }) => {
+      const { error } = await supabase.from('comments').upsert({ id, comment,place_id }).order('id', { ascending: true });;
       if (error) throw error;
     },
     onSuccess: () => {
-      alert('수정되었습니다.');
       queryClient.invalidateQueries(['comment']);
     },
     onError: (error) => {
@@ -40,5 +53,5 @@ export const useComment = (commentInfo) => {
     },
   });
 
-  return { deleteCommentMutate, updateCommentMutate, isCommenter }
+  return {getCommentsQuery, deleteCommentMutate, upsertCommentMutate, isCommenter }
 }

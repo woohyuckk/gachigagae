@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 import { CiMenuKebab } from 'react-icons/ci';
 import { FaRegPenToSquare } from 'react-icons/fa6';
 import { RiDeleteBin5Line } from 'react-icons/ri';
-import useAuthStore from '../../stores/useAuthstore';
 import { useComment } from '../../libs/hooks/useComment';
 
 const Comment = ({ comment: commentInfo }) => {
@@ -12,7 +11,7 @@ const Comment = ({ comment: commentInfo }) => {
   const menuRef = useRef();
   const commentRef = useRef();
 
-  const { deleteCommentMutate, updateCommentMutate, isCommenter } = useComment(commentInfo);
+  const { deleteCommentMutate, upsertCommentMutate, isCommenter } = useComment(commentInfo);
   const profileImage =
     'https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg?w=740';
 
@@ -49,10 +48,14 @@ const Comment = ({ comment: commentInfo }) => {
   const handleSubmitUdateComment = (e) => {
     e.preventDefault();
     comment = commentRef.current.value;
-    updateCommentMutate(
+    upsertCommentMutate(
       { id, comment },
       {
-        onSuccess: () => setIsUpdateComment((prev) => !prev),
+        
+        onSuccess: () => {
+          alert("수정되었습니다.")
+          setIsUpdateComment((prev) => !prev)
+        },
       }
     );
   };
