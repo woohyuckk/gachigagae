@@ -6,6 +6,8 @@ const Home = () => {
   const {
     userInfo: { id: userId },
   } = useAuthStore();
+
+  // 전체 게시물 데이터 가져오기
   const { data, isLoading } = useGetPlaces(userId);
 
   if (isLoading) return <div>loading...</div>;

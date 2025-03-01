@@ -8,7 +8,7 @@ import fetchPlacesData from '../api/placesData';
  */
 const useGetPlaces = (userId) => {
   return useQuery({
-    queryKey: ['places'],
+    queryKey: ['places', userId],
     queryFn: () => fetchPlacesData(userId),
     onError: (error) => {
       console.error('fetchPlacesData 에러 발생 :', error);
