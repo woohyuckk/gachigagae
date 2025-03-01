@@ -10,6 +10,8 @@ const Comment = ({ comment: commentInfo }) => {
   let { id, comment } = commentInfo;
   const menuRef = useRef();
   const commentRef = useRef();
+  const userProfileImage = commentInfo.users.profile_img_url
+  // const {profile_img_url} = commentInfo
 
   const { deleteCommentMutate, upsertCommentMutate, isCommenter } = useComment(commentInfo);
   const profileImage =
@@ -64,7 +66,7 @@ const Comment = ({ comment: commentInfo }) => {
       <div className="flex w-full items-center justify-between border-b p-1 relative flex-wrap">
         <div className="flex items-center space-x-2 min-w-0">
           <img
-            src={profileImage}
+            src={userProfileImage||profileImage}
             alt="Profile"
             className="w-8 h-8 rounded-full border border-gray-300 "
           />
