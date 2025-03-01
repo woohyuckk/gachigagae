@@ -3,21 +3,20 @@ import { CiMenuKebab } from 'react-icons/ci';
 import { FaRegPenToSquare } from 'react-icons/fa6';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import { useComment } from '../../libs/hooks/useComment';
+import CommentUserProfile from './comment/CommentUserProfile';
 
 const Comment = ({ comment: commentInfo }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUpdateComment, setIsUpdateComment] = useState(false);
-  console.log(commentInfo)
-  let { id, comment } = commentInfo;
+  let {
+    id,
+    comment,
+    users: { profile_img_url: userProfileImage, nickname },
+  } = commentInfo;
   const menuRef = useRef();
   const commentRef = useRef();
-  const { profile_img_url: userProfileImage, nickname } = commentInfo.users
-  console.log(nickname)
-  // const {profile_img_url} = commentInfo
 
   const { deleteCommentMutate, upsertCommentMutate, isCommenter } = useComment(commentInfo);
-  const profileImage =
-    'https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg?w=740';
 
   // 바깥 클릭 감지하여 메뉴 닫기
   useEffect(() => {
@@ -66,14 +65,7 @@ const Comment = ({ comment: commentInfo }) => {
   return (
     <div className="flex flex-col  bg-purple-200 rounded-xl w-full border-b border-gray-400 p-2 my-3 relative ">
       <div className="flex w-full items-center justify-between border-b p-1 relative flex-wrap">
-        <div className="flex items-center space-x-2 min-w-0">
-          <img
-            src={userProfileImage||profileImage}
-            alt="Profile"
-            className="w-8 h-8 rounded-full border border-gray-300 "
-          />
-          <span className="font-bold text-black truncate max-w-[150px]">{nickname}</span>
-        </div>
+        <CommentUserProfile userProfileImage={userProfileImage} nickname={nickname} />
 
         {/* 메뉴 버튼 */}
         {isCommenter && (
