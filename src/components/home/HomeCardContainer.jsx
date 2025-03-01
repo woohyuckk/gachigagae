@@ -20,7 +20,7 @@ const HomeCardContainer = ({ getPlaces }) => {
       fetchNextPage();
     },
   });
-  console.log(data);
+  // console.log(data);
 
   // 카테고리 정렬
   const handleCategory = (e) => {

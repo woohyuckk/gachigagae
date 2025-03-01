@@ -1,9 +1,10 @@
 import utils from '../../libs/utils/homeUtils';
 
-const HomeCard = ({ place, onClick }) => {
+const HomeCard = ({ place, onClick, text, ref, inView }) => {
   const { title, category1, category2, address, image } = place;
+
   return (
-    <>
+    <div className="h-full" ref={ref}>
       <h2 className="text-lg font-bold">{title}</h2>
       <p className="text-gray-400 text-xs w-full">{utils.splitAddress(address)}</p>
       <figure className="flex flex-auto justify-center items-center rounded-2xl bg-gray-100 xl:w-full h-3/4">
@@ -23,7 +24,7 @@ const HomeCard = ({ place, onClick }) => {
       >
         {category2}
       </span>
-    </>
+    </div>
   );
 };
 
