@@ -1,9 +1,8 @@
 import HomeCardContainer from '../components/home/HomeCardContainer';
-import usePlacesWithLiked from '../libs/hooks/usePlacesWithLiked';
+import { usePlacesWithLiked } from '../libs/hooks/useLikes';
 
 const Home = () => {
-  // const userId = useAuthStore((state) => state.userInfo.id);
-  const userId = '8037c1da-7723-4147-b7ad-a7a5a9be2a55';
+  const userId = 'temp Data';
 
   // 장소 목록 불러오기
   const { placesWithLikeStuats, isLoading } = usePlacesWithLiked(userId);

@@ -1,12 +1,19 @@
+import { useAddLikes } from '../../libs/hooks/useLikes';
 import utils from '../../libs/utils/homeUtils';
 import LikeButton from '../buttons/LikeButton';
 
 const HomeCard = ({ place, onClick }) => {
-  const { title, category1, category2, address, image, isLiked } = place;
+  const { id: placeId, title, category1, category2, address, image, isLiked } = place;
+
+  const userId = 'temp Data';
+  const addLikesMutation = useAddLikes();
 
   // * 좋아요 버튼 클릭 리스너
   const handleClickLikeButton = () => {
-    console.log('좋아요 클릭!');
+    if (!isLiked) {
+      console.log('좋아요 추가!');
+      addLikesMutation.mutate({ userId, placeId });
+    }
   };
 
   return (
