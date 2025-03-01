@@ -1,22 +1,8 @@
-import { useAddLikes, useDeleteLikes } from '../../libs/hooks/useLikes';
 import utils from '../../libs/utils/homeUtils';
-import LikeButton from '../buttons/LikeButton';
+import { LikePlaceButton } from '../buttons/LikeButton';
 
-const HomeCard = ({ place, onClick }) => {
-  const { id: placeId, title, category1, category2, address, image, isLiked } = place;
-
-  const userId = 'temp Data';
-  const addLikesMutation = useAddLikes();
-  const deleteLikesMutation = useDeleteLikes();
-
-  // * 좋아요 버튼 클릭 리스너
-  const handleClickLikeButton = () => {
-    if (!isLiked) {
-      addLikesMutation.mutate({ userId, placeId });
-    } else {
-      deleteLikesMutation.mutate({ userId, placeId });
-    }
-  };
+const HomeCard = ({ place }) => {
+  const { id, title, category1, category2, address, image, isLiked } = place;
 
   return (
     <>
@@ -35,12 +21,11 @@ const HomeCard = ({ place, onClick }) => {
           className="text-gray-500 text-sm cursor-pointer"
           onClick={(e) => {
             e.stopPropagation();
-            onClick(e);
           }}
         >
           {category2}
         </span>
-        <LikeButton size={24} status={isLiked} onClick={handleClickLikeButton} />
+        <LikePlaceButton placeId={id} isLiked={isLiked} />
       </div>
     </>
   );

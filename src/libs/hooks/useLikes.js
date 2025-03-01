@@ -1,28 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { addLikes, deleteLikes, fetchLikes } from '../api/likesData';
-import useGetPlaces from './useGetPlaces';
-
-/**
- * * 유저의 좋아요 목록, 장소 목록을 가져와서 장소 객체에 좋아요 여부를 추가하는 커스텀 훅
- * @param {string} userId - 현재 로그인한 유저의 uuid
- * @returns {Object} 데이터 배열과 로딩 여부를 담은 객체
- * @returns {Ojbect[]} return.placesWithLikeStuats - 좋아요 여부가 추가된 장소 데이터 배열
- *    { ...prev, isLiked }
- */
-export const usePlacesWithLiked = (userId) => {
-  const { data: placeList = [], isLoading: isLoadingPlaces } = useGetPlaces();
-  const { data: likeList = [], isLoading: isLoadingLikes } = useGetLikes(userId);
-
-  const isLoading = isLoadingLikes || isLoadingPlaces;
-
-  // 불러온 장소 목록에 좋아요 여부 속성 추가
-  const placesWithLikeStuats = placeList.map((place) => ({
-    ...place,
-    isLiked: likeList.some((likePlace) => likePlace.place_id === place.id),
-  }));
-
-  return { placesWithLikeStuats, isLoading };
-};
 
 /**
  * * 유저의 좋아요 목록을 가져오는 커스텀 쿼리 훅
@@ -41,35 +18,24 @@ export const useGetLikes = (userId) => {
 };
 
 /**
- * * 좋아요 데이터를 추가하는 커스텀 쿼리 훅
- * @returns {Object} useQuery의 결과 객체
+ * * 좋아요를 추가하거나 삭제하는 커스텀 훅
+ * @param {boolean} isLiked - 현재 장소의 좋아요 여부
+ * @return {Function} return.toggleLike - 좋아요 토글 mutation 함수
  */
-export const useAddLikes = () => {
+export const useToggleLikes = (isLiked) => {
   const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: addLikes,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['likes'] });
-    },
-    onError: (error) => {
-      console.error('addLikes 에러 발생 :', error);
-    },
-  });
-};
 
-/**
- * * 좋아요 데이터를 삭제하는 커스텀 쿼리 훅
- * @returns {Object} useQuery의 결과 객체
- */
-export const useDeleteLikes = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: deleteLikes,
+  const toggleLikeMutation = useMutation({
+    mutationFn: isLiked ? deleteLikes : addLikes,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['likes'] });
+      queryClient.invalidateQueries({ queryKey: ['places'] });
     },
     onError: (error) => {
-      console.error('deleteLikes 에러 발생 :', error);
+      console.error('좋아요 추가 또는 삭제 에러 발생 :', error);
     },
   });
+
+  return {
+    toggleLike: toggleLikeMutation.mutate,
+  };
 };

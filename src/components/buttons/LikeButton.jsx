@@ -1,32 +1,40 @@
-import { useState } from 'react';
 import { IoHeartOutline, IoHeart } from 'react-icons/io5';
+import { useToggleLikes } from '../../libs/hooks/useLikes';
+
+/**
+ * * 장소의 좋아요 기능을 추가한 좋아요 버튼 컴포넌트
+ * @param {boolean} props.isLiked - 현재 장소의 좋아요 여부 (필수)
+ * @param {number} props.placeId - 현재 장소의 id (필수)
+ * @param {number} props.size - 좋아요 버튼의 사이즈 (선택)
+ * @param {string} props.className - 더 추가하고 싶은 css 속성
+ * @example
+ * <LikePlaceButton size={30} placeId={id} isLiked={isLiked} />
+ */
+export const LikePlaceButton = ({ isLiked, placeId, ...props }) => {
+  const userId = 'Temp Data';
+  const { toggleLike } = useToggleLikes(isLiked);
+
+  const handleClickLikeButton = (e) => {
+    e.stopPropagation();
+    toggleLike({ userId, placeId });
+  };
+
+  return <LikeButton isLiked={isLiked} onClick={handleClickLikeButton} {...props} />;
+};
 
 /**
  * * 좋아요 버튼 컴포넌트
- * @param {Object} props
  * @param {number} props.size - 좋아요 버튼 사이즈 (디폴트 30)
- * @param {Function} props.onClick - 좋아요 버튼 누를 때 온클릭 이벤트
  * @param {string} props.className - 더 추가하고 싶은 css 속성
- * @param {boolean} props.status - 좋아요 여부
- * @example
- * <LikeButton size={24} onClick={handleClickLikeButton}/>
- * size, onClick 둘 다 선택입니다.
+ * @param {Function} props.onClick - 좋아요 버튼 누를 때 온클릭 이벤트
+ * @param {boolean} props.isLiked - 좋아요 여부
  */
-const LikeButton = ({ size = 30, onClick, className, status = false }) => {
-  const [isLiked, setIsLiked] = useState(status);
-
-  const handleClickLike = (e) => {
-    e.stopPropagation();
-    setIsLiked(!isLiked);
-    onClick();
-  };
-
+const LikeButton = ({ size = 24, className, ...props }) => {
   return (
     <VariantButton
       size={size}
       className={`cursor-pointer hover:scale-105 active:scale-95 ${className}`}
-      isLiked={isLiked}
-      onClick={handleClickLike}
+      {...props}
     />
   );
 };
@@ -41,5 +49,3 @@ const VariantButton = ({ isLiked, className, ...props }) => {
     <IoHeartOutline className={`text-gray-400 ${className}`} {...props} />
   );
 };
-
-export default LikeButton;

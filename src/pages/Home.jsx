@@ -1,17 +1,15 @@
 import HomeCardContainer from '../components/home/HomeCardContainer';
-import { usePlacesWithLiked } from '../libs/hooks/useLikes';
+import useGetPlaces from '../libs/hooks/useGetPlaces';
 
 const Home = () => {
-  const userId = 'temp Data';
-
-  // 장소 목록 불러오기
-  const { placesWithLikeStuats, isLoading } = usePlacesWithLiked(userId);
+  const userId = 'Temp Data';
+  const { data, isLoading } = useGetPlaces(userId);
 
   if (isLoading) return <div>loading...</div>;
 
   return (
     <>
-      <HomeCardContainer getPlaces={placesWithLikeStuats} />
+      <HomeCardContainer places={data} />
     </>
   );
 };
