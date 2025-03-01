@@ -7,10 +7,12 @@ import { useComment } from '../../libs/hooks/useComment';
 const Comment = ({ comment: commentInfo }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUpdateComment, setIsUpdateComment] = useState(false);
+  console.log(commentInfo)
   let { id, comment } = commentInfo;
   const menuRef = useRef();
   const commentRef = useRef();
-  const userProfileImage = commentInfo.users.profile_img_url
+  const { profile_img_url: userProfileImage, nickname } = commentInfo.users
+  console.log(nickname)
   // const {profile_img_url} = commentInfo
 
   const { deleteCommentMutate, upsertCommentMutate, isCommenter } = useComment(commentInfo);
@@ -70,7 +72,7 @@ const Comment = ({ comment: commentInfo }) => {
             alt="Profile"
             className="w-8 h-8 rounded-full border border-gray-300 "
           />
-          <span className="font-bold text-black truncate max-w-[150px]">NICKNAME</span>
+          <span className="font-bold text-black truncate max-w-[150px]">{nickname}</span>
         </div>
 
         {/* 메뉴 버튼 */}

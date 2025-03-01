@@ -19,7 +19,7 @@ export const useComment = (commentInfo) => {
   const getCommentsQuery= useQuery({
     queryKey: ['comment'],
     queryFn: async () => {
-      const { data } = await supabase.from('comments').select('*, users(profile_img_url)').eq('place_id', idNumber);
+      const { data } = await supabase.from('comments').select('*, users(profile_img_url, nickname)').eq('place_id', idNumber);
       return data;
     },
   });
