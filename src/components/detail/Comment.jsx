@@ -1,20 +1,18 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState, useRef, useEffect } from 'react';
 import { CiMenuKebab } from 'react-icons/ci';
 import { FaRegPenToSquare } from 'react-icons/fa6';
 import { RiDeleteBin5Line } from 'react-icons/ri';
-import { supabase } from '../../libs/api/supabaseClient';
 import useAuthStore from '../../stores/useAuthstore';
+import { useComment } from '../../libs/hooks/useComment';
 
-const Comment = ({ comment: commentData }) => {
+const Comment = ({ comment: commentInfo }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUpdateComment, setIsUpdateComment] = useState(false);
-  const { id: authId } = useAuthStore((state) => state.userInfo )
-  console.log(authId)
+  let { id, comment } = commentInfo;
   const menuRef = useRef();
   const commentRef = useRef();
-  let { id, comment, user_id:commentUserId } = commentData;
-  const queryClient = useQueryClient();
+
+  const { deleteCommentMutate, updateCommentMutate, isCommenter } = useComment(commentInfo);
   const profileImage =
     'https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg?w=740';
 
@@ -44,49 +42,23 @@ const Comment = ({ comment: commentData }) => {
     setIsMenuOpen((prev) => !prev);
   };
 
-  const handleCommentDelete = (id) => {
-
-    deleteCommentMutate(id)
+  const handleCommentDelete = () => {
+    deleteCommentMutate(id);
   };
-
-  const { mutate: deleteCommentMutate } = useMutation({
-    mutationFn: async (id) => {
-      const { error } = await supabase.from('comments').delete().eq('id', id);
-      if (error) throw error;
-    },
-    onSuccess: () => {
-      alert('삭제되었습니다');
-      queryClient.invalidateQueries(['comment']);
-    },
-    onError: (error) => {
-      console.error(error);
-    },
-  });
 
   const handleSubmitUdateComment = (e) => {
     e.preventDefault();
     comment = commentRef.current.value;
-    updateCommentMutate({ id, comment });
+    updateCommentMutate(
+      { id, comment },
+      {
+        onSuccess: () => setIsUpdateComment((prev) => !prev),
+      }
+    );
   };
-
-  const { mutate: updateCommentMutate } = useMutation({
-    mutationFn: async ({ id, comment }) => {
-      const { error } = await supabase.from('comments').update({ comment }).eq('id', id);
-      if (error) throw error;
-    },
-    onSuccess: () => {
-      alert('수정되었습니다.');
-      setIsUpdateComment((prev) => !prev);
-      queryClient.invalidateQueries(['comment']);
-    },
-    onError: (error) => {
-      console.error(error);
-    },
-  });
 
   return (
     <div className="flex flex-col  bg-purple-200 rounded-xl w-full border-b border-gray-400 p-2 my-3 relative ">
-      {/* 프로필 이미지 + 닉네임 + 메뉴 버튼 */}
       <div className="flex w-full items-center justify-between border-b p-1 relative flex-wrap">
         <div className="flex items-center space-x-2 min-w-0">
           <img
@@ -98,58 +70,58 @@ const Comment = ({ comment: commentData }) => {
         </div>
 
         {/* 메뉴 버튼 */}
-        <div className="relative ">
-          <button
-            className="p-2 rounded-full hover:bg-gray-300 transition"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <CiMenuKebab size={20} />
-          </button>
-
-          {/* 수정/삭제 버튼 (햄버거 버튼의 "오른쪽"에 배치) */}
-          {isMenuOpen && (
-            <div
-              ref={menuRef}
-              className="absolute left-full top-0 ml-2 w-28 bg-white shadow-lg rounded-md z-50 border border-gray-300"
+        {isCommenter && (
+          <div className="relative ">
+            <button
+              className="p-2 rounded-full hover:bg-gray-300 transition"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              <button
-                className="flex items-center w-full px-3 py-2 hover:bg-gray-100"
-                onClick={handleCommentUpdate}
+              <CiMenuKebab size={20} />
+            </button>
+
+            {/* 수정/삭제 버튼 (햄버거 버튼의 "오른쪽"에 배치) */}
+            {isMenuOpen && (
+              <div
+                ref={menuRef}
+                className="absolute left-full top-0 ml-2 w-28 bg-white shadow-lg rounded-md z-50 border border-gray-300"
               >
-                <FaRegPenToSquare className="mr-2" /> 수정
-              </button>
-              <button
-                className="flex items-center w-full px-3 py-2 hover:bg-red-100 text-red-500"
-                onClick={()=>handleCommentDelete(id)}
-              >
-                <RiDeleteBin5Line className="mr-2" /> 삭제
-              </button>
-            </div>
-          )}
-        </div>
+                <button
+                  className="flex items-center justify-center w-full px-3 py-2 hover:bg-gray-100"
+                  onClick={handleCommentUpdate}
+                >
+                  <FaRegPenToSquare className="mr-2" /> 수정
+                </button>
+                <button
+                  className="flex items-center  justify-center w-full px-3 py-2 hover:bg-red-100 text-red-500"
+                  onClick={handleCommentDelete}
+                >
+                  <RiDeleteBin5Line className="mr-2" /> 삭제
+                </button>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* 댓글 내용 */}
-      <div className="w-full overflow-hidden p-2">
-        {isUpdateComment ? (
-          <form onSubmit={handleSubmitUdateComment} className="mt-4">
-            <textarea
-              className="w-full  p-2 border rounded-lg resize-none overflow-y-auto focus:ring-pink-400 outline-none"
-              ref={commentRef}
-              name="comment"
-              placeholder="댓글을 입력하세요"
-            />
-            <button
-              type="submit"
-              className="w-full bg-pink-500 text-white py-2 rounded-lg mt-2 hover:bg-pink-600 transition-all"
-            >
-              수정하기
-            </button>
-          </form>
-        ) : (
-          <span className="whitespace-pre-wrap break-words">{comment}</span>
-        )}
-      </div>
+      {isUpdateComment ? (
+        <form onSubmit={handleSubmitUdateComment} className="mt-4 w-full overflow-hidden p-2">
+          <textarea
+            className="w-full  p-2 border rounded-lg resize-none overflow-y-auto focus:ring-pink-400 outline-none"
+            ref={commentRef}
+            name="comment"
+            placeholder="댓글을 입력하세요"
+          />
+          <button
+            type="submit"
+            className="flex items-center justify-center w-full px-3 py-2 rounded-lg bg-pink-500 text-white   mt-2 hover:bg-pink-600 transition-all"
+          >
+            <FaRegPenToSquare className="mr-2" /> 수정
+          </button>
+        </form>
+      ) : (
+        <span className="whitespace-pre-wrap break-words">{comment}</span>
+      )}
     </div>
   );
 };
