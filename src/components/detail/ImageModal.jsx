@@ -1,7 +1,7 @@
 const ImageModal = ({ handleModalClose: closeModal, modalImage }) => {
   return (
     <div
-      className="fixed inset-0 bg-amber-100 bg-amber-100/20 flex items-center justify-center z-50 backdrop-blur-md"
+      className="fixed inset-0 bg-amber-100/20 flex items-center justify-center z-50 backdrop-blur-md"
       onClick={closeModal}
     >
       <div className="relative bg-white p-4 rounded-lg shadow-lg w-1/3 ">

@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import { CiMenuKebab } from 'react-icons/ci';
 import { FaRegPenToSquare } from 'react-icons/fa6';
-import { RiDeleteBin5Line } from 'react-icons/ri';
 import { useComment } from '../../libs/hooks/useComment';
 import CommentUserProfile from './comment/CommentUserProfile';
+import ModifyMenu from './comment/ModifyMenu';
 
 const Comment = ({ comment: commentInfo }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -48,6 +48,10 @@ const Comment = ({ comment: commentInfo }) => {
     deleteCommentMutate(id);
   };
 
+  const handleMenuToggle = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   const handleSubmitUdateComment = (e) => {
     e.preventDefault();
     comment = commentRef.current.value;
@@ -72,30 +76,18 @@ const Comment = ({ comment: commentInfo }) => {
           <div className="relative ">
             <button
               className="p-2 rounded-full hover:bg-gray-300 transition"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={handleMenuToggle}
             >
               <CiMenuKebab size={20} />
             </button>
 
             {/* 수정/삭제 버튼 (햄버거 버튼의 "오른쪽"에 배치) */}
             {isMenuOpen && (
-              <div
-                ref={menuRef}
-                className="absolute left-full top-0 ml-2 w-28 bg-white shadow-lg rounded-md z-50 border border-gray-300"
-              >
-                <button
-                  className="flex items-center justify-center w-full px-3 py-2 hover:bg-gray-100"
-                  onClick={handleCommentUpdate}
-                >
-                  <FaRegPenToSquare className="mr-2" /> 수정
-                </button>
-                <button
-                  className="flex items-center  justify-center w-full px-3 py-2 hover:bg-red-100 text-red-500"
-                  onClick={handleCommentDelete}
-                >
-                  <RiDeleteBin5Line className="mr-2" /> 삭제
-                </button>
-              </div>
+              <ModifyMenu
+                menuRef={menuRef}
+                handleCommentDelete={handleCommentDelete}
+                handleCommentUpdate={handleCommentUpdate}
+              />
             )}
           </div>
         )}
