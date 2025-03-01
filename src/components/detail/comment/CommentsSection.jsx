@@ -4,7 +4,7 @@ import Comment from './Comment';
 import { useComment } from '../../../libs/hooks/useComment';
 
 const CommentsSection = () => {
-  const { upsertCommentMutate, getCommentsQuery } = useComment({});
+  const { upsertCommentMutate,getCommentsQuery } = useComment({});
   const commentRef = useRef();
   const { id } = useParams();
   const idNumber = Number(id);

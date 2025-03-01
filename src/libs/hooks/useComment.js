@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "../api/supabaseClient";
 import useAuthStore from "../../stores/useAuthstore";
 import { useParams } from "react-router-dom";
+import { COMMENT_QUERY_KEY } from "../../constants/queryKeyConstants";
 
 
 
@@ -11,15 +12,15 @@ export const useComment = (commentInfo) => {
   const { id: authId } = useAuthStore((state) => state.userInfo);
 
   const isCommenter = commentUserId === authId ? true : false;
- 
+
   const { id } = useParams();
   const idNumber = Number(id);
 
   // get comments included in the post
-  const getCommentsQuery= useQuery({
-    queryKey: ['comment'],
+  const getCommentsQuery = useQuery({
+    queryKey: COMMENT_QUERY_KEY.COMMENT,
     queryFn: async () => {
-      const { data } = await supabase.from('comments').select('*, users(profile_img_url, nickname)').eq('place_id', idNumber);
+      const { data } = await supabase.from('comments').select('*, users(profile_img_url, nickname)').eq('place_id', idNumber).order('id', { ascending: true });
       return data;
     },
   });
@@ -32,7 +33,7 @@ export const useComment = (commentInfo) => {
     },
     onSuccess: () => {
       alert('삭제되었습니다');
-      queryClient.invalidateQueries(['comment']);
+      queryClient.invalidateQueries(COMMENT_QUERY_KEY.COMMENT);
     },
     onError: (error) => {
       console.error(error);
@@ -41,17 +42,17 @@ export const useComment = (commentInfo) => {
 
   // 코멘트 추가 및 수정
   const { mutate: upsertCommentMutate } = useMutation({
-    mutationFn: async ({ id, comment,place_id }) => {
-      const { error } = await supabase.from('comments').upsert({ id, comment,place_id }).order('id', { ascending: true });;
+    mutationFn: async ({ id, comment, place_id }) => {
+      const { error } = await supabase.from('comments').upsert({ id, comment, place_id }).order('id', { ascending: true });
       if (error) throw error;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['comment']);
+      queryClient.invalidateQueries(COMMENT_QUERY_KEY.COMMENT);
     },
     onError: (error) => {
       console.error(error);
     },
   });
 
-  return {getCommentsQuery, deleteCommentMutate, upsertCommentMutate, isCommenter }
+  return { getCommentsQuery, deleteCommentMutate, upsertCommentMutate, isCommenter }
 }
