@@ -1,17 +1,10 @@
 import HomeCard from './HomeCard';
 import SideBar from './SideBar';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import homeUtils from '../../libs/utils/homeUtils';
 
 const HomeCardContainer = ({ places }) => {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-
-  // 데이터 필터링
-  const category = searchParams.get('category');
-  const filteredPlaces = category
-    ? homeUtils.filterCategory(places, homeUtils.translateCategoryName(category))
-    : places;
 
   // * 카테고리 정렬 핸들러 함수
   const handleCategory = (e) => {
@@ -24,7 +17,7 @@ const HomeCardContainer = ({ places }) => {
     <div className="lg:w-full lg:max-w-3xl m-auto flex flex-wrap gap-7 justify-evenly p-4 sm:w-1/2 md:gap-20">
       <SideBar onClick={handleCategory} />
 
-      {filteredPlaces.map((place, idx) => {
+      {places.map((place, idx) => {
         return (
           <article
             key={place.id}

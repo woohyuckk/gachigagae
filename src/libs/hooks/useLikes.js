@@ -20,11 +20,12 @@ export const useGetLikes = (userId) => {
 /**
  * * 좋아요를 추가하거나 삭제하는 커스텀 훅
  * @param {boolean} isLiked - 현재 장소의 좋아요 여부
+ * @param {string} userId - 현재 로그인한 유저의 uuid
  * @return {Function} return.toggleLike - 좋아요 토글 mutation 함수
  */
-export const useToggleLikes = (isLiked) => {
+export const useToggleLikes = (isLiked, userId, category) => {
   const queryClient = useQueryClient();
-  const queryKey = ['places'];
+  const queryKey = ['places', userId, category];
 
   // * 옵티미스틱 업데이트를 위한 onMutate 함수
   const handleMutate = async ({ placeId }) => {
@@ -52,6 +53,7 @@ export const useToggleLikes = (isLiked) => {
     onMutate: handleMutate,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey });
+      queryClient.invalidateQueries({ queryKey: ['likes'] });
     },
     onError: (error, _, context) => {
       queryClient.setQueryData(queryKey, context.previousData);
