@@ -1,6 +1,6 @@
 import utils from '../../libs/utils/homeUtils';
 
-const HomeCard = ({ place, onClick, text, ref, inView }) => {
+const HomeCard = ({ place, onClick, ref }) => {
   const { title, category1, category2, address, image } = place;
 
   return (
