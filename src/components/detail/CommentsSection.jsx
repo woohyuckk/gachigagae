@@ -1,16 +1,14 @@
-import { useState } from 'react';
+import { useRef } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '../../libs/api/supabaseClient';
 import { useParams } from 'react-router-dom';
+import Comment from './Comment';
 
 const CommentsSection = () => {
   const queryClient = useQueryClient();
-  const [comment, setcomment] = useState('');
+  const commentRef = useRef();
   const { id } = useParams();
-  const handleOnChagneComment = (e) => {
-    setcomment(e.target.value);
-  };
-
+  const idNumber = Number(id);
   const {
     data: comments,
     isLoading,
@@ -18,28 +16,31 @@ const CommentsSection = () => {
   } = useQuery({
     queryKey: ['comment'],
     queryFn: async () => {
-      const { data } = await supabase.from('comments').select('*').eq('place_id', Number(id));
+      const { data } = await supabase.from('comments').select('*').eq('place_id', idNumber);
       return data;
     },
   });
-
   const { mutate: insertCommentMutate } = useMutation({
     mutationFn: async ({ comment, place_id }) => {
       await supabase.from('comments').insert({ comment, place_id });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['comments']);
+      queryClient.invalidateQueries(['comment']);
     },
   });
 
   const handleOnSubmitComment = (e) => {
     e.preventDefault();
+    const comment = commentRef.current.value.trim();
+
+    if (!comment) return;
+
     insertCommentMutate(
-      { comment, place_id: Number(id) },
+      { comment, place_id: idNumber },
       {
         onSuccess: () => {
           alert('성공적으로 등록되었습니다.');
-          setcomment('');
+          commentRef.current.value = '';
         },
       }
     );
@@ -47,20 +48,17 @@ const CommentsSection = () => {
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>error</div>;
-
   return (
-    <div className="w-full md:w-1/3 bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+    <div className="w-full = md:w-1/3   bg-white rounded-xl shadow-lg p-6 border border-gray-200">
       <h2 className="text-xl font-semibold text-gray-800">💬 코멘트 작성</h2>
 
       {/* 댓글 입력 */}
       <form onSubmit={handleOnSubmitComment} className="mt-4">
-        <input
-          type="text"
-          name="comment"
-          value={comment}
-          onChange={handleOnChagneComment}
-          className="w-full border p-2 rounded-lg mt-2 focus:ring-2 focus:ring-pink-400 outline-none"
-          placeholder="댓글을 입력하세요..."
+        <textarea
+          className="w-full h-32 p-2 border rounded-lg resize-none overflow-y-auto focus:ring-pink-400 outline-none"
+          // value={comment}
+          ref={commentRef}
+          placeholder="댓글을 입력하세요"
         />
         <button
           type="submit"
@@ -70,16 +68,11 @@ const CommentsSection = () => {
         </button>
       </form>
 
-      {/* 댓글 목록 */}
+      {/* 댓글 목록 overflow-y-auto scrollbar-hide*/}
       <div className="mt-6">
-        {comments.map((comment) => (
-          <div className="p-4 border rounded-lg bg-gray-50" key={comment.id}>
-            <p className="text-gray-700">{comment.comment}</p>
-          </div>
-        ))}
-        <div className="p-4 border rounded-lg bg-gray-50 mt-2">
-          <p className="text-gray-700">🐱 고양이: 다음에 꼭 가볼게요! 😻</p>
-        </div>
+        {comments.map((comment) => {
+          return <Comment key={comment.id} comment={comment} />;
+        }) || <div className="text-center"> comment가 존재하지 않습니다. </div>}
       </div>
     </div>
   );

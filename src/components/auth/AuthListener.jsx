@@ -1,38 +1,41 @@
-import React, { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { supabase } from '../../libs/api/supabaseClient';
 import useAuthStore from '../../stores/useAuthstore';
-import useGetUserInfo from '../../libs/hooks/useGetUserInfo';
+import { useAuthMutate } from '../../libs/hooks/useAuth.api';
 
-const AuthListener = () => {
-  const setUserInfo = useAuthStore((state) => state.setUserInfo);
-  const logout = useAuthStore((state) => state.logout);
-  const { data: userData, isPending, Error } = useGetUserInfo();
+const useAuthStateChange = (callback) => {
+  const currentSession = useRef(null);
+  const { loginUserInfo } = useAuthMutate();
 
   useEffect(() => {
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (_, session) => {
-      if (session) {
-        const userInfo = {
-          id: session.user.id,
-          email: session.user.email,
-          nickname: userData?.nickname || '',
-          profile_img_url: userData?.profile_img_url || '',
-        };
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log('첫번째 유즈 이펙트.=====>', event, session);
+      if (session?.user?.id === currentSession.current?.user?.id) return;
+      currentSession.current = session;
+      callback(event, session);
 
-        setUserInfo(userInfo);
-      } else {
-        logout();
+      if (session) {
+        const id = session.user.id;
+        loginUserInfo({ id });
       }
     });
-    // cleanUp
+
     return () => {
       subscription.unsubscribe();
     };
-  }, [userData]); // userData 변경 시 리렌더링
+  }, []);
+};
 
-  if (isPending) return <>pending...</>;
-  if (Error) return <>error...</>;
+const AuthListener = () => {
+  const logout = useAuthStore((state) => state.logout);
+
+  useAuthStateChange((event, session) => {
+    if (event === 'SIGNED_OUT') {
+      logout();
+    }
+  });
 
   return <></>;
 };
