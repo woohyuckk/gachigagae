@@ -1,10 +1,11 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "../api/supabaseClient";
 import useAuthStore from "../../stores/useAuthstore";
 import { useParams } from "react-router-dom";
 import { COMMENT_QUERY_KEY } from "../../constants/queryKeyConstants";
 
 
+const COMMENTS_PER_SCROLL = 5;
 
 export const useComment = (commentInfo) => {
   const queryClient = useQueryClient();
@@ -20,7 +21,7 @@ export const useComment = (commentInfo) => {
   const getCommentsQuery = useQuery({
     queryKey: COMMENT_QUERY_KEY.COMMENT,
     queryFn: async () => {
-      const { data } = await supabase.from('comments').select('*, users(profile_img_url, nickname)').eq('place_id', idNumber).order('created_at', { ascending: false });
+      const { data } = await supabase.from('comments').select('*, users(profile_img_url, nickname)').eq('place_id', idNumber).order('created_at', { ascending: false }).limit(COMMENTS_PER_SCROLL);
       return data;
     },
   });
@@ -43,7 +44,7 @@ export const useComment = (commentInfo) => {
   // 코멘트 추가 및 수정
   const { mutate: upsertCommentMutate } = useMutation({
     mutationFn: async ({ id, comment, place_id }) => {
-      const { error } = await supabase.from('comments').upsert({ id, comment, place_id }).order('created_at', { ascending: false });
+      const { error } = await supabase.from('comments').upsert({ id, comment, place_id })
       if (error) throw error;
     },
     onSuccess: () => {
@@ -54,5 +55,34 @@ export const useComment = (commentInfo) => {
     },
   });
 
+
+
+
+
   return { getCommentsQuery, deleteCommentMutate, upsertCommentMutate, isCommenter }
+}
+
+
+export const useInfiniteCommentsQuery = (idNumber) => {
+
+
+  return useInfiniteQuery({
+    queryKey: COMMENT_QUERY_KEY.COMMENT_PLACE_ID(idNumber),
+    queryFn: async ({ pageParam }) => {
+      console.log("InfiniteQuery Fn 실행됨 PageParam ===>",pageParam)
+      const query = supabase.from('comments')
+        .select('*, users(profile_img_url, nickname)')
+        .eq('place_id', idNumber)
+        .order('created_at', { ascending: false })
+        .limit(COMMENTS_PER_SCROLL);
+      const { data, error } = await (pageParam ? query.lt('created_at', pageParam) : query);
+      if (error) throw new Error(error.message)
+      return data;
+    },
+    initialPageParam: null,
+    getNextPageParam: (lastPage) => {
+      console.log(lastPage.length, lastPage[lastPage.length - 1]?.created_at);
+      return lastPage.length === COMMENTS_PER_SCROLL ? lastPage[lastPage.length - 1].created_at : undefined
+    }
+  })
 }

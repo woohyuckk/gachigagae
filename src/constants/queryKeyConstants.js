@@ -6,4 +6,5 @@ export const PlACES_QUERY_KEY = {
 
 export const COMMENT_QUERY_KEY = {
   COMMENT: ["comment"],
+  COMMENT_PLACE_ID :(id)=> ["comment", id]
 }

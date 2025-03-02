@@ -1,21 +1,24 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import Comment from './Comment';
-import { useComment } from '../../../libs/hooks/useComment';
+import { useComment, useInfiniteCommentsQuery } from '../../../libs/hooks/useComment';
 
 const CommentsSection = () => {
-  const { upsertCommentMutate,getCommentsQuery } = useComment({});
+  const { upsertCommentMutate } = useComment({});
   const commentRef = useRef();
+  const observerRef = useRef(null);
   const { id } = useParams();
   const idNumber = Number(id);
-  const { data: comments, isLoading, error } = getCommentsQuery;
+  // const { data: comments, isLoading, error } = getCommentsQuery;
 
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useInfiniteCommentsQuery(idNumber);
+  const comments = data?.pages.flat() || [];
   const handleOnSubmitComment = (e) => {
     e.preventDefault();
     const comment = commentRef.current.value.trim();
 
     if (!comment) return;
-
     upsertCommentMutate(
       { comment, place_id: idNumber },
       {
@@ -27,8 +30,28 @@ const CommentsSection = () => {
     );
   };
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>error</div>;
+  useEffect(() => {
+    console.log(hasNextPage);
+    console.log(observerRef.current);
+    if (!observerRef.current || !hasNextPage) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          console.log('fetchNextPage 실행됨');
+          fetchNextPage();
+        }
+      },
+      {
+        threshold: 0.5,
+        rootMargin: '100px',
+      }
+    );
+    observer.observe(observerRef.current);
+
+    return () => observer.disconnect();
+  }, [hasNextPage, fetchNextPage]);
+
   return (
     <div className="w-full = md:w-1/3   bg-white rounded-xl shadow-lg p-6 border border-gray-200">
       <h2 className="text-xl font-semibold text-gray-800">💬 코멘트 작성</h2>
@@ -54,6 +77,8 @@ const CommentsSection = () => {
         {comments.map((comment) => {
           return <Comment key={comment.id} comment={comment} />;
         }) || <div className="text-center"> comment가 존재하지 않습니다. </div>}
+        <div ref={observerRef} className="h-10" />
+        {isFetchingNextPage && <p>Loading...</p>}
       </div>
     </div>
   );
