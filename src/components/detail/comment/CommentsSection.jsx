@@ -31,14 +31,11 @@ const CommentsSection = () => {
   };
 
   useEffect(() => {
-    console.log(hasNextPage);
-    console.log(observerRef.current);
     if (!observerRef.current || !hasNextPage) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          console.log('fetchNextPage 실행됨');
           fetchNextPage();
         }
       },

@@ -69,7 +69,6 @@ export const useInfiniteCommentsQuery = (idNumber) => {
   return useInfiniteQuery({
     queryKey: COMMENT_QUERY_KEY.COMMENT_PLACE_ID(idNumber),
     queryFn: async ({ pageParam }) => {
-      console.log("InfiniteQuery Fn 실행됨 PageParam ===>",pageParam)
       const query = supabase.from('comments')
         .select('*, users(profile_img_url, nickname)')
         .eq('place_id', idNumber)
@@ -81,7 +80,6 @@ export const useInfiniteCommentsQuery = (idNumber) => {
     },
     initialPageParam: null,
     getNextPageParam: (lastPage) => {
-      console.log(lastPage.length, lastPage[lastPage.length - 1]?.created_at);
       return lastPage.length === COMMENTS_PER_SCROLL ? lastPage[lastPage.length - 1].created_at : undefined
     }
   })
