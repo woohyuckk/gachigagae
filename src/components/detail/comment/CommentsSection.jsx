@@ -43,14 +43,14 @@ const CommentsSection = () => {
         />
         <button
           type="submit"
-          className="w-full bg-pink-500 text-white py-2 rounded-lg mt-2 hover:bg-pink-600 transition-all"
+          className="w-full bg-pink-500 text-white py-2 rounded-lg mt-2 hover:bg-pink-600 transition-all cursor-pointer"
         >
           작성하기
         </button>
       </form>
 
       {/* 댓글 목록 overflow-y-auto scrollbar-hide*/}
-      <div className="mt-6">
+      <div className="mt-6 overflow-y-auto scrollbar-hide max-h-[500px]">
         {comments.map((comment) => {
           return <Comment key={comment.id} comment={comment} />;
         }) || <div className="text-center"> comment가 존재하지 않습니다. </div>}

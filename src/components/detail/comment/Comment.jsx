@@ -76,7 +76,7 @@ const Comment = ({ comment: commentInfo }) => {
         {isCommenter && (
           <div className="relative ">
             <button
-              className="p-2 rounded-full hover:bg-gray-300 transition"
+              className="p-2 rounded-full hover:bg-gray-300 transition cursor-pointer"
               onClick={handleMenuToggle}
             >
               <CiMenuKebab size={20} />
@@ -105,7 +105,7 @@ const Comment = ({ comment: commentInfo }) => {
           />
           <button
             type="submit"
-            className="flex items-center justify-center w-full px-3 py-2 rounded-lg bg-pink-500 text-white   mt-2 hover:bg-pink-600 transition-all"
+            className="flex items-center justify-center w-full px-3 py-2 rounded-lg bg-pink-500 text-white   mt-2 hover:bg-pink-600 transition-all cursor-pointer"
           >
             <FaRegPenToSquare className="mr-2" /> 수정
           </button>

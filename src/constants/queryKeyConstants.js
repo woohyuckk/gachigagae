@@ -1,6 +1,6 @@
 
 export const PlACES_QUERY_KEY = {
-  PlACES: ["places"],
+  PLACES: ["places"],
   PLACE_PLACE_ID: (id)=> ["place", id],
 }
 

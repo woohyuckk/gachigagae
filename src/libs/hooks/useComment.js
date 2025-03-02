@@ -20,7 +20,7 @@ export const useComment = (commentInfo) => {
   const getCommentsQuery = useQuery({
     queryKey: COMMENT_QUERY_KEY.COMMENT,
     queryFn: async () => {
-      const { data } = await supabase.from('comments').select('*, users(profile_img_url, nickname)').eq('place_id', idNumber).order('id', { ascending: true });
+      const { data } = await supabase.from('comments').select('*, users(profile_img_url, nickname)').eq('place_id', idNumber).order('created_at', { ascending: false });
       return data;
     },
   });
@@ -43,7 +43,7 @@ export const useComment = (commentInfo) => {
   // 코멘트 추가 및 수정
   const { mutate: upsertCommentMutate } = useMutation({
     mutationFn: async ({ id, comment, place_id }) => {
-      const { error } = await supabase.from('comments').upsert({ id, comment, place_id }).order('id', { ascending: true });
+      const { error } = await supabase.from('comments').upsert({ id, comment, place_id }).order('created_at', { ascending: false });
       if (error) throw error;
     },
     onSuccess: () => {
