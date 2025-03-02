@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from "react";
-import { useComment } from "../../../libs/hooks/useComment";
-import { CiMenuKebab } from "react-icons/ci";
-import CommentUserProfile from "./CommentUserProfile";
-import ModifyMenu from "./ModifyMenu";
-import { FaRegPenToSquare } from "react-icons/fa6";
-
+import { useEffect, useRef, useState } from 'react';
+import { useComment } from '../../../libs/hooks/useComment';
+import { CiMenuKebab } from 'react-icons/ci';
+import CommentUserProfile from './CommentUserProfile';
+import ModifyMenu from './ModifyMenu';
+import { FaRegPenToSquare } from 'react-icons/fa6';
 
 const Comment = ({ comment: commentInfo }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -55,7 +54,11 @@ const Comment = ({ comment: commentInfo }) => {
 
   const handleSubmitUdateComment = (e) => {
     e.preventDefault();
-    comment = commentRef.current.value;
+    comment = commentRef.current.value.trim();
+    if (!comment) {
+      return alert('내용을 입력해주세요.');
+    }
+
     upsertCommentMutate(
       { id, comment },
       {
@@ -82,7 +85,7 @@ const Comment = ({ comment: commentInfo }) => {
               <CiMenuKebab size={20} />
             </button>
 
-            {/* 수정/삭제 버튼 (햄버거 버튼의 "오른쪽"에 배치) */}
+            {/* 수정/삭제 버튼 */}
             {isMenuOpen && (
               <ModifyMenu
                 menuRef={menuRef}
@@ -94,7 +97,7 @@ const Comment = ({ comment: commentInfo }) => {
         )}
       </div>
 
-      {/* 댓글 내용 */}
+      {/* 수정 댓글 내용 */}
       {isUpdateComment ? (
         <form onSubmit={handleSubmitUdateComment} className="mt-4 w-full overflow-hidden p-2">
           <textarea
