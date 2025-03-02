@@ -1,32 +1,19 @@
+import HOME_CONSTANT from '../../constants/homeConstant';
 import { supabase } from './supabaseClient';
 
-const fetchPlacesData = async () => {
-  let { data, error } = await supabase.from('places').select(`*`).limit(8);
+const fetchPlacesData = async ({ pageParam = null, category2 }) => {
+  let response = supabase.from('places').select('*').order('id', { ascending: false }).limit(8);
 
-  if (error) {
-    console.log(error);
+  // 카테고리가 Home이 아닐 경우 Category2가져오기
+  if (category2 !== HOME_CONSTANT.CATEGORY_HOME) {
+    response = response.eq('category2', category2);
   }
 
-  return data;
-};
-
-const fetchLimitPlacesData = async ({ pageParam = null }) => {
-  let response = supabase
-    .from('places')
-    .select('*')
-    .order('created_at', { ascending: false })
-    .order('id', { ascending: false })
-    .limit(10);
-
   if (pageParam) {
-    console.log(pageParam);
-    response = response
-      .lt('created_at', pageParam.created_at)
-      .or(`created_at.eq.${pageParam.created_at}, id.lt.${pageParam.id}`);
+    response = response.lt(`id`, pageParam.id);
   }
 
   const { data, error } = await response;
-  // console.log(data);
 
   if (error) {
     console.log(error);
@@ -37,7 +24,6 @@ const fetchLimitPlacesData = async ({ pageParam = null }) => {
 
 const fetchData = {
   fetchPlacesData,
-  fetchLimitPlacesData,
 };
 
 export default fetchData;

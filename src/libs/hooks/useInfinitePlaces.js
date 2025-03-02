@@ -1,22 +1,19 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import fetchData from '../api/fetchData';
 
-const useInfinitePlaces = () => {
-  const { data, error, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, status } =
+const useInfinitePlaces = (selectedCategory) => {
+  const { data, error, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage } =
     useInfiniteQuery({
-      queryKey: ['infinitePlaces'],
-      queryFn: fetchData.fetchLimitPlacesData,
+      queryKey: ['infinitePlaces', selectedCategory],
+      queryFn: ({ pageParam = null }) =>
+        fetchData.fetchPlacesData({ pageParam, category2: selectedCategory }),
       initialPageParam: null,
       getNextPageParam: (lastPage) => {
-        // console.log('getNextPageParam 호출 : ', lastPage);
         const result = lastPage.length
           ? {
-              created_at: lastPage[lastPage.length - 1].created_at,
               id: lastPage[lastPage.length - 1].id,
             }
-          : undefined;
-
-        console.log(result);
+          : null;
 
         return result;
       },
@@ -26,7 +23,6 @@ const useInfinitePlaces = () => {
   if (error) {
     console.log(error);
   }
-  console.log('useInfinitePlaces : ', data);
 
   return { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching };
 };

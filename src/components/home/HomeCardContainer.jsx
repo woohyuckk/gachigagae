@@ -4,47 +4,50 @@ import SideBar from './SideBar';
 import HOME_CONSTANT from '../../constants/homeConstant';
 import { useNavigate } from 'react-router-dom';
 import homeUtils from '../../libs/utils/homeUtils';
-// import { useInView } from 'react-intersection-observer';
 import useInfinitePlaces from '../../libs/hooks/useInfinitePlaces';
 import { useInView } from 'react-intersection-observer';
 
-const HomeCardContainer = ({ getPlaces }) => {
-  // const [places, setPlaces] = useState(getPlaces);
+const HomeCardContainer = () => {
+  const [selectedCategory, setSelectedCategory] = useState(HOME_CONSTANT.CATEGORY_HOME);
   const navigate = useNavigate();
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } = useInfinitePlaces();
-  const places = data.pages[0]
+  const {
+    data: places,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfinitePlaces(selectedCategory);
 
-  const [ref, inView] = useInView({
-    threshold: 0.3,
+  const { ref } = useInView({
+    threshold: 1,
+    triggerOnce: true,
     onChange: (inView) => {
       if (!inView || !hasNextPage || isFetchingNextPage) return;
       fetchNextPage();
     },
   });
-  // console.log(data);
 
   // 카테고리 정렬
   const handleCategory = (e) => {
     const categoryName = e.target.innerText;
+    const translatedCategoryName = homeUtils.translateCategoryName(categoryName);
 
-    if (homeUtils.translateCategoryName(categoryName) === HOME_CONSTANT.CATEGORY_HOME) {
-      setPlaces(getPlaces);
+    if (translatedCategoryName === HOME_CONSTANT.CATEGORY_HOME) {
+      setSelectedCategory(categoryName);
       homeUtils.handleCategoryMove(categoryName, navigate);
       homeUtils.scrollToTop();
     } else {
+      setSelectedCategory(translatedCategoryName);
       homeUtils.handleCategoryMove(categoryName, navigate);
-      setPlaces(homeUtils.filterCategory(getPlaces, homeUtils.translateCategoryName(categoryName)));
       homeUtils.scrollToTop();
     }
   };
 
-  if (isFetching) return <div>Fetching...</div>;
   return (
     <div className="lg:w-full lg:max-w-3xl m-auto flex flex-wrap gap-7 justify-evenly p-4 sm:w-1/2 md:gap-20">
       <SideBar onClick={handleCategory} />
 
-      {places.map((place, idx) => {
+      {places.pages.flat().map((place, idx) => {
         return (
           <article
             key={place.id}
@@ -58,13 +61,7 @@ const HomeCardContainer = ({ getPlaces }) => {
             }
           >
             {idx % 7 === 0 && idx !== 0 ? (
-              <HomeCard
-                place={place}
-                onClick={handleCategory}
-                ref={ref}
-                inView={inView}
-                text="7번째"
-              />
+              <HomeCard place={place} onClick={handleCategory} ref={ref} text="10번째" />
             ) : (
               <HomeCard place={place} onClick={handleCategory} />
             )}
