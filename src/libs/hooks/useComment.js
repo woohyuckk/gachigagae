@@ -3,7 +3,14 @@ import { supabase } from "../api/supabaseClient";
 import useAuthStore from "../../stores/useAuthstore";
 import { COMMENT_QUERY_KEY } from "../../constants/queryKeyConstants";
 
-
+/* 
+*@param {object} commentInfo : comment 1개의 정보 
+*@param {string} authId : 로그인한 사용자
+*@param {boolean} isCommenter : 작성자 여부확인
+*@param {number} id : comments의 primaryKey
+*@param {string} comment : 작성한 comment
+*@param {number} place_id : places의 primaryKey
+*/
 const COMMENTS_PER_SCROLL = 5;
 
 export const useComment = (commentInfo = {}) => {
@@ -52,7 +59,7 @@ export const useComment = (commentInfo = {}) => {
         created_at: Date.now(),
         users: {
           profile_img_url: null,
-          nickname : ""
+          nickname: ""
         }
       };
 
@@ -102,9 +109,6 @@ export const useComment = (commentInfo = {}) => {
       queryClient.invalidateQueries({ queryKey: COMMENT_QUERY_KEY.COMMENT_PLACE_ID(newComment.place_id) });
     }
   });
-
-
-
 
   // 코멘트 추가 및 수정
   const { mutate: upsertCommentMutate } = useMutation({
