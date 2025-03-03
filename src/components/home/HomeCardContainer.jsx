@@ -7,9 +7,7 @@ import useGetPlaces from '../../libs/hooks/useGetPlaces';
 
 const HomeCardContainer = () => {
   const navigate = useNavigate();
-  const {
-    userInfo: { id: userId },
-  } = useAuthStore();
+  const { id: userId } = useAuthStore((state) => state.userInfo);
   const [searchParams] = useSearchParams();
 
   // 쿼리스트링에 따라 데이터 다르게 가져오기

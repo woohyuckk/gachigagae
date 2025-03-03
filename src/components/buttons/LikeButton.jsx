@@ -14,9 +14,7 @@ import { useSearchParams } from 'react-router-dom';
  */
 export const LikePlaceButton = ({ isLiked, placeId, ...props }) => {
   const [searchParams] = useSearchParams();
-  const {
-    userInfo: { id: userId },
-  } = useAuthStore();
+  const { id: userId } = useAuthStore((state) => state.userInfo);
 
   const category = searchParams.get('category');
   const { toggleLike } = useToggleLikes(isLiked, userId, category);
