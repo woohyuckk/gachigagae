@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../libs/api/supabaseClient';
 import { useState } from 'react';
-import AuthForm from '../components/auth/AuthForm';
+import AuthForm, { LoginButton } from '../components/auth/AuthForm';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -41,6 +41,9 @@ const SignIn = () => {
         <h1 className="text-2xl font-extrabold w-full">로그인</h1>
         <AuthForm mode="login" onSubmit={handleSignIn} errorMessage={errorMessage} />
         <div>
+          <LoginButton type="button" color="grey" className={'w-full'}>
+            구글 로그인
+          </LoginButton>
           <p className="mt-7">
             계정이 없으신가요?&nbsp;
             <Link to="/signup" className="text-red-500 font-semibold">

@@ -61,13 +61,30 @@ const AuthForm = ({ mode, onSubmit, errorMessage }) => {
         </div>
       )}
       {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
-      <button
-        type="submit"
-        className="rounded-full bg-[var(--color-orange)] px-7 py-3 mt-4 text-lg leading-8 font-semibold text-white shadow-lg shadow-[var(--color-orange)]-500/50 hover:bg-[var(--color-orange-400)]"
-      >
-        {mode === 'login' ? '로그인' : '회원가입'}
-      </button>
+      <LoginButton type="submit">{mode === 'login' ? '로그인' : '회원가입'}</LoginButton>
     </form>
+  );
+};
+
+export const LoginButton = ({ type, color = 'orange', className, ...props }) => {
+  // 버튼 부수효과 색상 정의
+  const colorVariants = {
+    orange: {
+      hover: 'bg-orange-400',
+      shadow: 'orange-400/50',
+    },
+    grey: {
+      hover: 'bg-gray-600',
+      shadow: 'gray-500/50',
+    },
+  };
+
+  return (
+    <button
+      type={type}
+      className={`rounded-full bg-[var(--color-${color})] px-7 py-3 mt-3 text-lg leading-8 font-semibold text-white shadow-lg shadow-${colorVariants[color].shadow} hover:${colorVariants[color].hover} cursor-pointer ${className}`}
+      {...props}
+    />
   );
 };
 
