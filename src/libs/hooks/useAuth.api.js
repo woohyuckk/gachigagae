@@ -4,13 +4,11 @@ import useAuthStore from '../../stores/useAuthstore';
 
 export const useAuthMutate = () => {
   const setUserInfo = useAuthStore((state) => state.setUserInfo);
+  const logout = useAuthStore((state) => state.logout);
 
   const { mutate: signUp } = useMutation({
     mutationFn: async ({ email, password }) => {
       const { data, error } = await supabase.auth.signUp({ email, password });
-      console.log('Sign Up Data:', data);
-      console.log('Sign Up Error:', error);
-
       if (error) {
         throw new Error(error.message);
       }
@@ -45,5 +43,14 @@ export const useAuthMutate = () => {
     },
   });
 
-  return { signUp, updateUserInfo, loginUserInfo };
+  const { mutate: logoutUser } = useMutation({
+    mutationFn: async () => {
+      await supabase.auth.signOut();
+    },
+    onSuccess: () => {
+      logout();
+    },
+  });
+
+  return { signUp, updateUserInfo, loginUserInfo, logoutUser };
 };
