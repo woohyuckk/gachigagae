@@ -11,7 +11,6 @@ const useAuthStateChange = (callback) => {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
-      console.log('첫번째 유즈 이펙트.=====>', event, session);
       if (session?.user?.id === currentSession.current?.user?.id) return;
       currentSession.current = session;
       callback(event, session);
