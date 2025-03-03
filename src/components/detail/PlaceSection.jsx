@@ -3,9 +3,8 @@ import KaKaoMap from './KaKaoMap';
 const PlaceSection = ({ handleModalOpen: openModal, placeInfo }) => {
   const description = placeInfo.description.split('|');
   const [open, close, parking, isAccompanied, exeption] = description;
-
   const {
-    coordinates: { latitude, longitude },
+    coordinates: { latitude, longitude },image
   } = placeInfo;
 
   return (
@@ -25,10 +24,10 @@ const PlaceSection = ({ handleModalOpen: openModal, placeInfo }) => {
       {/* 대표 이미지 */}
       <div className="mt-4 flex justify-center">
         <img
-          src="/public/default-image.png"
-          alt="default-image"
-          className="w-full md:w-1/2  object-cover rounded-lg shadow-md hover:scale-105 transition-all duration-300 cursor-pointer"
-          onClick={() => openModal('/public/default-image.png')}
+          src={image}
+          alt="/public/default-image.png"
+          className="w-full h-[400px] object-cover rounded-lg shadow-md hover:scale-105 transition-all duration-300 cursor-pointer"
+          onClick={() => openModal(image)}
         />
       </div>
 
