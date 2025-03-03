@@ -52,7 +52,7 @@ export const useToggleLikes = (isLiked, userId, category) => {
     mutationFn: isLiked ? deleteLikes : addLikes,
     onMutate: handleMutate,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey });
+      queryClient.invalidateQueries({ queryKey: ['places', userId] });
       queryClient.invalidateQueries({ queryKey: ['likes'] });
     },
     onError: (error, _, context) => {

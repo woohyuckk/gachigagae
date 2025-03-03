@@ -2,7 +2,7 @@ import utils from '../../libs/utils/homeUtils';
 import { LikePlaceButton } from '../buttons/LikeButton';
 
 const HomeCard = ({ place }) => {
-  const { id, title, category1, category2, address, image, isLiked } = place;
+  const { id, title, category1, category2, address, image, is_liked } = place;
 
   return (
     <>
@@ -25,7 +25,7 @@ const HomeCard = ({ place }) => {
         >
           {category2}
         </span>
-        <LikePlaceButton placeId={id} isLiked={isLiked} className="ml-auto" />
+        <LikePlaceButton placeId={id} isLiked={is_liked} className="ml-auto" />
       </div>
     </>
   );
