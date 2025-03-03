@@ -63,7 +63,7 @@ const AuthForm = ({ mode, onSubmit, errorMessage }) => {
       {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
       <button
         type="submit"
-        className="rounded-full bg-blue-500 px-7 py-3 mt-4 text-lg leading-8 font-semibold text-white shadow-lg shadow-blue-500/50 hover:bg-blue-600"
+        className="rounded-full bg-[var(--color-orange)] px-7 py-3 mt-4 text-lg leading-8 font-semibold text-white shadow-lg shadow-[var(--color-orange)]-500/50 hover:bg-[var(--color-orange-400)]"
       >
         {mode === 'login' ? '로그인' : '회원가입'}
       </button>
