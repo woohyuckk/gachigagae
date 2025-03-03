@@ -11,7 +11,7 @@ const initialState = {
 const useAuthStore = create(
   immer((set) => {
     return {
-      isLogin: false,
+      isLogin: !!localStorage.getItem('sb-qeuffrcnqnozqfufnnsp-auth-token'),
       userInfo: initialState,
       setUserInfo: (userInfo) => {
         set((state) => {

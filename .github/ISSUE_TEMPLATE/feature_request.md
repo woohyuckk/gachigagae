@@ -2,8 +2,7 @@
 name: Feature request
 about: Suggest an idea for this project
 title: ''
-labels: "\U0001F4EDAPI, \U0001F6D1Bug, \U0001F3A8Design, \U0001F4C3Docs, ❓Question,
-  \U0001F6E0Refactor, ⚙Setting"
+labels: ''
 assignees: ''
 
 ---
