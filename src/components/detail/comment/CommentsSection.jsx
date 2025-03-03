@@ -3,13 +3,18 @@ import { useParams } from 'react-router-dom';
 import Comment from './Comment';
 import { useComment, useInfiniteCommentsQuery } from '../../../libs/hooks/useComment';
 
+/**
+ * @param {number} : idNumber -> place_id useParams로부터 읽은 string 변환
+ * @param {string} : comment
+ * @param {array} : comments supabase에서 불러온 comment
+ * @returns 
+ */
 const CommentsSection = () => {
   const { addCommentMutate } = useComment({});
   const commentRef = useRef();
   const observerRef = useRef(null);
   const { id } = useParams();
   const idNumber = Number(id);
-  // const { data: comments, isLoading, error } = getCommentsQuery;
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteCommentsQuery(idNumber);
@@ -57,7 +62,6 @@ const CommentsSection = () => {
       <form onSubmit={handleOnSubmitComment} className="mt-4">
         <textarea
           className="w-full h-32 p-2 border rounded-lg resize-none overflow-y-auto focus:ring-pink-400 outline-none"
-          // value={comment}
           ref={commentRef}
           placeholder="댓글을 입력하세요"
         />

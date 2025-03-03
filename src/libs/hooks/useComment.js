@@ -3,7 +3,7 @@ import { supabase } from "../api/supabaseClient";
 import useAuthStore from "../../stores/useAuthstore";
 import { COMMENT_QUERY_KEY } from "../../constants/queryKeyConstants";
 
-/* 
+/**  
 *@param {object} commentInfo : comment 1개의 정보 
 *@param {string} authId : 로그인한 사용자
 *@param {boolean} isCommenter : 작성자 여부확인
