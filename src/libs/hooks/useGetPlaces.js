@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import fetchPlacesData from '../api/fetchData';
 import { useParams } from 'react-router-dom';
 import { supabase } from '../api/supabaseClient';
 import { PlACES_QUERY_KEY } from '../../constants/queryKeyConstants';
