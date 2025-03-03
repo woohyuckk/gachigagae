@@ -44,21 +44,22 @@ export const useComment = (commentInfo = {}) => {
 
     onMutate: async ({ comment, place_id }) => {
       await queryClient.cancelQueries({ queryKey: COMMENT_QUERY_KEY.COMMENT_PLACE_ID(place_id) });
-
       const previousComments = queryClient.getQueryData(COMMENT_QUERY_KEY.COMMENT_PLACE_ID(place_id)).pages // 💡 기본값 처리
-      console.log(previousComments)
       const optimisticComment = {
         id: crypto.randomUUID(), // 💡 임시 ID 생성
         comment,
         place_id,
-        created_at: Date.now()
+        created_at: Date.now(),
+        users: {
+          profile_img_url: null,
+          nickname : ""
+        }
       };
 
       queryClient.setQueryData(COMMENT_QUERY_KEY.COMMENT_PLACE_ID(place_id), (old) => {
-        console.log('old====>', old)
         return {
           ...old,
-          pages: [...old.pages, optimisticComment]
+          pages: [...old.pages, [optimisticComment]]
         }
       });
 
@@ -76,20 +77,28 @@ export const useComment = (commentInfo = {}) => {
       const optimisticCommentId = context?.optimisticCommentId; // 💡 onMutate에서 반환한 임시 ID
 
       queryClient.setQueryData(COMMENT_QUERY_KEY.COMMENT_PLACE_ID(place_id), (old) => {
-        console.log("old====>",old)
-        old.pages?.map((comment) => {
-          console.log("comment===>",comment)
-          // console.log(!Array.isArray(comment))
-          // if (!Array.isArray(comment)) {
-          return comment.id === optimisticCommentId ? [ ...comment, { id: data.id, created_at: data.created_at }] : comment
-          // }
-        }
-        )
-      }
-      );
+        return {
+          ...old,
+          pages: old.pages?.map((comment) => {
+            return comment.map((item) => {
+              if (item.id === optimisticCommentId) {
+                return {
+                  ...item,
+                  id: data.id,
+                  created_at: data.created_at,
+                };
+              } else {
+                return item;
+              }
+            });
+          })
+        };
+      })
+
     },
 
     onSettled: (_, __, newComment) => {
+      console.log(typeof newComment.place_id)
       queryClient.invalidateQueries({ queryKey: COMMENT_QUERY_KEY.COMMENT_PLACE_ID(newComment.place_id) });
     }
   });

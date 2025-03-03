@@ -13,7 +13,6 @@ const CommentsSection = () => {
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteCommentsQuery(idNumber);
-  console.log(data)
   const comments = data?.pages.flat() || [];
   const handleOnSubmitComment = (e) => {
     e.preventDefault();

@@ -8,7 +8,6 @@ import { FaRegPenToSquare } from 'react-icons/fa6';
 const Comment = ({ comment: commentInfo }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUpdateComment, setIsUpdateComment] = useState(false);
-  console.log(commentInfo)
   let {
     id,
     comment,
