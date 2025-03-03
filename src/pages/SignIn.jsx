@@ -8,7 +8,6 @@ const SignIn = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSignIn = async (formData) => {
-    // 로그인 로직 구현
     const { email, password } = formData;
 
     // 유효성 검사
@@ -40,8 +39,7 @@ const SignIn = () => {
     <div className="flex items-center justify-center">
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
         <h1 className="text-2xl font-extrabold w-full">로그인</h1>
-        {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
-        <AuthForm mode="login" onSubmit={handleSignIn} />
+        <AuthForm mode="login" onSubmit={handleSignIn} errorMessage={errorMessage} />
         <div>
           <p className="mt-7">
             계정이 없으신가요?&nbsp;

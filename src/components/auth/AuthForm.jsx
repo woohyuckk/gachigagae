@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const AuthForm = ({ mode, onSubmit }) => {
+const AuthForm = ({ mode, onSubmit, errorMessage }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -60,6 +60,7 @@ const AuthForm = ({ mode, onSubmit }) => {
           />
         </div>
       )}
+      {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
       <button
         type="submit"
         className="rounded-full bg-blue-500 px-7 py-3 mt-4 text-lg leading-8 font-semibold text-white shadow-lg shadow-blue-500/50 hover:bg-blue-600"
