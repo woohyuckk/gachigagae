@@ -4,7 +4,7 @@ import Comment from './Comment';
 import { useComment, useInfiniteCommentsQuery } from '../../../libs/hooks/useComment';
 
 const CommentsSection = () => {
-  const { upsertCommentMutate } = useComment({});
+  const { addCommentMutate } = useComment({});
   const commentRef = useRef();
   const observerRef = useRef(null);
   const { id } = useParams();
@@ -13,13 +13,14 @@ const CommentsSection = () => {
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteCommentsQuery(idNumber);
+  console.log(data)
   const comments = data?.pages.flat() || [];
   const handleOnSubmitComment = (e) => {
     e.preventDefault();
     const comment = commentRef.current.value.trim();
 
     if (!comment) return;
-    upsertCommentMutate(
+    addCommentMutate(
       { comment, place_id: idNumber },
       {
         onSuccess: () => {

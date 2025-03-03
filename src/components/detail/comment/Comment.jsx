@@ -8,6 +8,7 @@ import { FaRegPenToSquare } from 'react-icons/fa6';
 const Comment = ({ comment: commentInfo }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUpdateComment, setIsUpdateComment] = useState(false);
+  console.log(commentInfo)
   let {
     id,
     comment,
@@ -71,7 +72,7 @@ const Comment = ({ comment: commentInfo }) => {
   };
 
   return (
-    <div className="flex flex-col  bg-purple-200 rounded-xl w-full border-b border-gray-400 p-2 my-3 relative ">
+    <div className="flex flex-col  bg-gray-200 rounded-xl w-full border-b border-gray-400 p-2 my-3 relative ">
       <div className="flex w-full items-center justify-between border-b p-1 relative flex-wrap">
         <CommentUserProfile userProfileImage={userProfileImage} nickname={nickname} />
 
@@ -114,7 +115,7 @@ const Comment = ({ comment: commentInfo }) => {
           </button>
         </form>
       ) : (
-        <span className="whitespace-pre-wrap break-words">{comment}</span>
+        <p className="whitespace-pre-wrap break-words my-1">{comment}</p>
       )}
     </div>
   );
