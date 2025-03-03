@@ -35,13 +35,23 @@ const SignIn = () => {
     }
   };
 
+  const handleGoogleLogin = async () => {
+    try {
+      await supabase.auth.signInWithOAuth({
+        provider: 'google',
+      });
+    } catch (err) {
+      throw new Error(err);
+    }
+  };
+
   return (
     <div className="flex items-center justify-center">
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
         <h1 className="text-2xl font-extrabold w-full">로그인</h1>
         <AuthForm mode="login" onSubmit={handleSignIn} errorMessage={errorMessage} />
         <div>
-          <LoginButton type="button" color="grey" className={'w-full'}>
+          <LoginButton type="button" color="grey" className={'w-full'} onClick={handleGoogleLogin}>
             구글 로그인
           </LoginButton>
           <p className="mt-7">
