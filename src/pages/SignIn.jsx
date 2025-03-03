@@ -1,14 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../libs/api/supabaseClient';
 import { useState } from 'react';
-import AuthForm from '../components/auth/AuthForm';
+import AuthForm, { LoginButton } from '../components/auth/AuthForm';
 
 const SignIn = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSignIn = async (formData) => {
-    // 로그인 로직 구현
     const { email, password } = formData;
 
     // 유효성 검사
@@ -36,13 +35,25 @@ const SignIn = () => {
     }
   };
 
+  const handleGoogleLogin = async () => {
+    try {
+      await supabase.auth.signInWithOAuth({
+        provider: 'google',
+      });
+    } catch (err) {
+      throw new Error(err);
+    }
+  };
+
   return (
     <div className="flex items-center justify-center">
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
         <h1 className="text-2xl font-extrabold w-full">로그인</h1>
-        {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
-        <AuthForm mode="login" onSubmit={handleSignIn} />
+        <AuthForm mode="login" onSubmit={handleSignIn} errorMessage={errorMessage} />
         <div>
+          <LoginButton type="button" color="grey" className={'w-full'} onClick={handleGoogleLogin}>
+            구글 로그인
+          </LoginButton>
           <p className="mt-7">
             계정이 없으신가요?&nbsp;
             <Link to="/signup" className="text-red-500 font-semibold">
