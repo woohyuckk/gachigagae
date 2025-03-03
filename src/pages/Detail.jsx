@@ -4,13 +4,15 @@ import ImageModal from '../components/detail/ImageModal';
 import { useState } from 'react';
 import { useGetPlaceInfo } from '../libs/hooks/useGetPlaces';
 
+/**
+ * @param {object} : placeInfo place_id에 해당하는 장소정보
+ * @returns 
+ */
 const Detail = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState('');
   const { data: placeInfo, isLoading, error } = useGetPlaceInfo();
-  // const user_profile = users.profile_img_url
-  // const {profile_img_url} =users
-  // 이미지 클릭 시 모달 열기
+  // 이미지 모달 열기
   const openModal = (imageSrc) => {
     setModalImage(imageSrc);
     setModalOpen(true);
