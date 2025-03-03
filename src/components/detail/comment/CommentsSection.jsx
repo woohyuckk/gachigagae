@@ -1,41 +1,30 @@
-import { useRef } from 'react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { supabase } from '../../libs/api/supabaseClient';
+import { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import Comment from './Comment';
+import { useComment, useInfiniteCommentsQuery } from '../../../libs/hooks/useComment';
 
+/**
+ * @param {number} : idNumber -> place_id useParams로부터 읽은 string 변환
+ * @param {string} : comment
+ * @param {array} : comments supabase에서 불러온 comment
+ * @returns 
+ */
 const CommentsSection = () => {
-  const queryClient = useQueryClient();
+  const { addCommentMutate } = useComment({});
   const commentRef = useRef();
+  const observerRef = useRef(null);
   const { id } = useParams();
   const idNumber = Number(id);
-  const {
-    data: comments,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ['comment'],
-    queryFn: async () => {
-      const { data } = await supabase.from('comments').select('*').eq('place_id', idNumber);
-      return data;
-    },
-  });
-  const { mutate: insertCommentMutate } = useMutation({
-    mutationFn: async ({ comment, place_id }) => {
-      await supabase.from('comments').insert({ comment, place_id });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries(['comment']);
-    },
-  });
 
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useInfiniteCommentsQuery(idNumber);
+  const comments = data?.pages.flat() || [];
   const handleOnSubmitComment = (e) => {
     e.preventDefault();
     const comment = commentRef.current.value.trim();
 
     if (!comment) return;
-
-    insertCommentMutate(
+    addCommentMutate(
       { comment, place_id: idNumber },
       {
         onSuccess: () => {
@@ -46,8 +35,25 @@ const CommentsSection = () => {
     );
   };
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>error</div>;
+  useEffect(() => {
+    if (!observerRef.current || !hasNextPage) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          fetchNextPage();
+        }
+      },
+      {
+        threshold: 0.5,
+        rootMargin: '100px',
+      }
+    );
+    observer.observe(observerRef.current);
+
+    return () => observer.disconnect();
+  }, [hasNextPage, fetchNextPage]);
+
   return (
     <div className="w-full = md:w-1/3   bg-white rounded-xl shadow-lg p-6 border border-gray-200">
       <h2 className="text-xl font-semibold text-gray-800">💬 코멘트 작성</h2>
@@ -56,23 +62,24 @@ const CommentsSection = () => {
       <form onSubmit={handleOnSubmitComment} className="mt-4">
         <textarea
           className="w-full h-32 p-2 border rounded-lg resize-none overflow-y-auto focus:ring-pink-400 outline-none"
-          // value={comment}
           ref={commentRef}
           placeholder="댓글을 입력하세요"
         />
         <button
           type="submit"
-          className="w-full bg-pink-500 text-white py-2 rounded-lg mt-2 hover:bg-pink-600 transition-all"
+          className="w-full bg-pink-500 text-white py-2 rounded-lg mt-2 hover:bg-pink-600 transition-all cursor-pointer"
         >
           작성하기
         </button>
       </form>
 
       {/* 댓글 목록 overflow-y-auto scrollbar-hide*/}
-      <div className="mt-6">
+      <div className="mt-6 overflow-y-auto scrollbar-hide max-h-[550px]">
         {comments.map((comment) => {
           return <Comment key={comment.id} comment={comment} />;
         }) || <div className="text-center"> comment가 존재하지 않습니다. </div>}
+        <div ref={observerRef} className="h-10" />
+        {isFetchingNextPage && <p>Loading...</p>}
       </div>
     </div>
   );

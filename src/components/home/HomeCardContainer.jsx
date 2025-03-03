@@ -1,22 +1,25 @@
-import { useState } from 'react';
 import HomeCard from './HomeCard';
 import SideBar from './SideBar';
-import HOME_CONSTANT from '../../constants/homeConstant';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import homeUtils from '../../libs/utils/homeUtils';
 import useInfinitePlaces from '../../libs/hooks/useInfinitePlaces';
 import { useInView } from 'react-intersection-observer';
+import useAuthStore from '../../stores/useAuthstore';
+// import useGetPlaces from '../../libs/hooks/useGetPlaces';
 
 const HomeCardContainer = () => {
-  const [selectedCategory, setSelectedCategory] = useState(HOME_CONSTANT.CATEGORY_HOME);
   const navigate = useNavigate();
+  const { id: userId } = useAuthStore((state) => state.userInfo);
+  const [searchParams] = useSearchParams();
+  // 쿼리스트링에 따라 데이터 다르게 가져오기
+  const category = searchParams.get('category');
 
   const {
     data: places,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useInfinitePlaces(selectedCategory);
+  } = useInfinitePlaces(category, userId);
 
   const { ref } = useInView({
     threshold: 1,
@@ -27,20 +30,11 @@ const HomeCardContainer = () => {
     },
   });
 
-  // 카테고리 정렬
+  // * 카테고리 정렬 핸들러 함수
   const handleCategory = (e) => {
     const categoryName = e.target.innerText;
-    const translatedCategoryName = homeUtils.translateCategoryName(categoryName);
-
-    if (translatedCategoryName === HOME_CONSTANT.CATEGORY_HOME) {
-      setSelectedCategory(categoryName);
-      homeUtils.handleCategoryMove(categoryName, navigate);
-      homeUtils.scrollToTop();
-    } else {
-      setSelectedCategory(translatedCategoryName);
-      homeUtils.handleCategoryMove(categoryName, navigate);
-      homeUtils.scrollToTop();
-    }
+    homeUtils.handleCategoryMove(categoryName, navigate);
+    homeUtils.scrollToTop();
   };
 
   return (
@@ -61,7 +55,7 @@ const HomeCardContainer = () => {
             }
           >
             {idx % 7 === 0 && idx !== 0 ? (
-              <HomeCard place={place} onClick={handleCategory} ref={ref} text="10번째" />
+              <HomeCard place={place} onClick={handleCategory} ref={ref} />
             ) : (
               <HomeCard place={place} onClick={handleCategory} />
             )}

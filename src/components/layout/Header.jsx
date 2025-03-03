@@ -1,15 +1,16 @@
 import { Link, useNavigate } from 'react-router-dom';
 import useAuthStore from '../../stores/useAuthstore';
-import { supabase } from '../../libs/api/supabaseClient';
 import { ROUTES } from '../../constants/routes';
+import { useAuthMutate } from '../../libs/hooks/useAuth.api';
 
 const Header = () => {
-  const { isLogin } = useAuthStore();
+  const isLogin = useAuthStore((state) => state.isLogin);
+  const { logoutUser } = useAuthMutate();
   const navigate = useNavigate();
 
   const handleAuthAction = async () => {
     if (isLogin) {
-      await supabase.auth.signOut();
+      logoutUser();
       alert('로그아웃 되었습니다.');
       navigate(ROUTES.HOME);
     } else {

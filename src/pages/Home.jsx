@@ -1,12 +1,7 @@
 import HomeCardContainer from '../components/home/HomeCardContainer';
 
 const Home = () => {
-
-  return (
-    <>
-      <HomeCardContainer />
-    </>
-  );
+  return <HomeCardContainer />;
 };
 
 export default Home;

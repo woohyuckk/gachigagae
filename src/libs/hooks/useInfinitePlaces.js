@@ -1,12 +1,12 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import fetchData from '../api/fetchData';
 
-const useInfinitePlaces = (selectedCategory) => {
+const useInfinitePlaces = (selectedCategory, userId) => {
   const { data, error, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage } =
     useInfiniteQuery({
-      queryKey: ['infinitePlaces', selectedCategory],
+      queryKey: ['infinitePlaces', userId, selectedCategory],
       queryFn: ({ pageParam = null }) =>
-        fetchData.fetchPlacesData({ pageParam, category2: selectedCategory }),
+        fetchData.fetchPlacesData({ pageParam, category2: selectedCategory, userId }),
       initialPageParam: null,
       getNextPageParam: (lastPage) => {
         const result = lastPage.length

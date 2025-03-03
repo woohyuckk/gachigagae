@@ -9,7 +9,7 @@ const PlaceSection = ({ handleModalOpen: openModal, placeInfo }) => {
   } = placeInfo;
 
   return (
-    <div className="w-full md:w-2/3 h-auto felx flex-col bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+    <div className="w-full md:w-2/3 min-h-[850px] flex flex-col bg-white rounded-xl shadow-lg p-6 border border-gray-200">
       <h1 className="text-2xl font-bold text-gray-800">{placeInfo.title}</h1>
 
       {/* 카테고리 */}

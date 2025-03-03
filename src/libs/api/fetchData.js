@@ -1,19 +1,26 @@
-import HOME_CONSTANT from '../../constants/homeConstant';
+import homeUtils from '../utils/homeUtils';
 import { supabase } from './supabaseClient';
 
-const fetchPlacesData = async ({ pageParam = null, category2 }) => {
-  let response = supabase.from('places').select('*').order('id', { ascending: false }).limit(8);
+const fetchPlacesData = async ({ pageParam = null, category2, userId }) => {
+  let query = userId
+    ? supabase
+        .rpc('get_places_with_likes', {
+          user_id: userId,
+        })
+        .order('id', { ascending: false })
+        .limit(8)
+    : supabase.from('places').select('*').order('id', { ascending: false }).limit(8);
 
-  // 카테고리가 Home이 아닐 경우 Category2가져오기
-  if (category2 !== HOME_CONSTANT.CATEGORY_HOME) {
-    response = response.eq('category2', category2);
+  if (category2) {
+    const catogoryName = homeUtils.translateCategoryName(category2);
+    query = query.eq('category2', catogoryName);
   }
 
   if (pageParam) {
-    response = response.lt(`id`, pageParam.id);
+    query = query.lt(`id`, pageParam.id);
   }
 
-  const { data, error } = await response;
+  const { data, error } = await query;
 
   if (error) {
     console.log(error);

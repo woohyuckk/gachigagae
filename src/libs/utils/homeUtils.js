@@ -18,6 +18,10 @@ const handleGoToDetail = (id, navigate) => {
 
 // category queryString
 const handleCategoryMove = (category, navigate) => {
+  if (category === HOME_CONSTANT.CATEGORY_HOME) {
+    navigate('/');
+    return;
+  }
   navigate(`/?category=${category}`);
 };
 
