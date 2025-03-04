@@ -1,13 +1,49 @@
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { useState } from 'react';
+import {
+  CustomOverlayMap,
+  Map,
+  MapMarker,
+  useKakaoLoader,
+  ZoomControl,
+} from 'react-kakao-maps-sdk';
+import MapOverlay from './MapOverlay';
+/**
+ *
+ * @param {boolean} isOverlayOpen
+ * @param {number}  : latitude, longitude
+ * @returns
+ */
+const KaKaoMap = ({ latitude, longitude, placeInfo }) => {
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+  useKakaoLoader();
 
-const KaKaoMap = ({ latitude, longitude }) => {
+  const centerPosition = {
+    lat: latitude,
+    lng: longitude,
+  };
+
+  const handleOverlayToggle = () => {
+    setIsOverlayOpen(!isOverlayOpen);
+  };
+
   return (
-    <Map
-      center={{ lat: latitude, lng: longitude }}
-      className="w-full h-full object-cover rounded-lg shadow-md  cursor-pointer"
-    >
-      <MapMarker position={{ lat: latitude, lng: longitude }} />
-    </Map>
+    <div className="w-full md:w-1/2 h-72 ">
+      <Map
+        center={centerPosition}
+        className="w-full h-full object-cover rounded-lg shadow-md  cursor-pointer"
+        level={2}
+      >
+        <MapMarker position={{ lat: latitude, lng: longitude }} onClick={handleOverlayToggle} />
+
+        {isOverlayOpen && (
+          <CustomOverlayMap position={{ lat: latitude, lng: longitude }}>
+            <MapOverlay placeInfo={placeInfo} handleOverlayToggle={handleOverlayToggle} />
+          </CustomOverlayMap>
+        )}
+
+        <ZoomControl position={'RIGHT'} />
+      </Map>
+    </div>
   );
 };
 

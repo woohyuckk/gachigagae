@@ -3,11 +3,13 @@ import { useParams } from 'react-router-dom';
 import Comment from './Comment';
 import { useComment, useInfiniteCommentsQuery } from '../../../libs/hooks/useComment';
 import { toast } from 'react-toastify';
+import useAuthStore from '../../../stores/useAuthstore';
 
 /**
  * @param {number} : idNumber -> place_id useParams로부터 읽은 string 변환
  * @param {string} : comment
- * @param {array} : comments supabase에서 불러온 comment
+ * @param {object:[]} : comments supabase에서 불러온 comment
+ * @param {boolean} : isLogin
  * @returns
  */
 const CommentsSection = () => {
@@ -16,12 +18,18 @@ const CommentsSection = () => {
   const observerRef = useRef(null);
   const { id } = useParams();
   const idNumber = Number(id);
-
+  const isLogin = useAuthStore((state) => state.isLogin);
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteCommentsQuery(idNumber);
   const comments = data?.pages.flat() || [];
+
   const handleOnSubmitComment = (e) => {
     e.preventDefault();
+
+    if (!isLogin) {
+      alert('로그인을 먼저 해주세요');
+      return;
+    }
     const comment = commentRef.current.value.trim();
 
     if (!comment) return;

@@ -1,12 +1,12 @@
-import PlaceSection from '../components/detail/PlaceSection';
 import CommentsSection from '../components/detail/comment/CommentsSection';
 import ImageModal from '../components/detail/ImageModal';
 import { useState } from 'react';
 import { useGetPlaceInfo } from '../libs/hooks/useGetPlaces';
+import PlaceSection from '../components/detail/place/PlaceSection';
 
 /**
  * @param {object} : placeInfo place_id에 해당하는 장소정보
- * @returns 
+ * @returns
  */
 const Detail = () => {
   const [modalOpen, setModalOpen] = useState(false);

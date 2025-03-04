@@ -1,4 +1,3 @@
-// ProfileForm.jsx
 import { CheckCircle2, Loader2, Sparkles } from 'lucide-react';
 
 export default function ProfileForm({ formData, setFormData, isSubmitting }) {
@@ -27,7 +26,7 @@ export default function ProfileForm({ formData, setFormData, isSubmitting }) {
           />
           <CheckCircle2
             className={`w-6 h-6 text-emerald-500 absolute right-4 top-4 transition-opacity duration-200 ${
-              formData.newNickname.length ? 'opacity-100' : 'opacity-0'
+              formData.newNickname ? 'opacity-100' : 'opacity-0'
             }`}
           />
         </div>

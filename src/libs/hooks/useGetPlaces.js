@@ -6,7 +6,7 @@ import fetchPlacesData from '../api/placesData';
 
 /**
  * * 장소 목록을 가져오는 커스텀 쿼리 훅
- * @param {number} userId - 현재 로그인한 유저의 uuid
+ * @param {string} userId - 현재 로그인한 유저의 uuid
  * @param {string} category - 현재 페이지의 category ('Restaurant', 'Cafe' 또는 null)
  * @returns {Object} useQuery의 결과 객체
  */
@@ -29,10 +29,9 @@ export const useGetPlaceInfo = () => {
     queryFn: async () => {
       const { data: place } = await supabase.from('places').select('*').eq('id', idNumber).single();
       return place;
-    }
-  })
-  return placeInfo
-
-}
+    },
+  });
+  return placeInfo;
+};
 
 export default useGetPlaces;
