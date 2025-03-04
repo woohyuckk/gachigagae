@@ -6,6 +6,7 @@ import ModifyMenu from './ModifyMenu';
 import { FaRegPenToSquare } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
 import DefaultButton from '../../buttons/DefaultButton';
+import { TOAST_MSG } from '../../../constants/toastMessages';
 
 const Comment = ({ comment: commentInfo }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -58,14 +59,14 @@ const Comment = ({ comment: commentInfo }) => {
     e.preventDefault();
     comment = commentRef.current.value.trim();
     if (!comment) {
-      return toast('내용을 입력해주세요.');
+      return toast(TOAST_MSG.RECHK_CONTENT);
     }
 
     upsertCommentMutate(
       { id, comment },
       {
         onSuccess: () => {
-          toast('수정되었습니다.');
+          toast(TOAST_MSG.UPDATE_CLEAR);
           setIsUpdateComment((prev) => !prev);
         },
       }

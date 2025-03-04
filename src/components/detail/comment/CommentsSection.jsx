@@ -5,7 +5,9 @@ import { useComment, useInfiniteCommentsQuery } from '../../../libs/hooks/useCom
 import { toast } from 'react-toastify';
 import useAuthStore from '../../../stores/useAuthstore';
 import DefaultButton from '../../buttons/DefaultButton';
+import { TOAST_MSG } from '../../../constants/toastMessages';
 import Loading from '../../common/Loading';
+
 
 /**
  * @param {number} : idNumber -> place_id useParams로부터 읽은 string 변환
@@ -29,7 +31,7 @@ const CommentsSection = () => {
     e.preventDefault();
 
     if (!isLogin) {
-      alert('로그인을 먼저 해주세요');
+      toast(TOAST_MSG.SIGNIN_FIRST);
       return;
     }
     const comment = commentRef.current.value.trim();
@@ -39,7 +41,7 @@ const CommentsSection = () => {
       { comment, place_id: idNumber },
       {
         onSuccess: () => {
-          toast('성공적으로 등록되었습니다.');
+          toast(TOAST_MSG.INSERT_CLEAR);
           commentRef.current.value = '';
         },
       }
