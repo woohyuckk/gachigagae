@@ -4,7 +4,8 @@ const PlaceSection = ({ handleModalOpen: openModal, placeInfo }) => {
   const description = placeInfo.description.split('|');
   const [open, close, parking, isAccompanied, exeption] = description;
   const {
-    coordinates: { latitude, longitude },image
+    coordinates: { latitude, longitude },
+    image,
   } = placeInfo;
 
   return (
@@ -13,11 +14,8 @@ const PlaceSection = ({ handleModalOpen: openModal, placeInfo }) => {
 
       {/* 카테고리 */}
       <div className="flex gap-2 mt-2">
-        <span className="bg-yellow-200 text-yellow-800 text-sm px-3 py-1 rounded-full">
-          {placeInfo.category1}
-        </span>
         <span className="bg-green-200 text-green-800 text-sm px-3 py-1 rounded-full">
-          {placeInfo.category2}
+          #{placeInfo.category2}
         </span>
       </div>
 
@@ -35,7 +33,7 @@ const PlaceSection = ({ handleModalOpen: openModal, placeInfo }) => {
       <div className="mt-4 flex flex-col md:flex-row gap-4">
         {/* 썸네일 */}
         <div className="w-full md:w-1/2 h-72 ">
-          <KaKaoMap latitude={latitude} longitude={longitude} />
+          <KaKaoMap latitude={latitude} longitude={longitude} placeInfo={placeInfo} />
         </div>
 
         {/* 정보 텍스트 */}
