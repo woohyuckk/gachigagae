@@ -5,11 +5,11 @@ const LikeCard = ({ place, onClick, ref }) => {
 
   return (
     <div className="h-full" ref={ref}>
-      <h2 className="text-lg font-bold">{title}</h2>
-      <p className="text-gray-400 text-xs w-full my-1">{utils.splitAddress(address)}</p>
+      <h2 className="text-2xl font-bold">{title}</h2>
+      <p className="text-gray-400 text-lg w-full my-1">{utils.splitAddress(address)}</p>
       <figure className="flex flex-auto justify-center items-center rounded-2xl bg-gray-100 xl:w-full h-3/4">
         {image ? (
-          <img className="object-cover w-full h-full" src={image} alt="" />
+          <img className="object-cover w-full h-full border-2 border-solid" src={image} alt="" />
         ) : (
           <div> No image </div>
         )}
@@ -22,7 +22,7 @@ const LikeCard = ({ place, onClick, ref }) => {
         }}
       >
         <span
-          className="text-gray-500 text-sm cursor-pointer"
+          className="text-gray-500 text-lg cursor-pointer"
           onClick={(e) => {
             e.stopPropagation();
             onClick(e);

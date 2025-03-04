@@ -16,7 +16,7 @@ export default function LikeItem({ place, navigate }) {
       <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-4 md:p-8 rounded-xl">
         <div className="space-y-2 flex items-center justify-between">
           <h3 className="text-xl md:text-3xl font-bold text-white mb-1 md:mb-2">{place.title}</h3>
-          <LikePlaceButton placeId={place.id} isLiked={place.is_liked} />
+          <LikePlaceButton placeId={place.id} isLiked={place.is_liked} size={30} />
         </div>
         <div className="flex">
           <div className="w-full">
