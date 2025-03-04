@@ -25,7 +25,10 @@ const Header = () => {
     const debounceTimer = setTimeout(() => {
       const trimSearch = search.trim();
 
-      navigate(`/?search=${trimSearch}`);
+      if(search){
+        navigate(`/?search=${trimSearch}`);
+      }
+
     }, 1000);
 
     return () => clearTimeout(debounceTimer);

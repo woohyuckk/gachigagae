@@ -46,6 +46,9 @@ const SignIn = () => {
     try {
       await supabase.auth.signInWithOAuth({
         provider: 'google',
+        options: {
+          redirectTo: 'https://nbc-outsourcing-project.vercel.app/auth/callback',
+        },
       });
     } catch (err) {
       throw new Error(err);

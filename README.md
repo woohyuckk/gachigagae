@@ -1,17 +1,20 @@
+## 📢 프로젝트 소개
 
+반려동물과 함께 방문할 수 있는 식당과 카페를 소개하는 웹 사이트입니다 🐾
 
-## 📢프로젝트 소개
-ㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅇㄴㅁㅇㄴㅁㅇㄴㅁㅁ
-ㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁㅇㄴㅁ
+<br>
 
-## 📅프로젝트 기간
+## 📅 프로젝트 기간
 
 - **2025.02.27 ~ 2025.03.04**
 
+<br>
+
 ## [프로젝트 계기]
 
+- 반려동물과 함께 여행 다니는 1500만 반려인을 위하여 방문이 가능한 장소를 쉽게 찾을 수 있도록 도움을 주고 싶어서 프로젝트를 계기하게 되었습니다.
 
-## 💏멤버 소개
+## 💏 멤버 소개
 
 <table>
   <tbody>
@@ -25,10 +28,10 @@
         <br />
       </td>
          <td width="300px" align="center">
-        <a href="">
-        <img src="" width="80" alt="sohxxny"/>
+        <a href="https://github.com/sohxxny">
+        <img src="https://avatars.githubusercontent.com/u/119118662?v=4" width="80" alt="sohxxny"/>
         <br />
-        <sub><b>woohyuckk</b></sub>
+        <sub><b>Soheun</b></sub>
         </a>
         <br />
       </td>
@@ -57,18 +60,18 @@
     </tr>
     <tr>
       <td align="center">
-        <a href="">
-        <img src="" width="80" alt=""/>
+        <a href="https://github.com/ye21iin">
+        <img src="https://avatars.githubusercontent.com/u/97957438?v=4" width="80" alt="Yelin Kim"/>
         <br />
-        <sub><b>예린</b></sub>
+        <sub><b>ye21iin</b></sub>
         </a>
         <br />
       </td>
       <td align="center">
-        <a href="">
-        <img src="" width="80" alt=""/>
+        <a href="https://github.com/joyounghyun550">
+        <img src="https://avatars.githubusercontent.com/u/192574613?v=4" width="80" alt="JoYoungHyun"/>
         <br />
-        <sub><b>영현</b></sub>
+        <sub><b>JoYoungHyun</b></sub>
         </a>
         <br />
       </td>
@@ -89,171 +92,289 @@
 
 ## 🛠 **기술스택**
 
+<br>
 
 ### 📌 **프로그래밍 언어 및 프레임워크**
 
-![js](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white)
-![react](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=black)
 
 ### 🎨 **UI 프레임워크 및 스타일링**
 
-- **tailwindcss**
-- **React-icons**
+![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
+![React Icons](https://img.shields.io/badge/ReactIcons-000000?style=flat-square&logo=react&logoColor=white)
+![React Toastify](https://img.shields.io/badge/ReactToastify-FF8700?style=flat-square&logo=react&logoColor=white)
+![Spinner](https://img.shields.io/badge/Spinner-00A99D?style=flat-square&logo=progress&logoColor=white)
 
-### ✅ **코드 품질 및 포맷팅**
+### ✅ **프로젝트 빌드 / 코드 품질 및 포맷팅**
 
-- **ESLint**
-- **Prettier**
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)
+![React Router](https://img.shields.io/badge/ReactRouter-CA4245?style=flat-square&logo=react-router&logoColor=white)
+![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=flat-square&logo=eslint&logoColor=white)
+![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=flat-square&logo=prettier&logoColor=white)
 
-### 🗄️ **백엔드 및 데이터베이스**
+### 🪜 **전역 상태 관리**
 
-- **Supabase (PostgreSQL 기반)**
-  - **데이터베이스:** 게시글, 댓글, 좋아요, 사용자 정보 저장 및 관리
-  - **인증:** 사용자 로그인 및 회원가입 관리
+![Zustand](https://img.shields.io/badge/zustand-orange?style=flat-square&logo=zustand&logoColor=white)
+
+### 🗄️ **백엔드 및 API 통신**
+
+![TanStack Query](https://img.shields.io/badge/TanstackQuery-FF4154?style=flat-square&logo=TanstackQuery&logoColor=white)
+
+![Kakao Map API](https://img.shields.io/badge/KakaoMapAPI-FFCD00?style=flat-square&logo=kakao&logoColor=black)
+
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white)
+
+- **BaaS** (PostgreSQL 기반 Backend as a Service)
+
+  - **Database:** 게시글, 댓글, 좋아요, 사용자 정보 저장 및 관리
+  - **Authentication:** 사용자 로그인 및 회원가입 관리
   - **Storage:** 프로필 이미지 등 파일 업로드 관리
-- **KAKAO MAP API**
-  - **지도**    
 
 ### 🗃️ **버전 관리**
 
-- **Git/GitHub**
+![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)
 
 ### 🚀 **배포**
 
+[같이가개 🐾](nbc-outsourcing-project.vercel.app)
+
+<br>
+
 ## 📝 **주요 기능**
 
+### 🔐 로그인 및 회원가입 기능
+
+- 사용자는 이메일로 회원가입 및 로그인할 수 있습니다.
+- 구글 소셜 로그인을 통한 간편 로그인 기능을 제공합니다.
+
+### 🐾 반려동물과 함께할 수 있는 장소 리스트
+
+- 홈 화면에서 전체 피드를 볼 수 있습니다.
+- '전체보기', '식당', '카페' 카테고리를 분류해서 볼 수 있는 사이드바를 제공합니다.
+- 타이틀을 검색할 수 있습니다.
+
+### 🔍 장소의 디테일 제공
+
+- 디테일 페이지에서는 각 장소의 상세 정보 및 위치 정보를 제공합니다.
+- 인증된 사용자는 댓글을 입력할 수 있습니다.
+
+### ❤️ 좋아요 기능
+
+- 사용자는 게시물에 좋아요 버튼을 눌러 저장할 수 있습니다.
+
+### 👤 마이페이지
+
+- 프로필 사진과 닉네임을 수정할 수 있습니다.
+- 사용자가 '좋아요'를 한 게시물을 모아 볼 수 있습니다.
+
+<br>
+
 ## 📁 프로젝트 구조
+
 ```
-├── api
-├── assets
-├── 📁components
-│   ├── 📁common
-│   └── 📁Layout
-├── 📁constants
-├── 📁contexts
-├── 📁hooks
-├── 📁pages
-│   ├── 📁detail
-│       ├──📁detailStyle
-│   ├── 📁home
-│       ├──📁homeStyle
-│   ├──📁login
-│       ├──📁loginStyle
-│   ├── 📁myPage
-│       ├──📁mypageStyle
-│   ├── 📁post
-│       ├──📁postStyle
-│   └── signup
-│       ├──📁signupStyle
-├──📁 shared
-├──📁 style
-├──📁 supabase
-├──📁 utils
-├──📁 App.jsx
-└──📁 main.jsx
+📦nbc-outsourcing-project
+ ┣ 📂public
+ ┣ 📂src
+ ┃ ┣ 📂components
+ ┃ ┃ ┣ 📂auth
+ ┃ ┃ ┣ 📂buttons
+ ┃ ┃ ┣ 📂common
+ ┃ ┃ ┣ 📂detail
+ ┃ ┃ ┃ ┣ 📂comment
+ ┃ ┃ ┃ ┣ 📂place
+ ┃ ┃ ┣ 📂home
+ ┃ ┃ ┣ 📂layout
+ ┃ ┃ ┗ 📂mypage
+ ┃ ┃ ┃ ┣ 📂likes
+ ┃ ┃ ┃ ┣ 📂profile
+ ┃ ┣ 📂constants
+ ┃ ┣ 📂libs
+ ┃ ┃ ┣ 📂api
+ ┃ ┃ ┣ 📂hooks
+ ┃ ┃ ┗ 📂utils
+ ┃ ┣ 📂pages
+ ┃ ┣ 📂routes
+ ┃ ┣ 📂stores
+ ┃ ┣ 📜App.jsx
+ ┃ ┣ 📜index.css
+ ┃ ┗ 📜main.jsx
 ```
 
-각 스타일 컴포넌트는 page 명칭에 맞는 pageStyle 폴더로 관리 
+각 스타일 컴포넌트는 page 명칭에 맞는 pageStyle 폴더로 관리
 예) page 폴더에 page.jsx / pageStyle 폴더로 페이지에 사용된 스타일 컴포넌트를 한 곳에서 확인할 수 있도록 설계
-### 📝 피드 작성, 수정 및 삭제
-
-- 사용자가 자유롭게 게시글을 작성할 수 있으며, 게시물의 제목, 내용, 카테고리 및 이미지 업로드 할 수 있습니다.
-- 작성글은 **실시간으로 피드에 반영**되며, 수정 및 삭제 가능합니다.
-- **모달창**을 통해 간편하게 게시글을 수정합니다.
-
-### ❤️ ‘좋아요’ 및 댓글 생성, 그 숫자 확인
-
-- ‘좋아요’ 버튼을 통해 사용자는 게시글에 공감을 표현할 수 있습니다.
-- 댓글을 통해 사용자 간 소통할 수 있습니다.
-- 좋아요 및 댓글 수가 표시되어 **참여가 활발한 게시물**을 알 수 있습니다.
-
-### 🗂️ 카테고리 별 피드 조회
-
-- ‘**일상**, **운동**, **취미**, **맛집**, **기타**’ 카테고리를 제공합니다.
-- 사용자가 관심있는 카테고리를 선택하여 해당 게시글만을 모아 볼 수 있습니다.
-
-### 🧑‍💻 마이페이지
-
-- **프로필 사진, 닉네임**을 수정할 수 있습니다.
-- 내가 작성한 게시글 대시보드를 제공하여 **본인의 작성글을 관리**할 수 있습니다.
 
 ## 와이어 프레임
 
-![image (2)](https://github.com/user-attachments/assets/ab66fd1b-c868-4f66-8d7e-dfeb43868674)
+![image](https://github.com/user-attachments/assets/78fb31d5-9312-4d57-a159-e6db9d7ea0e8)
+
 
 ## ERD
 
-![ERD](https://github.com/user-attachments/assets/9bb4803d-ba23-4ba0-8c70-37a51c8ba23d)
+![ERD](https://github.com/user-attachments/assets/72a33042-c42e-49da-89f3-bda37084bf03)
 
 ## 🛠️ 트러블 슈팅
 
-### 🔹 새로고침 시 로그인 페이지로 리다이렉트되는 문제
+### 🔹 데이터 리스트에서 좋아요한 카드의 좋아요 버튼 다르게 보이도록 하기
 
-#### 🚨 문제 상황  
-React 프로젝트에서 로그인 상태를 관리하는 `isLogin` 변수를 사용했는데, 새로고침 시 항상 로그인 페이지로 이동하는 문제가 발생했다.  
+#### 🚨 문제 상황
 
-#### 🔍 원인  
-- `isLogin`의 초기값을 `false`로 설정했다.  
-- React가 상태를 불러오기 전에 `isLogin`이 `false`로 평가되면서, 로그인되지 않은 것으로 간주되어 리다이렉트가 발생했다.  
-
-#### 💡 해결 방법  
-1. `isLogin`의 초기값을 `'initial'`로 변경하여 상태 확인 전까지는 로그인 여부를 확정하지 않도록 수정했다.  
-2. 상태가 결정될 때까지 로딩 화면을 표시하도록 구현하여 불필요한 리다이렉트를 방지했다.  
-
-```jsx
-const [isLogin, setIsLogin] = useState('initial');
-
-useEffect(() => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    setIsLogin(true);
-  } else {
-    setIsLogin(false);
-  }
-}, []);
-
-if (isLogin === 'initial') {
-  return <LoadingScreen />; // 로딩 화면 표시
-}
-
-return isLogin ? <MainPage /> : <LoginPage />;
-```
-
-#### ✅ 결과
-
-•	새로고침 시 로그인 여부를 정확히 판단할 때까지 로그인 페이지로 이동하는 문제 해결
-
-•	불필요한 리다이렉트 없이 자연스럽게 로그인 여부 판별
-
-<hr>
-
-### 🔹 로그인 후 'PGRST116' 오류 발생
-
-#### 문제 상황
-로그인 후에 users 테이블에서 정상적으로 데이터를 가져오지 못하고, 아래와 같은 **PGRST116** 오류가 발생
-
-<img width="576" alt="스크린샷 2025-02-18 09 47 50" src="https://github.com/user-attachments/assets/aaa90f86-493a-43ce-8699-3d93982820ae" />
-
-```
-  "code": "PGRST116" // PostgREST에서 발생한 특정 오류 코드
-  "details": "The result contains 0 rows" // 쿼리 실행 결과가 0개의 행을 반환했음
-  "message": "JSON object requested, multiple (or no) rows returned" // JSON 객체를 요청했지만, 여러 개의 행이 반환되었거나(1개 이상) 아무 행도 반환되지 않음
-```
-
-### 🔍 원인: RLS(Row-Level Security) policy 정책이 누락됨
-
-- 특정 테이블에 대해 `SELECT` 권한이 부여되지 않으면, 로그인 후 데이터를 조회할 때 결과가 반환되지 않음
+- Supabase DB에는 전체 장소 목록과 좋아요 목록이 별도 테이블로 저장되어 있기 때문에 초기에는 두 데이터를 각각 불러온 후, 장소 목록에 좋아요 정보를 추가하는 방식으로 구현
+- 무한 스크롤(infinite scroll)을 구현하면서 데이터를 점진적으로 로드해야 했는데, 이때 두 데이터를 별도로 불러오는 방식에서 문제가 발생
 
 #### 💡 해결 방법
 
-1.	RLS 정책 설정 추가
-   
-•	users 테이블의 SELECT 권한을 확인하고 정책 추가
+- SQL 에디터를 활용하여 커스텀 함수를 생성. 이 함수는 전체 장소 목록을 불러오면서 사용자 ID를 기준으로 좋아요 목록과 대조하여 해당 장소가 사용자의 좋아요 목록에 있으면 'is_liked' 속성값을 true로, 없으면 false로 설정하여 데이터를 한 번에 가져옴
 
-<img width="1141" alt="image" src="https://github.com/user-attachments/assets/ee287c0d-dbd7-44b7-9b5f-4440f56ff7bd" />
-
+```sql
+CREATE OR REPLACE FUNCTION get_places_with_likes(user_id UUID)
+RETURNS TABLE (
+  id BIGINT,
+  title TEXT,
+  created_at TIMESTAMPTZ,
+  description TEXT,
+  charge TEXT,
+  category1 TEXT,
+  category2 TEXT,
+  tel TEXT,
+  url TEXT,
+  address TEXT,
+  coordinates JSON,
+  image TEXT,
+  is_liked BOOLEAN
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  RETURN QUERY
+  SELECT
+    p.*,
+    EXISTS (
+      SELECT 1
+      FROM likes l
+      WHERE l.place_id = p.id AND l.user_id = get_places_with_likes.user_id
+    ) AS is_liked
+  FROM places p;
+END;
+$$;
+```
 
 #### ✅ 결과
 
-• users 테이블에서 정상적으로 데이터를 갖고 오는 것을 확인
+- 무한 스크롤 구현 시 발생할 수 있는 데이터 불일치 문제(장소 목록과 좋아요 목록의 로드 범위가 서로 다른 현상)를 해결
+- 장소 목록과 좋아요 정보를 별도로 쿼리하여 저장할 필요 없이, 단일 쿼리로 통합된 데이터를 한 번에 가져올 수 있게 됨
 
+<hr>
+
+### 🔹 useInView 사용시 ref, inView 작동하지 않는 문제
+
+#### 🚨 문제 상황
+
+- 무한스크롤 작업 중 useInView의 ref와 inView가 설정된 div에서 작동하지 않는 문제 발생
+
+#### 🔍 원인
+
+- 한번에 들어오는 데이터의 양이 많음. 그래서 ref가 동작을 안 했을 수 있음.
+
+```javascript
+const fetchPlacesData = async () => {
+  let { data, error } = await supabase.from('place').select('*');
+
+  if (error) {
+    console.log(error);
+  }
+
+  return data;
+};
+```
+
+#### 💡 해결 방법
+
+들어오는 데이터의 양을 줄이고 테스트를 하면 잘 작동 됨.
+
+```javascript
+const fetchPlacesData = async () => {
+  let { data, error } = await supabase.from('place').select('*').limit(8);
+
+  if (error) {
+    console.log(error);
+  }
+
+  return data;
+};
+```
+
+#### ✅ 결과
+
+- 데이터의 양을 줄이니 ref가 작동되면서 inView도 작동이 됨.
+- 그 후로 무한스크롤 구현 시작할 수 있었음.
+
+<hr>
+
+### 🔹 No QueryClient set 에러 - QueryClientProvider 적용
+
+#### 🚨 문제 상황
+
+- useQuery를 사용하여 사용자 정보를 가져오는 과정에서 `No QueryClient set, use QueryClientProvider to set one` 에러 발생
+
+- useQuery를 통해 탠스택쿼리로 BaaS 서버에서 데이터를 가져오는 로직 작성.
+- onAuthStateChange를 통한 인증 상태를 전역 상태에 반영하는 커스텀 훅 생성.
+
+```
+const useAuthListener = () => {
+  const setUserInfo = useAuthStore().setUserInfo;
+  const { data: userData } = useGetUserInfo();
+
+  useEffect(() => {
+    // 인증 상태 변경 감지 및 자동 업데이트
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (_, session) => {
+      const userInfo = {
+        id: session?.user.id,
+        email: session?.user.email,
+        nickname: userData?.nickname || '',
+        profile_img_url: userData?.profile_img_url || '',
+      };
+
+      setUserInfo(userInfo);
+    });
+    return () => {
+      subscription.unsubscribe(); // Cleanup when unmounting
+    };
+  }, []);
+};
+```
+
+#### 🔍 원인
+
+- useAuthListener에서 useQuery를 사용하는 useGetUserInfo를 호출했으나, QueryClientProvider가 감싸고 있지 않아 QueryClient가 설정되지 않음.
+
+```
+const App = () => {
+  const queryClient = new QueryClient();
+  useAuthListener(); // 실행 위치
+
+  return (
+    <>
+      <QueryClientProvider client={queryClient}>
+        <Router />
+      </QueryClientProvider
+    </>
+  )
+}
+```
+
+#### 💡 해결 방법
+
+- QueryClientProvider를 App.jsx에서 최상위에 배치.
+- useAuthListener를 QueryClientProvider 내부에서 실행되도록 별도 AuthListener 컴포넌트로 분리.
+- useEffect를 두 번 사용하여 onAuthStateChange로 초기 데이터 설정 후, userData 변경 시 상태 업데이트.
+
+#### ✅ 결과
+
+- QueryClientProvider 내부에서 useQuery를 정상적으로 사용할 수 있게 되어 인증 상태 변경 감지 및 사용자 정보 업데이트가 원활하게 동작함.
+- 단, 초기 렌더링 시 리렌더링이 여러 번 발생하는 사이드이펙트 존재.
+- 개선 : useMutation으로 client-BaaS 간 비동기 통신을 대체 및 zustand 전역상태까지 관리할 수 있도록 수정.
+- 최종 : userData가 fetch된 이후 상태를 업데이트하기 위해 useEffect를 두 번 사용하던 로직을 개선. 기존 AuthListener는 supabase의 세션 변경만을 감지하도록 수정.
