@@ -1,7 +1,7 @@
 import homeUtils from '../utils/homeUtils';
 import { supabase } from './supabaseClient';
 
-const fetchPlacesData = async ({ pageParam = null, category2, userId }) => {
+const fetchPlacesData = async ({ pageParam = null, category2, userId, searchValue }) => {
   let query = userId
     ? supabase
         .rpc('get_places_with_likes', {
@@ -14,6 +14,11 @@ const fetchPlacesData = async ({ pageParam = null, category2, userId }) => {
   if (category2) {
     const catogoryName = homeUtils.translateCategoryName(category2);
     query = query.eq('category2', catogoryName);
+  }
+
+  if (searchValue) {
+    // ilike 대소문자 구분 없이. %{searchValue}%값이 포함된 데이터 검색 %% : SQL문
+    query = query.ilike('title', `%${searchValue}%`);
   }
 
   if (pageParam) {

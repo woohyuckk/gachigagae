@@ -1,6 +1,6 @@
 import HOME_CONSTANT from '../../constants/homeConstant';
 
-const SideBar = ({ onClick }) => {
+const SideBar = ({ onClick, value, onChange }) => {
   return (
     <aside className="fixed left-0 top-1/4 h-96 bg-white shadow-md border-r p-4 rounded-2xl xl:left-50 xl:w-32 lg:left-20 sm:left-0 sm:w-fit">
       <div>
@@ -15,6 +15,7 @@ const SideBar = ({ onClick }) => {
             {HOME_CONSTANT.CATEGORY_CAFE}
           </li>
         </ul>
+        
       </div>
     </aside>
   );

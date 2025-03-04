@@ -5,21 +5,35 @@ import homeUtils from '../../libs/utils/homeUtils';
 import useInfinitePlaces from '../../libs/hooks/useInfinitePlaces';
 import { useInView } from 'react-intersection-observer';
 import useAuthStore from '../../stores/useAuthstore';
+import { useEffect, useState } from 'react';
 // import useGetPlaces from '../../libs/hooks/useGetPlaces';
 
 const HomeCardContainer = () => {
   const navigate = useNavigate();
   const { id: userId } = useAuthStore((state) => state.userInfo);
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   // 쿼리스트링에 따라 데이터 다르게 가져오기
   const category = searchParams.get('category');
+  const searchValue = searchParams.get('search');
+
+  const [search, setSearch] = useState('');
+
+  useEffect(() => {
+    const debounceTimer = setTimeout(() => {
+      const trimSearch = search.trim();
+      setSearch(trimSearch);
+      setSearchParams(new URLSearchParams({ search: trimSearch }));
+    }, 1000);
+    // 이전에 설정한 타이머를 클리어하여 디바운스 취소
+    return () => clearTimeout(debounceTimer);
+  }, [search]);
 
   const {
     data: places,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useInfinitePlaces(category, userId);
+  } = useInfinitePlaces(category, userId, searchValue);
 
   const { ref } = useInView({
     threshold: 1,
@@ -37,9 +51,13 @@ const HomeCardContainer = () => {
     homeUtils.scrollToTop();
   };
 
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
   return (
     <div className="lg:w-full lg:max-w-3xl m-auto flex flex-wrap gap-7 justify-evenly p-4 sm:w-1/2 md:gap-20">
-      <SideBar onClick={handleCategory} />
+      <SideBar onClick={handleCategory} value={search} onChange={handleSearch} />
 
       {places.pages.flat().map((place, idx) => {
         return (

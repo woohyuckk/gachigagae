@@ -17,7 +17,8 @@ export const LikePlaceButton = ({ isLiked, placeId, ...props }) => {
   const { id: userId } = useAuthStore((state) => state.userInfo);
 
   const category = searchParams.get('category');
-  const { toggleLike } = useToggleLikes(isLiked, userId, category);
+  const searchValue = searchParams.get('search');
+  const { toggleLike } = useToggleLikes(isLiked, userId, category, searchValue);
 
   // 좋아요 버튼 클릭 리스너
   const handleClickLikeButton = (e) => {
