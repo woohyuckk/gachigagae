@@ -68,12 +68,8 @@ export default function ProfileSection({ userInfo, setUserInfo }) {
       if (error) throw new Error('업데이트에 실패했습니다.');
 
       setUserInfo({ nickname: newNickname, profile_img_url: fileUrl });
-<<<<<<< HEAD:src/components/mypage/ProfileSection.jsx
-      toast('프로필이 성공적으로 업데이트되었습니다!');
-=======
       setFormData((prev) => ({ ...prev, newNickname: '' }));
-      alert('프로필이 성공적으로 업데이트되었습니다!');
->>>>>>> 729d2306cfa917801fa666c1a74487beecc224bc:src/components/mypage/profile/ProfileSection.jsx
+      toast('프로필이 성공적으로 업데이트되었습니다!');
     } catch (error) {
       console.error(error.message);
     } finally {
