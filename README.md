@@ -351,22 +351,23 @@ const useAuthListener = () => {
 
 - useAuthListener에서 useQuery를 사용하는 useGetUserInfo를 호출했으나, QueryClientProvider가 감싸고 있지 않아 QueryClient가 설정되지 않음.
 
+
+#### 💡 해결 방법
 ```
 const App = () => {
   const queryClient = new QueryClient();
-  useAuthListener(); // 실행 위치
+  useAuthListener(); // 기존 실행 위치
 
   return (
     <>
       <QueryClientProvider client={queryClient}>
+        <AuthListener />; // 컴포넌트화 이후 실행 위치
         <Router />
       </QueryClientProvider
     </>
   )
 }
 ```
-
-#### 💡 해결 방법
 
 - QueryClientProvider를 App.jsx에서 최상위에 배치.
 - useAuthListener를 QueryClientProvider 내부에서 실행되도록 별도 AuthListener 컴포넌트로 분리.
