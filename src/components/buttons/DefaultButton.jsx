@@ -13,7 +13,7 @@ const DefaultButton = ({ className, onClick, type = 'button', bgColor = 'yellow'
   return (
     <button
       type={type}
-      className={`bg-[var(--color-${bgColor})] font-semibold py-2 px-4 rounded-lg hover:brightness-105 active:brightness-95 cursor-pointer border-2 ${className}`}
+      className={`bg-[var(--color-${bgColor})]  border-black font-semibold py-2 px-4 rounded-xl hover:brightness-105 active:brightness-95 cursor-pointer border-2 ${className}`}
       onClick={onClick}
     >
       {children}

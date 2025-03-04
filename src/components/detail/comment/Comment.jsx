@@ -4,6 +4,7 @@ import { CiMenuKebab } from 'react-icons/ci';
 import CommentUserProfile from './CommentUserProfile';
 import ModifyMenu from './ModifyMenu';
 import { FaRegPenToSquare } from 'react-icons/fa6';
+import DefaultButton from '../../buttons/DefaultButton';
 
 const Comment = ({ comment: commentInfo }) => {
   console.log('comment component====>');
@@ -107,12 +108,13 @@ const Comment = ({ comment: commentInfo }) => {
             name="comment"
             placeholder="댓글을 입력하세요"
           />
-          <button
+          <DefaultButton
             type="submit"
-            className="flex items-center justify-center w-full px-3 py-2 rounded-lg bg-pink-500 text-white   mt-2 hover:bg-pink-600 transition-all cursor-pointer"
+            className="flex items-center justify-center w-full "
+            bgColor="orange"
           >
             <FaRegPenToSquare className="mr-2" /> 수정
-          </button>
+          </DefaultButton>
         </form>
       ) : (
         <p className="whitespace-pre-wrap break-words p-1 my-1">{comment}</p>
