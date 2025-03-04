@@ -49,17 +49,19 @@ const SignIn = () => {
 
   return (
     <div className="flex items-center justify-center">
-      <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
+      <div className="bg-white shadow-lg p-8 max-w-md w-full border-2 rounded-2xl">
         <h1 className="text-2xl font-extrabold w-full">로그인</h1>
         <AuthForm mode="login" onSubmit={handleSignIn} errorMessage={errorMessage} />
         <div>
           <LoginButton
             type="button"
-            className={'w-full bg-grey hover:bg-gray-800'}
+            className={
+              'w-full bg-grey hover:bg-gray-600 transition-all duration-300 transform hover:scale-[1.02] active:scale-95 group'
+            }
             onClick={handleGoogleLogin}
           >
             <div className="flex items-center justify-center gap-2">
-              <FcGoogle size={30} />
+              <FcGoogle size={30} className="transition-transform group-hover:rotate-180" />
               <span>구글 로그인</span>
             </div>
           </LoginButton>
