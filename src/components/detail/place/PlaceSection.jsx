@@ -2,7 +2,6 @@ import KaKaoMap from '../KaKaoMap';
 import PlaceInfo from './PlaceInfo';
 
 const PlaceSection = ({ handleModalOpen: openModal, placeInfo }) => {
-  console.log("---------PlaceSection------------")
   const {
     coordinates: { latitude, longitude },
     image,

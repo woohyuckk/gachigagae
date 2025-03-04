@@ -52,7 +52,7 @@ export default function ProfileImageUpload({ formData, setFormData }) {
           <img
             src={formData.imagePreview || DEFAULT_IMAGE}
             alt="이미지 미리보기"
-            className="w-full h-60 max-md:h-48 rounded-lg object-contain"
+            className="w-full h-60 max-md:h-48 rounded-lg object-contain border-2"
           />
           <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
             <Camera className="w-8 h-8 text-white/90" />
