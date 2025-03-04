@@ -7,6 +7,7 @@ import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import useAuthStore from '../stores/useAuthstore';
 import { toast } from 'react-toastify';
+import { TOAST_MSG } from '../constants/toastMessages';
 
 const Router = () => {
   const { isLogin } = useAuthStore();
@@ -14,7 +15,7 @@ const Router = () => {
   // * 인증된 사용자만 접근할 수 있는 라우트
   const PrivateRoute = () => {
     if (!isLogin) {
-      toast('로그인이 필요합니다.');
+      toast(TOAST_MSG.SIGNIN_FIRST);
       return <Navigate to="/signin" />;
     }
 

@@ -13,7 +13,7 @@ const MyPageTapButton = ({ activeTab, onChangeTab }) => {
           key={key}
           className={classNames(
             'px-6 py-2 rounded-full text-lg font-semibold transition',
-            activeTab === value ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'
+            activeTab === value ? 'bg-[var(--color-pink)] text-black' : 'bg-gray-200 text-gray-800'
           )}
           onClick={() => onChangeTab(value)}
         >

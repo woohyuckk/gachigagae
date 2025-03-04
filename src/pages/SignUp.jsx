@@ -3,6 +3,8 @@ import { useState } from 'react';
 import AuthForm from '../components/auth/AuthForm';
 import { useAuthMutate } from '../libs/hooks/useAuth.api';
 import { toast } from 'react-toastify';
+import { AUTH_ERROR_MESSAGES, AUTH_VALID_LENGTH } from '../constants/authValidation';
+import { TOAST_MSG } from '../constants/toastMessages';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -13,23 +15,48 @@ const Signup = () => {
     const { email, password, passwordRecheck, nickname } = formData;
 
     // 유효성 검사
-    const PASSWORD_LENGTH = 6;
-    if (password.length < PASSWORD_LENGTH) {
-      setErrorMessage('비밀번호는 최소 6자 이상이어야 합니다.');
+    if (/\s/.test(email)) {
+      setErrorMessage(AUTH_ERROR_MESSAGES.EMAIL_NO_SPACES);
       return;
     }
+
     if (password !== passwordRecheck) {
-      setErrorMessage('비밀번호가 일치하지 않습니다.');
+      setErrorMessage(AUTH_ERROR_MESSAGES.PASSWORD_MISMATCH);
+      return;
+    }
+    if (/\s/.test(password)) {
+      setErrorMessage(AUTH_ERROR_MESSAGES.PASSWORD_NO_SPACES);
+      return;
+    }
+    if (password.length < AUTH_VALID_LENGTH.PASSWORD_LENGTH) {
+      setErrorMessage(AUTH_ERROR_MESSAGES.PASSWORD_TOO_SHORT);
+      return;
+    }
+
+    if (/\s/.test(nickname)) {
+      setErrorMessage(AUTH_ERROR_MESSAGES.NICKNAME_NO_SPACES);
+      return;
+    }
+    if (
+      nickname.length < AUTH_VALID_LENGTH.MIN_NICKNAME_LENGTH ||
+      nickname.length > AUTH_VALID_LENGTH.MAX_NICKNAME_LENGTH
+    ) {
+      setErrorMessage(
+        AUTH_ERROR_MESSAGES.NICKNAME_LENGTH(
+          AUTH_VALID_LENGTH.MIN_NICKNAME_LENGTH,
+          AUTH_VALID_LENGTH.MAX_NICKNAME_LENGTH
+        )
+      );
       return;
     }
 
     try {
       await signUp({ email, password }); // 회원가입 처리
       await updateUserInfo({ nickname, email }); // public.users 닉네임 업데이트
-      toast('회원가입이 완료되었습니다!');
+      toast(TOAST_MSG.SIGNUP_CLEAR);
       navigate('/signin');
     } catch (error) {
-      setErrorMessage('오류가 발생했습니다. 다시 시도해 주세요.');
+      setErrorMessage(AUTH_ERROR_MESSAGES.SIGNUP_FAILED);
       throw new Error(error);
     }
   };

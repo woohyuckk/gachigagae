@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import DefaultButton from '../buttons/DefaultButton';
 
 const AuthForm = ({ mode, onSubmit, errorMessage }) => {
   const [formData, setFormData] = useState({
@@ -60,22 +61,15 @@ const AuthForm = ({ mode, onSubmit, errorMessage }) => {
           />
         </div>
       )}
-      {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
-      <LoginButton type="submit" className="bg-orange hover:bg-pink ">
+      {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+      <DefaultButton
+        type="submit"
+        className="bg-orange transition-all duration-300 transform hover:scale-[1.02] active:scale-95"
+      >
         {mode === 'login' ? '로그인' : '회원가입'}
-      </LoginButton>
+      </DefaultButton>
     </form>
   );
 };
 
 export default AuthForm;
-
-export const LoginButton = ({ type, className, ...props }) => {
-  return (
-    <button
-      type={type}
-      className={`rounded-full px-7 py-3 mt-3 text-lg leading-8 font-semibold shadow-lg text-white shadow-gray-500/30 cursor-pointer transition-all duration-300 transform hover:scale-[1.02] active:scale-95 ${className}`}
-      {...props}
-    />
-  );
-};

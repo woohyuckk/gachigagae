@@ -5,6 +5,7 @@ import { useAuthMutate } from '../../libs/hooks/useAuth.api';
 import { toast } from 'react-toastify';
 import useInfinitePlaces from '../../libs/hooks/useInfinitePlaces';
 import { useEffect, useState } from 'react';
+import { TOAST_MSG } from '../../constants/toastMessages';
 
 const Header = () => {
   const isLogin = useAuthStore((state) => state.isLogin);
@@ -33,7 +34,7 @@ const Header = () => {
   const handleAuthAction = async () => {
     if (isLogin) {
       logoutUser();
-      toast('로그아웃 되었습니다.');
+      toast(TOAST_MSG.LOGOUT_CLEAR);
       navigate(ROUTES.HOME);
     } else {
       navigate(ROUTES.SIGNIN);

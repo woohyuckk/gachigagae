@@ -3,6 +3,7 @@ import { supabase } from '../api/supabaseClient';
 import useAuthStore from '../../stores/useAuthstore';
 import { COMMENT_QUERY_KEY } from '../../constants/queryKeyConstants';
 import { toast } from 'react-toastify';
+import { TOAST_MSG } from '../../constants/toastMessages';
 
 /**
  *@param {object} commentInfo : comment 1개의 정보
@@ -16,7 +17,7 @@ const COMMENTS_PER_SCROLL = 5;
 
 export const useComment = (commentInfo = {}) => {
   const queryClient = useQueryClient();
-  const placeId= commentInfo.place_id
+  const placeId = commentInfo.place_id;
 
   let { user_id: commentUserId } = commentInfo;
   const { id: authId } = useAuthStore((state) => state.userInfo);
@@ -30,8 +31,8 @@ export const useComment = (commentInfo = {}) => {
       if (error) throw error;
     },
     onSuccess: () => {
-      toast('삭제되었습니다.');
-      queryClient.invalidateQueries(COMMENT_QUERY_KEY.COMMENT);
+      toast(TOAST_MSG.DELETE_CLEAR);
+      queryClient.invalidateQueries(COMMENT_QUERY_KEY.COMMENT_PLACE_ID(placeId));
     },
     onError: (error) => {
       console.error(error);
