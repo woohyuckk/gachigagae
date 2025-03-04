@@ -2,7 +2,7 @@ const PlaceInfo = ({ placeInfo }) => {
   const description = placeInfo.description.split('|');
   const [open, close, parking, isAccompanied, exeption] = description;
   return (
-    <div className="w-full md:w-1/2 flex flex-col gap-2 text-grey">
+    <div className="w-full md:flex-1/1 flex flex-col gap-2 text-grey">
       <p>⏰ {open}</p>
       <p>🚪 {close}</p>
       <p>📍 {placeInfo.address}</p>

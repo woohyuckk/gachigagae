@@ -4,6 +4,7 @@ import Comment from './Comment';
 import { useComment, useInfiniteCommentsQuery } from '../../../libs/hooks/useComment';
 import { toast } from 'react-toastify';
 import useAuthStore from '../../../stores/useAuthstore';
+import DefaultButton from '../../buttons/DefaultButton';
 
 /**
  * @param {number} : idNumber -> place_id useParams로부터 읽은 string 변환
@@ -21,6 +22,7 @@ const CommentsSection = () => {
   const isLogin = useAuthStore((state) => state.isLogin);
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteCommentsQuery(idNumber);
+  console.log(data);
   const comments = data?.pages.flat() || [];
 
   const handleOnSubmitComment = (e) => {
@@ -64,29 +66,27 @@ const CommentsSection = () => {
   }, [hasNextPage, fetchNextPage]);
 
   return (
-    <div className="w-full = md:w-1/3   bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+    <div className="w-full md:w-1/3 h-[854px]   bg-white rounded-2xl shadow-lg p-6 border-2 ">
       <h2 className="text-xl font-semibold text-gray-800">💬 코멘트 작성</h2>
 
       {/* 댓글 입력 */}
-      <form onSubmit={handleOnSubmitComment} className="mt-4">
+      <form onSubmit={handleOnSubmitComment} className="mt-4 border-b-2 pb-4 ">
         <textarea
-          className="w-full h-32 p-2 border rounded-lg resize-none overflow-y-auto focus:ring-pink-400 outline-none"
+          className="w-full h-32 p-2 border-2 rounded-2xl resize-none overflow-y-auto  outline-none"
           ref={commentRef}
           placeholder="댓글을 입력하세요"
         />
-        <button
-          type="submit"
-          className="w-full bg-pink-500 text-white py-2 rounded-lg mt-2 hover:bg-pink-600 transition-all cursor-pointer"
-        >
+        <DefaultButton type="submit" className="w-full mt-2" bgColor="orange">
           작성하기
-        </button>
+        </DefaultButton>
       </form>
 
       {/* 댓글 목록 overflow-y-auto scrollbar-hide*/}
       <div className="mt-6 overflow-y-auto scrollbar-hide max-h-[550px]">
         {comments.map((comment) => {
           return <Comment key={comment.id} comment={comment} />;
-        }) || <div className="text-center"> comment가 존재하지 않습니다. </div>}
+        })}
+        {!comments && <div className="text-center"> comment가 존재하지 않습니다. </div>}
         <div ref={observerRef} className="h-10" />
         {isFetchingNextPage && <p>Loading...</p>}
       </div>

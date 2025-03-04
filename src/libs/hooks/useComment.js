@@ -16,6 +16,7 @@ const COMMENTS_PER_SCROLL = 5;
 
 export const useComment = (commentInfo = {}) => {
   const queryClient = useQueryClient();
+  const placeId= commentInfo.place_id
 
   let { user_id: commentUserId } = commentInfo;
   const { id: authId } = useAuthStore((state) => state.userInfo);

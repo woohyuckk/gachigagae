@@ -5,8 +5,11 @@ import CommentUserProfile from './CommentUserProfile';
 import ModifyMenu from './ModifyMenu';
 import { FaRegPenToSquare } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
+import DefaultButton from '../../buttons/DefaultButton';
+
 
 const Comment = ({ comment: commentInfo }) => {
+  console.log('comment component====>');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUpdateComment, setIsUpdateComment] = useState(false);
   let {
@@ -32,7 +35,7 @@ const Comment = ({ comment: commentInfo }) => {
     };
   }, []);
 
-  //  수정하기 누른후 수정영역에 focus
+  //  수정하기 누른후 수정영역에 focus 주기
   useEffect(() => {
     if (isUpdateComment) {
       commentRef.current.focus();
@@ -72,8 +75,8 @@ const Comment = ({ comment: commentInfo }) => {
   };
 
   return (
-    <div className="flex flex-col  bg-gray-200 rounded-xl w-full border-b border-gray-400 p-2 my-3 relative ">
-      <div className="flex w-full items-center justify-between border-b p-1 relative flex-wrap">
+    <div className="flex flex-col  bg-gray-200 rounded-xl w-full border-2 border-dashed border-gray-400 p-2 my-3 relative ">
+      <div className="flex w-full items-center justify-between border-b-2 border-gray-400 pb-2 relative flex-wrap">
         <CommentUserProfile userProfileImage={userProfileImage} nickname={nickname} />
 
         {/* 메뉴 버튼 */}
@@ -107,15 +110,16 @@ const Comment = ({ comment: commentInfo }) => {
             name="comment"
             placeholder="댓글을 입력하세요"
           />
-          <button
+          <DefaultButton
             type="submit"
-            className="flex items-center justify-center w-full px-3 py-2 rounded-lg bg-pink-500 text-white   mt-2 hover:bg-pink-600 transition-all cursor-pointer"
+            className="flex items-center justify-center w-full "
+            bgColor="orange"
           >
             <FaRegPenToSquare className="mr-2" /> 수정
-          </button>
+          </DefaultButton>
         </form>
       ) : (
-        <p className="whitespace-pre-wrap break-words my-1">{comment}</p>
+        <p className="whitespace-pre-wrap break-words p-1 my-1">{comment}</p>
       )}
     </div>
   );
