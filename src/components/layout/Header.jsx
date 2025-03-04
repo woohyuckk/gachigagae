@@ -11,7 +11,7 @@ const Header = () => {
   const isLogin = useAuthStore((state) => state.isLogin);
   const { logoutUser } = useAuthMutate();
   const navigate = useNavigate();
-  const { id: userId } = useAuthStore((state) => state.userInfo);
+  const userInfo = useAuthStore((state) => state.userInfo);
   const [searchParams] = useSearchParams();
   const [search, setSearch] = useState('');
 
@@ -19,14 +19,14 @@ const Header = () => {
   const category = searchParams.get('category');
   const searchValue = searchParams.get('search');
 
-  useInfinitePlaces(category, userId, searchValue);
+  useInfinitePlaces(category, userInfo.id, searchValue);
 
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
       const trimSearch = search.trim();
 
       navigate(`/?search=${trimSearch}`);
-    }, 1000);
+    }, 500);
 
     return () => clearTimeout(debounceTimer);
   }, [search]);
