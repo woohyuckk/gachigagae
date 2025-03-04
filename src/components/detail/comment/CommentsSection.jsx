@@ -20,6 +20,7 @@ const CommentsSection = () => {
   const isLogin = useAuthStore((state) => state.isLogin);
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteCommentsQuery(idNumber);
+  console.log(data)
   const comments = data?.pages.flat() || [];
 
   const handleOnSubmitComment = (e) => {
@@ -36,7 +37,6 @@ const CommentsSection = () => {
       { comment, place_id: idNumber },
       {
         onSuccess: () => {
-          alert('성공적으로 등록되었습니다.');
           commentRef.current.value = '';
         },
       }
@@ -63,13 +63,13 @@ const CommentsSection = () => {
   }, [hasNextPage, fetchNextPage]);
 
   return (
-    <div className="w-full = md:w-1/3   bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+    <div className="w-full md:w-1/3 h-[854px]   bg-white rounded-2xl shadow-lg p-6 border-2 ">
       <h2 className="text-xl font-semibold text-gray-800">💬 코멘트 작성</h2>
 
       {/* 댓글 입력 */}
-      <form onSubmit={handleOnSubmitComment} className="mt-4">
+      <form onSubmit={handleOnSubmitComment} className="mt-4 border-b-2 pb-4 ">
         <textarea
-          className="w-full h-32 p-2 border rounded-lg resize-none overflow-y-auto focus:ring-pink-400 outline-none"
+          className="w-full h-32 p-2 border-2 rounded-2xl resize-none overflow-y-auto focus:ring-pink-400 outline-none"
           ref={commentRef}
           placeholder="댓글을 입력하세요"
         />
@@ -85,7 +85,8 @@ const CommentsSection = () => {
       <div className="mt-6 overflow-y-auto scrollbar-hide max-h-[550px]">
         {comments.map((comment) => {
           return <Comment key={comment.id} comment={comment} />;
-        }) || <div className="text-center"> comment가 존재하지 않습니다. </div>}
+        })}
+        { !comments && <div className="text-center"> comment가 존재하지 않습니다. </div>}
         <div ref={observerRef} className="h-10" />
         {isFetchingNextPage && <p>Loading...</p>}
       </div>
