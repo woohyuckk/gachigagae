@@ -23,26 +23,32 @@ export const useGetLikes = (userId) => {
  * @param {string} userId - 현재 로그인한 유저의 uuid
  * @return {Function} return.toggleLike - 좋아요 토글 mutation 함수
  */
-export const useToggleLikes = (isLiked, userId, category) => {
+export const useToggleLikes = (isLiked, userId, selectedCategory) => {
   const queryClient = useQueryClient();
-  const queryKey = ['places', userId, category];
+  const queryKey = ['infinitePlaces', userId, selectedCategory];
 
   // * 옵티미스틱 업데이트를 위한 onMutate 함수
   const handleMutate = async ({ placeId }) => {
     // 진행중인 쿼리 취소 및 현재 상태 저장
     await queryClient.cancelQueries({ queryKey });
-    const previousData = queryClient.getQueryData(queryKey);
+    const previousData = queryClient.getQueryData(queryKey).pages;
     // 클라이언트(캐시) 상태 업데이트
     queryClient.setQueryData(queryKey, (oldData) => {
-      return oldData.map((place) => {
-        if (place.id === placeId) {
-          return {
-            ...place,
-            isLiked: !place.isLiked,
-          };
-        }
-        return place;
-      });
+      return {
+        ...oldData,
+        pages: oldData.pages?.map((pages) => {
+          return pages.map((place) => {
+            if (place.id === placeId) {
+              return {
+                ...place,
+                isLiked: !place.isLiked,
+              };
+            } else {
+              return place;
+            }
+          });
+        }),
+      };
     });
     return { previousData };
   };
@@ -52,8 +58,7 @@ export const useToggleLikes = (isLiked, userId, category) => {
     mutationFn: isLiked ? deleteLikes : addLikes,
     onMutate: handleMutate,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['places', userId] });
-      queryClient.invalidateQueries({ queryKey: ['likes'] });
+      queryClient.invalidateQueries({ queryKey: ['infinitePlaces', userId] });
     },
     onError: (error, _, context) => {
       queryClient.setQueryData(queryKey, context.previousData);
