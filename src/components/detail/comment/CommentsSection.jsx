@@ -6,6 +6,8 @@ import { toast } from 'react-toastify';
 import useAuthStore from '../../../stores/useAuthstore';
 import DefaultButton from '../../buttons/DefaultButton';
 import { TOAST_MSG } from '../../../constants/toastMessages';
+import Loading from '../../common/Loading';
+
 
 /**
  * @param {number} : idNumber -> place_id useParams로부터 읽은 string 변환
@@ -88,7 +90,7 @@ const CommentsSection = () => {
         })}
         {!comments && <div className="text-center"> comment가 존재하지 않습니다. </div>}
         <div ref={observerRef} className="h-10" />
-        {isFetchingNextPage && <p>Loading...</p>}
+        {isFetchingNextPage && <Loading notification={'댓글을 불러오는 중입니다.'} />}
       </div>
     </div>
   );
