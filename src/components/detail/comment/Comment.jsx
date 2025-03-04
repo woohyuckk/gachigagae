@@ -6,6 +6,7 @@ import ModifyMenu from './ModifyMenu';
 import { FaRegPenToSquare } from 'react-icons/fa6';
 
 const Comment = ({ comment: commentInfo }) => {
+  console.log('comment component====>');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUpdateComment, setIsUpdateComment] = useState(false);
   let {
@@ -31,7 +32,7 @@ const Comment = ({ comment: commentInfo }) => {
     };
   }, []);
 
-  //  수정하기 누른후 수정영역에 focus
+  //  수정하기 누른후 수정영역에 focus 주기
   useEffect(() => {
     if (isUpdateComment) {
       commentRef.current.focus();
