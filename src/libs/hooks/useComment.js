@@ -32,7 +32,7 @@ export const useComment = (commentInfo = {}) => {
     },
     onSuccess: () => {
       toast(TOAST_MSG.DELETE_CLEAR);
-      queryClient.invalidateQueries(COMMENT_QUERY_KEY.COMMENT);
+      queryClient.invalidateQueries(COMMENT_QUERY_KEY.COMMENT_PLACE_ID(placeId));
     },
     onError: (error) => {
       console.error(error);
