@@ -11,7 +11,7 @@ const SideBar = ({ onClick }) => {
           <li className="text-gray-700 hover:text-black cursor-pointer" onClick={onClick}>
             전체보기
           </li>
-          <div className="h-8 my-4 md:my-2 border-l border-gray-300 my-2 md:mx-5 md:h-0 md:w-16 md:border-l-0 md:border-t"></div>
+          <div className="h-8 my-4 md:my-2 border-l border-gray-300  md:mx-5 md:h-0 md:w-16 md:border-l-0 md:border-t"></div>
           <li className="text-gray-700 hover:text-black cursor-pointer" onClick={onClick}>
             식당
           </li>
@@ -22,12 +22,14 @@ const SideBar = ({ onClick }) => {
         {userInfo.id && (
           <Link
             to="/mypage"
-            className={`hidden md:block border-2 block w-[70px] h-[70px] rounded-[35px] bg-[url("${userInfo.profile_img_url}")] bg-cover bg-center mt-10`}
-          ></Link>
-        )}
+          >
+            <img src={userInfo.profile_img_url || "/public/user2.png" } alt="/public/user2.png" className="hidden md:block border-2 w-[70px] h-[70px] rounded-[35px]  bg-cover bg-center mt-10"/>
+          </Link>)
+        }
+        
       </div>
     </aside>
   );
 };
-
+<img src="0000" alt="default-iamge"/>
 export default SideBar;
