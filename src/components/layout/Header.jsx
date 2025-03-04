@@ -21,15 +21,21 @@ const Header = () => {
 
   return (
     <header className="fixed h-16 w-full z-50 bg-white border-b-1 border-gray-300">
-      <nav className="flex px-15 h-full items-center ">
-        <h1 className="flex-grow">
-          <Link to="/">
-            <img src="/logo.png" alt="logo" className="h-16 w-auto max-w-[150px]" />
+      <nav className="flex px-5 md:mr-5 sm:mr-2 h-full items-center ">
+        <div className="flex-grow ">
+          <Link to="/" className="inline-block">
+            <img src="/logo.png" alt="logo" className="h-16 w-auto max-w-[150px] mt-2" />
           </Link>
-        </h1>
+        </div>
         <div className="flex gap-5">
-          {isLogin && <Link to={ROUTES.MYPAGE}>마이페이지</Link>}
-          <button onClick={handleAuthAction}>{isLogin ? '로그아웃' : '로그인'}</button>
+          {isLogin && (
+            <Link to={ROUTES.MYPAGE} className="w-auto">
+              마이페이지
+            </Link>
+          )}
+          <button onClick={handleAuthAction} className="w-auto">
+            {isLogin ? '로그아웃' : '로그인'}
+          </button>
         </div>
       </nav>
     </header>
