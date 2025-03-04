@@ -1,20 +1,30 @@
-import HOME_CONSTANT from '../../constants/homeConstant';
+import { Link } from 'react-router-dom';
+import useAuthStore from '../../stores/useAuthstore';
 
 const SideBar = ({ onClick }) => {
+  const userInfo = useAuthStore((state) => state.userInfo);
+
   return (
-    <aside className="fixed left-0 top-1/4 h-50 bg-white shadow-md border-r p-4 rounded-2xl md:h-80 lg:left-24 xl:left-40">
-      <div>
-        <ul className="space-y-4  text-[10px] md:text-lg">
+    <aside className="fixed z-50 md:left-[3%] md:top-1/4 px-8 top-[150px] bg-white shadow-md border-2 rounded-2xl md:p-3 md:py-5">
+      <div className="flex flex-col items-center">
+        <ul className="flex flex-row md:flex-col gap-5 md:gap-3 text-center items-center text-md">
           <li className="text-gray-700 hover:text-black cursor-pointer" onClick={onClick}>
-            {HOME_CONSTANT.CATEGORY_HOME}
+            전체보기
+          </li>
+          <div className="h-8 my-4 md:my-2 border-l border-gray-300 my-2 md:mx-5 md:h-0 md:w-16 md:border-l-0 md:border-t"></div>
+          <li className="text-gray-700 hover:text-black cursor-pointer" onClick={onClick}>
+            식당
           </li>
           <li className="text-gray-700 hover:text-black cursor-pointer" onClick={onClick}>
-            {HOME_CONSTANT.CATEGORY_RESTAURANT}
-          </li>
-          <li className="text-gray-700 hover:text-black cursor-pointer" onClick={onClick}>
-            {HOME_CONSTANT.CATEGORY_CAFE}
+            카페
           </li>
         </ul>
+        {userInfo.id && (
+          <Link
+            to="/mypage"
+            className={`hidden md:block border-2 block w-[70px] h-[70px] rounded-[35px] bg-[url("${userInfo.profile_img_url}")] bg-cover bg-center mt-10`}
+          ></Link>
+        )}
       </div>
     </aside>
   );
