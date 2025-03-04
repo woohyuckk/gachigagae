@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { FcGoogle } from 'react-icons/fc';
 import DefaultButton from '../components/buttons/DefaultButton';
 import { AUTH_ERROR_MESSAGES } from '../constants/authValidation';
+import { TOAST_MSG } from '../constants/toastMessages';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const SignIn = () => {
         setErrorMessage(AUTH_ERROR_MESSAGES.LOGIN_FAILED);
         throw error;
       }
-      toast('로그인에 성공했습니다!');
+      toast(TOAST_MSG.SIGNIN_CLEAR);
       navigate('/');
     } catch (err) {
       if (err.message === 'Invalid login credentials') {

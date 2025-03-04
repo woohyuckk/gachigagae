@@ -4,6 +4,7 @@ import AuthForm from '../components/auth/AuthForm';
 import { useAuthMutate } from '../libs/hooks/useAuth.api';
 import { toast } from 'react-toastify';
 import { AUTH_ERROR_MESSAGES, AUTH_VALID_LENGTH } from '../constants/authValidation';
+import { TOAST_MSG } from '../constants/toastMessages';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ const Signup = () => {
     try {
       await signUp({ email, password }); // 회원가입 처리
       await updateUserInfo({ nickname, email }); // public.users 닉네임 업데이트
-      toast('회원가입이 완료되었습니다!');
+      toast(TOAST_MSG.SIGNUP_CLEAR);
       navigate('/signin');
     } catch (error) {
       setErrorMessage(AUTH_ERROR_MESSAGES.SIGNUP_FAILED);
