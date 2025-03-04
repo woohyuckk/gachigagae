@@ -27,24 +27,23 @@ const KaKaoMap = ({ latitude, longitude, placeInfo }) => {
   };
 
   return (
-    <Map
-      center={centerPosition}
-      className="w-full h-full object-cover rounded-lg shadow-md  cursor-pointer"
-      level={2}
-    >
-      <MapMarker position={{ lat: latitude, lng: longitude }} onClick={handleOverlayToggle} />
+    <div className="w-full md:w-1/2 h-72 ">
+      <Map
+        center={centerPosition}
+        className="w-full h-full object-cover rounded-lg shadow-md  cursor-pointer"
+        level={2}
+      >
+        <MapMarker position={{ lat: latitude, lng: longitude }} onClick={handleOverlayToggle} />
 
-      {isOverlayOpen && (
-        <CustomOverlayMap position={{ lat: latitude, lng: longitude }}>
-          <MapOverlay
-              placeInfo={placeInfo}
-            handleOverlayToggle={handleOverlayToggle}
-          />
-        </CustomOverlayMap>
-      )}
+        {isOverlayOpen && (
+          <CustomOverlayMap position={{ lat: latitude, lng: longitude }}>
+            <MapOverlay placeInfo={placeInfo} handleOverlayToggle={handleOverlayToggle} />
+          </CustomOverlayMap>
+        )}
 
-      <ZoomControl position={'RIGHT'} />
-    </Map>
+        <ZoomControl position={'RIGHT'} />
+      </Map>
+    </div>
   );
 };
 
