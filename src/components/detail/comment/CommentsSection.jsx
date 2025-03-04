@@ -29,7 +29,7 @@ const CommentsSection = () => {
     e.preventDefault();
 
     if (!isLogin) {
-      alert(TOAST_MSG.SIGNIN_FIRST);
+      toast(TOAST_MSG.SIGNIN_FIRST);
       return;
     }
     const comment = commentRef.current.value.trim();
