@@ -15,6 +15,7 @@ const COMMENTS_PER_SCROLL = 5;
 
 export const useComment = (commentInfo = {}) => {
   const queryClient = useQueryClient();
+  const placeId= commentInfo.place_id
 
   let { user_id: commentUserId } = commentInfo;
   const { id: authId } = useAuthStore((state) => state.userInfo);
@@ -29,7 +30,7 @@ export const useComment = (commentInfo = {}) => {
     },
     onSuccess: () => {
       alert('삭제되었습니다');
-      queryClient.invalidateQueries(COMMENT_QUERY_KEY.COMMENT);
+      queryClient.invalidateQueries(COMMENT_QUERY_KEY.COMMENT_PLACE_ID(placeId));
     },
     onError: (error) => {
       console.error(error);
