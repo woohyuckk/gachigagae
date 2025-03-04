@@ -1,28 +1,25 @@
 import HomeCard from '../home/HomeCard';
 import KaKaoMap from '../detail/KaKaoMap';
 import { Heart } from 'lucide-react';
-import useGetPlaces from '../../libs/hooks/useGetPlaces';
 import homeUtils from '../../libs/utils/homeUtils';
+import { useGetLikePlaces } from '../../libs/hooks/useLikes';
 
 export default function LikesSection({ userInfo, navigate }) {
-  // * 장소 목록을 불러오기 위한 useGetPlaces 훅
-  const { data } = useGetPlaces(userInfo?.id, null);
-
-  // * 좋아요한 장소만 필터링
-  const placeFiltered = data?.filter((place) => place.is_liked === true);
+  // * 장소 목록을 불러오기 위한 useGetLikePlaces 훅
+  const { data: likePlaces } = useGetLikePlaces(userInfo?.id);
 
   return (
     <div className="w-full px-4 md:px-0">
       <h2 className="text-2xl md:text-3xl font-extrabold text-gray-800 mb-6 md:mb-8 flex items-center gap-1 md:gap-2">
         <Heart className="w-6 h-6 md:w-8 md:h-8 text-rose-500" />
         좋아요 한 장소
-        <span className="text-blue-500/90 text-xl md:text-2xl">({placeFiltered?.length})</span>
+        <span className="text-blue-500/90 text-xl md:text-2xl">({likePlaces?.length})</span>
       </h2>
       {/* 스크롤 컨테이너 */}
       <div className="relative h-auto md:h-[600px]">
         <div className="h-full overflow-x-auto overflow-y-hidden md:overflow-x-auto scrollbar-thin scrollbar-thumb-blue-200/80 scrollbar-track-transparent">
           <div className="flex flex-wrap md:flex-nowrap gap-4 md:gap-8 px-2 md:pl-2 md:pr-8 min-h-[300px] md:min-h-[600px]">
-            {placeFiltered?.map((place) => (
+            {likePlaces?.map((place) => (
               <article
                 key={place.id}
                 className="w-full md:w-[420px] flex-shrink-0 bg-white rounded-xl md:rounded-2xl shadow-lg md:shadow-2xl hover:shadow-xl md:hover:shadow-3xl transition-all duration-500 cursor-pointer transform hover:-translate-y-1 md:hover:-translate-y-3 relative group h-[480px] md:h-[580px]"
