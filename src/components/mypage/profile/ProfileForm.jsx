@@ -1,4 +1,3 @@
-// ProfileForm.jsx
 import { CheckCircle2, Loader2, Sparkles } from 'lucide-react';
 
 export default function ProfileForm({ formData, setFormData, isSubmitting }) {

@@ -10,7 +10,7 @@ const HomeCard = ({ place }) => {
       <p className="text-gray-400 text-xs w-full my-1">{utils.splitAddress(address)}</p>
       <figure className="flex flex-auto justify-center items-center rounded-2xl bg-gray-100 xl:w-full h-3/4">
         {image ? (
-          <img className="object-cover w-full h-full" src="" alt="" />
+          <img className="object-cover w-full h-full" src={image} alt="" />
         ) : (
           <div> No image </div>
         )}

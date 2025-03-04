@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '../../libs/api/supabaseClient';
+import { supabase } from '../../../libs/api/supabaseClient';
 import ProfileImageUpload from './ProfileImageUpload';
 import ProfileForm from './ProfileForm';
 
