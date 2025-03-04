@@ -10,7 +10,7 @@ const App = () => {
     <>
       <QueryClientProvider client={queryClient}>
         <AuthListener />
-        <ToastContainer autoClose={2000} />
+        <ToastContainer autoClose={1500} theme="colored" />
         <Router />
       </QueryClientProvider>
     </>
