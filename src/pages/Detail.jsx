@@ -8,8 +8,7 @@ import PlaceSection from '../components/detail/place/PlaceSection';
  * @param {object} : placeInfo place_id에 해당하는 장소정보
  * @returns
  */
-const Detail =  () => {
-  console.log("---------detail page------------")
+const Detail = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState('');
   const { data: placeInfo, isLoading, error } = useGetPlaceInfo();

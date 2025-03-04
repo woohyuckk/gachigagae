@@ -10,7 +10,7 @@ export default function ProfileForm({ formData, setFormData, isSubmitting }) {
     <div className="space-y-8">
       {/* 닉네임 입력 필드 */}
       <div className="space-y-4">
-        <label className="block text-sm font-semibold ml-1 text-gray-600 tracking-wide">
+        <label className="block font-semibold ml-1 text-xl text-gray-600 tracking-wide mt-5">
           닉네임 : {formData.myNickname}
         </label>
         <div className="relative">
@@ -22,7 +22,7 @@ export default function ProfileForm({ formData, setFormData, isSubmitting }) {
             placeholder="닉네임을 입력해주세요."
             min={1}
             required
-            className="w-full px-5 py-4 text-lg border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all placeholder:text-gray-400/80"
+            className="w-full px-5 py-4 text-lg border-2 rounded-xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all placeholder:text-gray-400/80"
           />
           <CheckCircle2
             className={`w-6 h-6 text-emerald-500 absolute right-4 top-4 transition-opacity duration-200 ${

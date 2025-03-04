@@ -7,9 +7,7 @@ import { FaRegPenToSquare } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
 import DefaultButton from '../../buttons/DefaultButton';
 
-
 const Comment = ({ comment: commentInfo }) => {
-  console.log('comment component====>');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUpdateComment, setIsUpdateComment] = useState(false);
   let {
