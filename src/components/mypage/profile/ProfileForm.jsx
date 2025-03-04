@@ -36,7 +36,7 @@ export default function ProfileForm({ formData, setFormData, isSubmitting }) {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full py-4 px-6 bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-600 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] active:scale-95 relative overflow-hidden group"
+        className="w-full py-4 px-6 bg-[var(--color-orange)] text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] active:scale-95 relative overflow-hidden group"
       >
         <span className="relative z-10 flex items-center justify-center gap-2">
           {isSubmitting ? (
