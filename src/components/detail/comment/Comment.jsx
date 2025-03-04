@@ -4,7 +4,9 @@ import { CiMenuKebab } from 'react-icons/ci';
 import CommentUserProfile from './CommentUserProfile';
 import ModifyMenu from './ModifyMenu';
 import { FaRegPenToSquare } from 'react-icons/fa6';
+import { toast } from 'react-toastify';
 import DefaultButton from '../../buttons/DefaultButton';
+
 
 const Comment = ({ comment: commentInfo }) => {
   console.log('comment component====>');
@@ -58,14 +60,14 @@ const Comment = ({ comment: commentInfo }) => {
     e.preventDefault();
     comment = commentRef.current.value.trim();
     if (!comment) {
-      return alert('내용을 입력해주세요.');
+      return toast('내용을 입력해주세요.');
     }
 
     upsertCommentMutate(
       { id, comment },
       {
         onSuccess: () => {
-          alert('수정되었습니다.');
+          toast('수정되었습니다.');
           setIsUpdateComment((prev) => !prev);
         },
       }

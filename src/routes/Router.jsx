@@ -6,6 +6,7 @@ import Mypage from '../pages/Mypage';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import useAuthStore from '../stores/useAuthstore';
+import { toast } from 'react-toastify';
 
 const Router = () => {
   const { isLogin } = useAuthStore();
@@ -13,7 +14,7 @@ const Router = () => {
   // * 인증된 사용자만 접근할 수 있는 라우트
   const PrivateRoute = () => {
     if (!isLogin) {
-      alert('로그인이 필요합니다.');
+      toast('로그인이 필요합니다.');
       return <Navigate to="/signin" />;
     }
 
