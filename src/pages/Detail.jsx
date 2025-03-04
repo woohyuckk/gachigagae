@@ -3,6 +3,7 @@ import ImageModal from '../components/detail/place/ImageModal';
 import { useState } from 'react';
 import { useGetPlaceInfo } from '../libs/hooks/useGetPlaces';
 import PlaceSection from '../components/detail/place/PlaceSection';
+import Loading from '../components/common/Loading';
 
 /**
  * @param {object} : placeInfo place_id에 해당하는 장소정보
@@ -23,7 +24,9 @@ const Detail = () => {
     setModalOpen(false);
   };
 
-  if (isLoading) return <div>loading...</div>;
+  if (isLoading) {
+    return <Loading notification="정보를 불러오는 중입니다." />;
+  }
   if (error) return <div>{error}</div>;
 
   return (

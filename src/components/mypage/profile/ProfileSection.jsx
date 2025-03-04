@@ -116,7 +116,7 @@ export default function ProfileSection({ userInfo, setUserInfo }) {
   return (
     <div className="w-full max-w-xl mx-auto border-2 rounded-2xl shadow-2xl transition-all hover:shadow-3xl hover:-translate-y-1.5">
       <div className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl p-8 border border-white/20">
-        <h1 className="text-4xl max-md:text-2xl font-extrabold bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent mb-5 text-center">
+        <h1 className="text-4xl max-md:text-2xl font-extrabold bg-[var(--color-grey)] bg-clip-text text-transparent mb-5 text-center">
           프로필 업데이트
         </h1>
 
@@ -128,7 +128,7 @@ export default function ProfileSection({ userInfo, setUserInfo }) {
           onKeyDown={handleKeyDown}
         >
           <ProfileImageUpload formData={formData} setFormData={setFormData} />
-          <ProfileForm formData={formData} setFormData={setFormData} />
+          <ProfileForm formData={formData} setFormData={setFormData} isSubmitting={isSubmitting} />
         </form>
       </div>
     </div>
