@@ -1,8 +1,8 @@
-import HomeCard from '../home/HomeCard';
-import KaKaoMap from '../detail/KaKaoMap';
+import HomeCard from '../../home/HomeCard';
+import KaKaoMap from '../../detail/KaKaoMap';
 import { Heart } from 'lucide-react';
-import homeUtils from '../../libs/utils/homeUtils';
-import { useGetLikePlaces } from '../../libs/hooks/useLikes';
+import homeUtils from '../../../libs/utils/homeUtils';
+import { useGetLikePlaces } from '../../../libs/hooks/useLikes';
 
 export default function LikesSection({ userInfo, navigate }) {
   // * 장소 목록을 불러오기 위한 useGetLikePlaces 훅
