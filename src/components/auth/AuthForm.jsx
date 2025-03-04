@@ -19,7 +19,7 @@ const AuthForm = ({ mode, onSubmit, errorMessage }) => {
   };
 
   return (
-    <form className="flex flex-col" onSubmit={(e) => handleSubmit(e)}>
+    <form className="flex flex-col gap-2 mt-4" onSubmit={(e) => handleSubmit(e)}>
       <input
         className="w-full p-4 border border-gray-300 rounded-lg"
         type="email"
@@ -39,7 +39,7 @@ const AuthForm = ({ mode, onSubmit, errorMessage }) => {
         required
       />
       {mode === 'signup' && (
-        <div>
+        <div className="flex flex-col gap-2">
           <input
             type="password"
             name="passwordRecheck"
@@ -61,19 +61,21 @@ const AuthForm = ({ mode, onSubmit, errorMessage }) => {
         </div>
       )}
       {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
-      <LoginButton type="submit">{mode === 'login' ? '로그인' : '회원가입'}</LoginButton>
+      <LoginButton type="submit" className="bg-orange hover:bg-pink ">
+        {mode === 'login' ? '로그인' : '회원가입'}
+      </LoginButton>
     </form>
   );
 };
+
+export default AuthForm;
 
 export const LoginButton = ({ type, className, ...props }) => {
   return (
     <button
       type={type}
-      className={`rounded-full bg-blue-500 px-7 py-3 mt-3 text-lg leading-8 font-semibold text-white shadow-lg shadow-blue-500/50 hover:bg-blue-600 cursor-pointer ${className}`}
+      className={`rounded-full px-7 py-3 mt-3 text-lg leading-8 font-semibold shadow-lg text-white shadow-gray-500/30 cursor-pointer transition-all duration-300 transform hover:scale-[1.02] active:scale-95 ${className}`}
       {...props}
     />
   );
 };
-
-export default AuthForm;

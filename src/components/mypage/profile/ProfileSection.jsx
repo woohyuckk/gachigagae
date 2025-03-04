@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../../../libs/api/supabaseClient';
 import ProfileImageUpload from './ProfileImageUpload';
 import ProfileForm from './ProfileForm';
+import { toast } from 'react-toastify';
 
 const DEFAULT_IMAGE = '/public/user2.png';
 
@@ -69,9 +70,9 @@ export default function ProfileSection({ userInfo, setUserInfo }) {
 
       setUserInfo({ nickname: newNickname, profile_img_url: fileUrl });
       setFormData((prev) => ({ ...prev, newNickname: '' }));
-      alert('프로필이 성공적으로 업데이트되었습니다!');
+      toast('프로필이 성공적으로 업데이트되었습니다!');
     } catch (error) {
-      alert(error.message);
+      console.error(error.message);
     } finally {
       setIsSubmitting(false);
     }

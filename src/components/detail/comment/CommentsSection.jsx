@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import Comment from './Comment';
 import { useComment, useInfiniteCommentsQuery } from '../../../libs/hooks/useComment';
+import { toast } from 'react-toastify';
 import useAuthStore from '../../../stores/useAuthstore';
 import DefaultButton from '../../buttons/DefaultButton';
 
@@ -38,6 +39,7 @@ const CommentsSection = () => {
       { comment, place_id: idNumber },
       {
         onSuccess: () => {
+          toast('성공적으로 등록되었습니다.');
           commentRef.current.value = '';
         },
       }

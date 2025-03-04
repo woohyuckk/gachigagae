@@ -1,28 +1,27 @@
-@import "tailwindcss";
-
-
+@import 'tailwindcss';
 
 @font-face {
   font-family: 'Pretendard-Regular';
-  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+    format('woff');
   font-weight: 400;
   font-style: normal;
 }
 
-@layer base{
-  :root{
+@layer base {
+  :root {
     font-family: 'Pretendard-Regular';
     line-height: 1.5;
     font-weight: 800;
-    
   }
 }
 
 @theme {
-  --color-pink : #F7C7B1;
-  --color-orange : #E78F63;
-  --color-yellow : #E2BE62;
-  --color-grey : #3D3E3B; 
+  --color-pink: #f7c7b1;
+  --color-orange: #e78f63;
+  --color-yellow: #e2be62;
+  --color-grey: #3d3e3b;
+  --color-beige: #f4e6d4; /* header - F4E2D4 or F3E1C5 */
 }
 
 .scrollbar-hide::-webkit-scrollbar {
@@ -30,7 +29,6 @@
 }
 
 .scrollbar-hide {
-  -ms-overflow-style: none;  /* IE, Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE, Edge */
+  scrollbar-width: none; /* Firefox */
 }
-
