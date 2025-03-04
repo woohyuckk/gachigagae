@@ -1,8 +1,8 @@
 import KaKaoMap from '../KaKaoMap';
+import PlaceInfo from './PlaceInfo';
 
 const PlaceSection = ({ handleModalOpen: openModal, placeInfo }) => {
-  const description = placeInfo.description.split('|');
-  const [open, close, parking, isAccompanied, exeption] = description;
+  
   const {
     coordinates: { latitude, longitude },
     image,
@@ -31,21 +31,13 @@ const PlaceSection = ({ handleModalOpen: openModal, placeInfo }) => {
 
       {/* 상세 정보 */}
       <div className="mt-4 flex flex-col md:flex-row gap-4">
-        {/* 썸네일 */}
+        {/* 지도 */}
         <div className="w-full md:w-1/2 h-72 ">
           <KaKaoMap latitude={latitude} longitude={longitude} placeInfo={placeInfo} />
         </div>
-
         {/* 정보 텍스트 */}
-        <div className="w-full md:w-1/2 flex flex-col gap-2 text-grey">
-          <p>⏰ {open}</p>
-          <p>🚪 {close}</p>
-          <p>📍 {placeInfo.address}</p>
-          <p>📞 전화번호:{placeInfo.tel || '❌'}</p>
-          <p>💡 {isAccompanied}</p>
-          <p>⚠️ {exeption}</p>
-          <p>🚗 {parking}</p>
-        </div>
+        <PlaceInfo placeInfo={placeInfo}/>
+       
       </div>
     </div>
   );
