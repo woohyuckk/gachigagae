@@ -105,7 +105,6 @@ export const useComment = (commentInfo = {}) => {
     },
 
     onSettled: (_, __, newComment) => {
-      console.log(typeof newComment.place_id)
       queryClient.invalidateQueries({ queryKey: COMMENT_QUERY_KEY.COMMENT_PLACE_ID(newComment.place_id) });
     }
   });

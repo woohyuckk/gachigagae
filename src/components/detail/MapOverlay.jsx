@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 
 const MapOverlay = ({ placeInfo, handleOverlayToggle }) => {
-  console.log(placeInfo)
   const { image, url, title, address } = placeInfo;
   return (
     <div className="w-[160px] h-auto bg-white border border-black shadow-lg rounded-md p-1 flex flex-col justify-center">

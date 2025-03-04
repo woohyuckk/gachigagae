@@ -9,7 +9,7 @@ import useAuthStore from '../../../stores/useAuthstore';
  * @param {string} : comment
  * @param {object:[]} : comments supabase에서 불러온 comment
  * @param {boolean} : isLogin
- * @returns 
+ * @returns
  */
 const CommentsSection = () => {
   const { addCommentMutate } = useComment({});
@@ -17,16 +17,17 @@ const CommentsSection = () => {
   const observerRef = useRef(null);
   const { id } = useParams();
   const idNumber = Number(id);
-  const isLogin = useAuthStore((state)=>state.isLogin)
+  const isLogin = useAuthStore((state) => state.isLogin);
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteCommentsQuery(idNumber);
   const comments = data?.pages.flat() || [];
+
   const handleOnSubmitComment = (e) => {
     e.preventDefault();
 
     if (!isLogin) {
-      alert("로그인을 먼저 해주세요")
-      return
+      alert('로그인을 먼저 해주세요');
+      return;
     }
     const comment = commentRef.current.value.trim();
 

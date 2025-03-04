@@ -1,4 +1,4 @@
-import KaKaoMap from './KaKaoMap';
+import KaKaoMap from '../KaKaoMap';
 
 const PlaceSection = ({ handleModalOpen: openModal, placeInfo }) => {
   const description = placeInfo.description.split('|');
