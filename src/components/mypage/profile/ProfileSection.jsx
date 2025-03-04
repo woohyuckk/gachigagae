@@ -4,8 +4,7 @@ import ProfileImageUpload from './ProfileImageUpload';
 import ProfileForm from './ProfileForm';
 import { toast } from 'react-toastify';
 import { TOAST_MSG } from '../../../constants/toastMessages';
-
-const DEFAULT_IMAGE = '/public/user2.png';
+import {DEFAULT_IMAGE} from'/public/user2.png'
 
 export default function ProfileSection({ userInfo, setUserInfo }) {
   // Submit 버튼 클릭 시, 중복을 방지하기 위한 상태
