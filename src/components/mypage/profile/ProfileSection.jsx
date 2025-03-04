@@ -3,6 +3,7 @@ import { supabase } from '../../../libs/api/supabaseClient';
 import ProfileImageUpload from './ProfileImageUpload';
 import ProfileForm from './ProfileForm';
 import { toast } from 'react-toastify';
+import { TOAST_MSG } from '../../../constants/toastMessages';
 
 const DEFAULT_IMAGE = '/public/user2.png';
 
