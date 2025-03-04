@@ -6,14 +6,6 @@ const splitAddress = (address) => {
   return splitedAddress[1] + ' ' + splitedAddress[2];
 };
 
-// 카테고리 분류
-const filterCategory = (places, category) => {
-  return places.filter((place) => {
-    const result = place.category2 === category;
-    return result;
-  });
-};
-
 // 맨 위로
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -49,7 +41,6 @@ const translateCategoryName = (categoryName) => {
 
 const homeUtils = {
   splitAddress,
-  filterCategory,
   scrollToTop,
   handleGoToDetail,
   handleCategoryMove,
