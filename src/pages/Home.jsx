@@ -39,7 +39,7 @@ const Home = () => {
   return (
     <>
       <SideBar onClick={handleCategory} />
-      <div className="flex flex-wrap gap-20 justify-evenly p-4">
+      <div className="flex flex-wrap gap-20 justify-evenly p-4 m-auto md:w-3/5 ">
         {places.pages.flat().map((place, idx) => {
           return (
             <article
@@ -49,8 +49,8 @@ const Home = () => {
               }}
               className={
                 idx % 2 === 1
-                  ? 'w-48 bg-white shadow-lg rounded-2xl overflow-hidden p-4 relative flex-col '
-                  : 'w-48 bg-white shadow-lg rounded-2xl overflow-hidden p-4 relative flex-col lg:top-16  '
+                  ? 'w-48 min-h-[320px] bg-white shadow-lg rounded-2xl overflow-hidden p-4 relative flex-col md:w-80 md:h-[450px]'
+                  : 'w-48 min-h-[320px] bg-white shadow-lg rounded-2xl overflow-hidden p-4 relative flex-col xl:top-16 md:w-80 md:h-[450px]'
               }
             >
               {idx % 7 === 0 && idx !== 0 ? (

@@ -6,9 +6,9 @@ const HomeCard = ({ place, onClick, ref }) => {
 
   return (
     <div className="h-full" ref={ref}>
-      <h2 className="text-lg font-bold">{title}</h2>
-      <p className="text-gray-400 text-xs w-full my-1">{utils.splitAddress(address)}</p>
-      <figure className="flex flex-auto justify-center items-center rounded-2xl bg-gray-100 xl:w-full h-3/4">
+      <h2 className="text-lg font-bold md:text-2xl">{title}</h2>
+      <p className="text-gray-400 text-xs w-full my-1 md:text-sm">{utils.splitAddress(address)}</p>
+      <figure className="flex flex-auto justify-center items-center rounded-2xl bg-gray-100 h-3/4">
         {image ? (
           <img className="object-cover w-full h-full" src={image} alt="" />
         ) : (
@@ -23,7 +23,7 @@ const HomeCard = ({ place, onClick, ref }) => {
         }}
       >
         <span
-          className="text-gray-500 text-sm cursor-pointer"
+          className="text-gray-500 text-sm cursor-pointer md:text-base"
           onClick={(e) => {
             e.stopPropagation();
             onClick(e);
