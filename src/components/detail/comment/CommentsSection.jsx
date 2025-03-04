@@ -22,7 +22,6 @@ const CommentsSection = () => {
   const isLogin = useAuthStore((state) => state.isLogin);
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteCommentsQuery(idNumber);
-  console.log(data);
   const comments = data?.pages.flat() || [];
 
   const handleOnSubmitComment = (e) => {
