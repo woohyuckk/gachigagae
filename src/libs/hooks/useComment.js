@@ -105,7 +105,6 @@ export const useComment = (commentInfo = {}) => {
     },
 
     onSettled: (_, __, newComment) => {
-      console.log(typeof newComment.place_id)
       queryClient.invalidateQueries({ queryKey: COMMENT_QUERY_KEY.COMMENT_PLACE_ID(newComment.place_id) });
     }
   });
@@ -134,7 +133,6 @@ export const useInfiniteCommentsQuery = (place_id) => {
   return useInfiniteQuery({
     queryKey: COMMENT_QUERY_KEY.COMMENT_PLACE_ID(place_id),
     queryFn: async ({ pageParam }) => {
-      console.log(pageParam)
       const query = supabase.from('comments')
         .select('*, users(profile_img_url, nickname)')
         .eq('place_id', place_id)

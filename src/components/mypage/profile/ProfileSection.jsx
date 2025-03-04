@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '../../libs/api/supabaseClient';
+import { supabase } from '../../../libs/api/supabaseClient';
 import ProfileImageUpload from './ProfileImageUpload';
 import ProfileForm from './ProfileForm';
 
@@ -10,7 +10,7 @@ export default function ProfileSection({ userInfo, setUserInfo }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   // 프로필 업데이트 폼 데이터
   const [formData, setFormData] = useState({
-    newNickname: userInfo.nickname,
+    newNickname: '',
     imagePreview: userInfo.profile_img_url || DEFAULT_IMAGE,
     file: null,
     oldFilePath: userInfo.profile_img_url ?? null,
@@ -21,7 +21,6 @@ export default function ProfileSection({ userInfo, setUserInfo }) {
   useEffect(() => {
     if (userInfo !== null) {
       setFormData({
-        newNickname: userInfo.nickname,
         imagePreview: userInfo.profile_img_url || DEFAULT_IMAGE,
         file: null,
         oldFilePath: userInfo.profile_img_url ?? null,
@@ -29,6 +28,13 @@ export default function ProfileSection({ userInfo, setUserInfo }) {
       });
     }
   }, [userInfo]);
+
+  // 엔터 키 눌림 방지 함수
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault(); // 엔터 키 기본 동작(폼 제출)을 막음
+    }
+  };
 
   // 프로필 업데이트 요청
   const handleSubmit = async (newNickname, file) => {
@@ -61,6 +67,7 @@ export default function ProfileSection({ userInfo, setUserInfo }) {
       if (error) throw new Error('업데이트에 실패했습니다.');
 
       setUserInfo({ nickname: newNickname, profile_img_url: fileUrl });
+      setFormData((prev) => ({ ...prev, newNickname: '' }));
       alert('프로필이 성공적으로 업데이트되었습니다!');
     } catch (error) {
       alert(error.message);
@@ -116,6 +123,7 @@ export default function ProfileSection({ userInfo, setUserInfo }) {
             e.preventDefault();
             handleSubmit(formData.newNickname, formData.file);
           }}
+          onKeyDown={handleKeyDown}
         >
           <ProfileImageUpload formData={formData} setFormData={setFormData} />
           <ProfileForm formData={formData} setFormData={setFormData} />
