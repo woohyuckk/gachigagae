@@ -13,13 +13,14 @@ const Home = () => {
   const [searchParams] = useSearchParams();
   // 쿼리스트링에 따라 데이터 다르게 가져오기
   const category = searchParams.get('category');
+  const searchValue = searchParams.get('search');
 
   const {
     data: places,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useInfinitePlaces(category, userInfo.id);
+  } = useInfinitePlaces(category, userInfo.id, searchValue);
 
   const { ref } = useInView({
     threshold: 0.7,
