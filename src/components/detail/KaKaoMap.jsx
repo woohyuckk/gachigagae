@@ -27,7 +27,7 @@ const KaKaoMap = ({ latitude, longitude, placeInfo }) => {
   };
 
   return (
-    <div className="w-full md:w-1/2 h-72 ">
+    <div className="w-full h-72">
       <Map
         center={centerPosition}
         className="w-full h-full object-cover rounded-lg shadow-md  cursor-pointer"

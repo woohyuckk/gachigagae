@@ -16,11 +16,12 @@ export default function LikeItem({ place, navigate }) {
         <div className="space-y-2">
           <h3 className="text-xl md:text-3xl font-bold text-white mb-1 md:mb-2">{place.title}</h3>
         </div>
-        <div className="flex-1 min-h-[120px]">
-          <div className="w-full h-full">
+        <div className="flex">
+          <div className="w-full">
             <KaKaoMap
               latitude={place.coordinates.latitude}
               longitude={place.coordinates.longitude}
+              placeInfo={place}
             />
           </div>
         </div>
