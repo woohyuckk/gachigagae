@@ -1,4 +1,4 @@
-import HOME_CONSTANT from '../../constants/homeConstant';
+import HOME_CONSTANT from '../../constants/HomeConstant';
 
 // 주소 분할
 const splitAddress = (address) => {
