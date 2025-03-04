@@ -63,6 +63,7 @@ const Header = () => {
             type="text"
             value={search}
             onChange={handleSearch}
+            placeholder='🔎 검색'
             onClick={() => setSearch('')}
           />
         </div>
