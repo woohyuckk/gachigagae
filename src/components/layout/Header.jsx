@@ -26,7 +26,7 @@ const Header = () => {
       const trimSearch = search.trim();
 
       navigate(`/?search=${trimSearch}`);
-    }, 500);
+    }, 1000);
 
     return () => clearTimeout(debounceTimer);
   }, [search]);
@@ -57,9 +57,9 @@ const Header = () => {
             />
           </Link>
         </div>
-        <div className="flex items-center border rounded-lg px-2 py-1 text-sm w-8 sm:w-36 transition-all ease-in-out duration-300 focus-within:w-36">
+        <div className="flex flex-grow max-w-[120px] items-center border-2 rounded-lg px-2 py-1 text-sm  ">
           <input
-            className="w-full outline-none"
+            className="w-full max-w-16 outline-none "
             type="text"
             value={search}
             onChange={handleSearch}
