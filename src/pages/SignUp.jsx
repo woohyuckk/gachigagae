@@ -36,7 +36,7 @@ const Signup = () => {
 
   return (
     <div className="flex items-center justify-center">
-      <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
+      <div className="bg-white shadow-lg p-8 max-w-md w-full border-2 rounded-2xl">
         <h1 className="text-2xl font-extrabold w-full">회원가입</h1>
         <AuthForm mode="signup" onSubmit={handleSignup} errorMessage={errorMessage} />
         <div>
