@@ -1,8 +1,26 @@
+import homeUtils from '../utils/homeUtils';
 import { supabase } from './supabaseClient';
 
-// 충돌 방지를 위해 남겨놓았습니다
-const fetchPlacesData = async () => {
-  let { data, error } = await supabase.from('places').select(`*`);
+const fetchPlacesData = async ({ pageParam = null, category2, userId }) => {
+  let query = userId
+    ? supabase
+        .rpc('get_places_with_likes', {
+          user_id: userId,
+        })
+        .order('id', { ascending: false })
+        .limit(8)
+    : supabase.from('places').select('*').order('id', { ascending: false }).limit(8);
+
+  if (category2) {
+    const catogoryName = homeUtils.translateCategoryName(category2);
+    query = query.eq('category2', catogoryName);
+  }
+
+  if (pageParam) {
+    query = query.lt(`id`, pageParam.id);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     console.log(error);
@@ -11,4 +29,8 @@ const fetchPlacesData = async () => {
   return data;
 };
 
-export default fetchPlacesData;
+const fetchData = {
+  fetchPlacesData,
+};
+
+export default fetchData;
