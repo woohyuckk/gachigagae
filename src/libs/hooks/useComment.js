@@ -31,7 +31,7 @@ export const useComment = (commentInfo = {}) => {
     },
     onSuccess: () => {
       toast('삭제되었습니다.');
-      queryClient.invalidateQueries(COMMENT_QUERY_KEY.COMMENT);
+      queryClient.invalidateQueries(COMMENT_QUERY_KEY.COMMENT_PLACE_ID(placeId));
     },
     onError: (error) => {
       console.error(error);
