@@ -19,10 +19,12 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed h-28 w-full z-50">
-      <nav className="flex px-15 h-full items-center">
+    <header className="fixed h-16 w-full z-50 bg-white border-b-1 border-gray-300">
+      <nav className="flex px-15 h-full items-center ">
         <h1 className="flex-grow">
-          <Link to="/">로고</Link>
+          <Link to="/">
+            <img src="/logo.png" alt="logo" className="h-16 w-auto max-w-[150px]" />
+          </Link>
         </h1>
         <div className="flex gap-5">
           {isLogin && <Link to={ROUTES.MYPAGE}>마이페이지</Link>}
