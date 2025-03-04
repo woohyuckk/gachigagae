@@ -11,7 +11,11 @@ const ImageModal = ({ handleModalClose: closeModal, modalImage }) => {
         >
           ✖
         </button>
-        <img src={modalImage} alt="modal" className="w-full  max-h-[600px] md:w-full  object-cover rounded-lg" />
+        <img
+          src={modalImage}
+          alt="modal"
+          className="w-full  max-h-[600px] md:w-full  object-cover rounded-lg"
+        />
       </div>
     </div>
   );
