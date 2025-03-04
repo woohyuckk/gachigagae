@@ -1,6 +1,5 @@
 
 
-
 ## 📢프로젝트 소개
 
 
@@ -11,10 +10,6 @@
 
 ## [프로젝트 계기]
 
-- 당근마켓의 동네생활 기능에서 영감을 받아 시작했습니다.
-- 다양한 관심사를 가진 사람들이 모여 서로의 이야기를 나누고 소통할 수 있는 공간을 제공합니다.
-- 여러 주제가 한 공간에 섞여 사용자가 원하는 관심사나 주제를 찾는 것이 어려운 상황을 피할 수 있도록 **카테고리 제공**
-- 각 주제에 대해 익명성을 보장받아 **자유롭게 글을 올리고 댓글로 소통할 수 있는 공간**을 마련했습니다.
 
 ## 💏멤버 소개
 
@@ -22,16 +17,16 @@
   <tbody>
     <tr>
       <td width="300px" align="center">
-        <a href="https://github.com/ImJaeOne">
-        <img src="https://avatars.githubusercontent.com/u/123159312?v=4" width="80" alt="Jaeone Lim"/>
+        <a href="https://github.com/woohyuckk">
+        <img src="https://avatars.githubusercontent.com/u/192562150?v=4" width="80" alt="woohyuckk"/>
         <br />
-        <sub><b>Jaeone Lim</b></sub>
+        <sub><b>woohyuckk</b></sub>
         </a>
         <br />
       </td>
          <td width="300px" align="center">
-        <a href="https://github.com/woohyuckk">
-        <img src="https://avatars.githubusercontent.com/u/192562150?v=4" width="80" alt="woohyuckk"/>
+        <a href="">
+        <img src="" width="80" alt="sohxxny"/>
         <br />
         <sub><b>woohyuckk</b></sub>
         </a>
@@ -48,16 +43,16 @@
     </tr>
     <tr>
       <td align="center">
-        <b>홈 페이지</b> <br/>
-        <b>코드 총괄</b> <br/>
+        <b>역할 1</b> <br/>
+        <b>역할 2</b> <br/>
       </td>
       <td align="center">
-        <b>전체적인 레이아웃</b> <br/>
-        <b>(헤더, 푸터, 플로팅 버튼 등)</b> <br/>
+        <b>역할 1</b> <br/>
+        <b>역할 2</b> <br/>
       </td>
       <td align="center">
-        <b>글 작성 페이지</b> <br/>
-        <b>스토리지 관리</b> <br/>
+        <b>역할 1</b> <br/>
+        <b>역할 2</b> <br/>
       </td>
     </tr>
     <tr>
@@ -65,27 +60,27 @@
         <a href="">
         <img src="" width="80" alt=""/>
         <br />
-        <sub><b>PureunKang</b></sub>
+        <sub><b>예린</b></sub>
         </a>
         <br />
       </td>
       <td align="center">
-        <a href="https://github.com/lje00220">
-        <img src="https://avatars.githubusercontent.com/u/155710708?v=4" width="80" alt="Jieun Lee"/>
+        <a href="">
+        <img src="" width="80" alt=""/>
         <br />
-        <sub><b>Jieun Lee</b></sub>
+        <sub><b>영현</b></sub>
         </a>
         <br />
       </td>
     </tr>
     <tr>
       <td align="center">
-        <b>상세 페이지</b> <br/>
-        <b>로그인 페이지</b> <br/>
+        <b>역할 1</b> <br/>
+        <b>역할 2</b> <br/>
       </td>
       <td align="center">
-        <b>마이 페이지</b> <br/>
-        <b>회원가입 페이지</b> <br/>
+        <b>역할 1</b> <br/>
+        <b>역할 2</b> <br/>
       </td>
       <td align="center">
     </tr>
@@ -94,6 +89,7 @@
 
 ## 🛠 **기술스택**
 
+
 ### 📌 **프로그래밍 언어 및 프레임워크**
 
 ![js](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white)
@@ -101,7 +97,7 @@
 
 ### 🎨 **UI 프레임워크 및 스타일링**
 
-- **Styled Components**
+- **tailwindcss**
 - **React-icons**
 
 ### ✅ **코드 품질 및 포맷팅**
@@ -115,13 +111,14 @@
   - **데이터베이스:** 게시글, 댓글, 좋아요, 사용자 정보 저장 및 관리
   - **인증:** 사용자 로그인 및 회원가입 관리
   - **Storage:** 프로필 이미지 등 파일 업로드 관리
+- **KAKAO MAP API**
+  - **지도**    
 
 ### 🗃️ **버전 관리**
 
 - **Git/GitHub**
 
 ### 🚀 **배포**
-[![같이가개](https://nbc-outsourcing-project.vercel.app/)
 
 ## 📝 **주요 기능**
 
