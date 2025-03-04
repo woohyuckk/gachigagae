@@ -70,7 +70,7 @@ export default function ProfileSection({ userInfo, setUserInfo }) {
 
       setUserInfo({ nickname: newNickname, profile_img_url: fileUrl });
       setFormData((prev) => ({ ...prev, newNickname: '' }));
-      toast('프로필이 성공적으로 업데이트되었습니다!');
+      toast(TOAST_MSG.PROFILE_UPDATE);
     } catch (error) {
       console.error(error.message);
     } finally {

@@ -1,8 +1,10 @@
 import { useRef } from 'react';
 import { Camera } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { TOAST_MSG } from '../../../constants/toastMessages';
 
 const MAX_FILE_SIZE = 50 * 1024 * 1024;
+const TOAST_MAX_FILE_SIZE = 50;
 const DEFAULT_IMAGE = '/public/user2.png';
 
 export default function ProfileImageUpload({ formData, setFormData }) {
@@ -14,7 +16,7 @@ export default function ProfileImageUpload({ formData, setFormData }) {
     if (!selectedFile) return;
 
     if (selectedFile.size > MAX_FILE_SIZE) {
-      toast('50MB 이하의 파일만 업로드 가능합니다.');
+      toast(TOAST_MSG.PROFILE_IMG_CAPA_UNDER(TOAST_MAX_FILE_SIZE));
       return;
     }
 
