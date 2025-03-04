@@ -48,8 +48,8 @@ const SignIn = () => {
         provider: 'google',
         options: {
           queryParams: {
-            access_type: 'offline',
-            prompt: 'consent',
+            access_type: 'offline', // 오프라인 액세스 권한 요청
+            prompt: 'consent', // 항상 사용자에게 권한 요청 화면을 표시
           },
         },
       });
