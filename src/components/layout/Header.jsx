@@ -1,4 +1,4 @@
-import { Link, replace, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import useAuthStore from '../../stores/useAuthstore';
 import { ROUTES } from '../../constants/routes';
 import { useAuthMutate } from '../../libs/hooks/useAuth.api';
@@ -11,7 +11,7 @@ const Header = () => {
   const { logoutUser } = useAuthMutate();
   const navigate = useNavigate();
   const { id: userId } = useAuthStore((state) => state.userInfo);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [search, setSearch] = useState('');
 
   // 쿼리스트링에 따라 데이터 다르게 가져오기
@@ -24,13 +24,7 @@ const Header = () => {
     const debounceTimer = setTimeout(() => {
       const trimSearch = search.trim();
 
-      if (trimSearch) {
-        navigate(`/search?search=${trimSearch}`);
-
-        setSearchParams(new URLSearchParams({ search: trimSearch }));
-
-        setSearch(trimSearch);
-      }
+      navigate(`/?search=${trimSearch}`);
     }, 1000);
 
     return () => clearTimeout(debounceTimer);
@@ -52,27 +46,32 @@ const Header = () => {
 
   return (
     <header className="fixed h-16 w-full z-50 bg-white border-b-1 border-gray-300">
-      <nav className="flex px-5 md:mr-5 sm:mr-2 h-full items-center ">
+      <nav className="flex px-5 h-full items-center gap-4 md:gap-7 ">
         <div className="flex-grow ">
           <Link to="/" className="inline-block">
-            <img src="/logo.png" alt="logo" className="h-16 w-auto max-w-[150px] mt-2" />
+            <img
+              src="/logo.png"
+              alt="logo"
+              className="h-12 w-auto max-w-[120px] sm:h-16 sm:max-w-[150px] mt-2"
+            />
           </Link>
         </div>
-        <input
-          className="w-full  p-2 border rounded-lg resize-none overflow-y-auto focus:ring-pink-400 outline-none"
-          type="text"
-          name=""
-          id=""
-          value={search}
-          onChange={handleSearch}
-        />
-        <div className="flex gap-5">
+        <div className="flex items-center border rounded-lg px-2 py-1 text-sm w-8 sm:w-36 transition-all ease-in-out duration-300 focus-within:w-36">
+          <input
+            className="w-full outline-none"
+            type="text"
+            value={search}
+            onChange={handleSearch}
+            onClick={() => setSearch('')}
+          />
+        </div>
+        <div className="flex gap-3 sm:gap-5">
           {isLogin && (
-            <Link to={ROUTES.MYPAGE} className="w-auto">
+            <Link to={ROUTES.MYPAGE} className="text-sm sm:text-base w-auto">
               마이페이지
             </Link>
           )}
-          <button onClick={handleAuthAction} className="w-auto">
+          <button onClick={handleAuthAction} className="text-sm sm:text-base w-auto">
             {isLogin ? '로그아웃' : '로그인'}
           </button>
         </div>
