@@ -29,7 +29,7 @@ export const useComment = (commentInfo = {}) => {
       if (error) throw error;
     },
     onSuccess: () => {
-      toast('삭제되었습니다');
+      toast('삭제되었습니다.');
       queryClient.invalidateQueries(COMMENT_QUERY_KEY.COMMENT);
     },
     onError: (error) => {
