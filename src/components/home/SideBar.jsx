@@ -5,7 +5,7 @@ const SideBar = ({ onClick }) => {
   const userInfo = useAuthStore((state) => state.userInfo);
 
   return (
-    <aside className="fixed z-50 md:left-[3%] md:top-1/4 px-8 top-[150px] bg-white shadow-md border-2 rounded-2xl md:p-3 md:py-5">
+    <aside className="fixed z-50 md:left-[3%] md:top-1/4 px-8 top-[90px] bg-white shadow-md border-2 rounded-2xl md:p-3 md:py-5">
       <div className="flex flex-col items-center">
         <ul className="flex flex-row md:flex-col gap-5 md:gap-3 text-center items-center text-md">
           <li className="text-gray-700 hover:text-black cursor-pointer" onClick={onClick}>
@@ -20,16 +20,17 @@ const SideBar = ({ onClick }) => {
           </li>
         </ul>
         {userInfo.id && (
-          <Link
-            to="/mypage"
-          >
-            <img src={userInfo.profile_img_url || "/public/user2.png" } alt="/public/user2.png" className="hidden md:block border-2 w-[70px] h-[70px] rounded-[35px]  bg-cover bg-center mt-10"/>
-          </Link>)
-        }
-        
+          <Link to="/mypage">
+            <img
+              src={userInfo.profile_img_url || '/public/user2.png'}
+              alt="/public/user2.png"
+              className="hidden md:block border-2 w-[70px] h-[70px] rounded-[35px]  bg-cover bg-center mt-10"
+            />
+          </Link>
+        )}
       </div>
     </aside>
   );
 };
-<img src="0000" alt="default-iamge"/>
+<img src="0000" alt="default-iamge" />;
 export default SideBar;
