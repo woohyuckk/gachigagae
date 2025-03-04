@@ -22,14 +22,16 @@ const HomeCard = ({ place, onClick, ref }) => {
           e.stopPropagation();
         }}
       >
-        <span
-          className="text-gray-500 text-lg cursor-pointer md:text-base"
-          onClick={(e) => {
-            e.stopPropagation();
-            onClick(e);
-          }}
-        >
-          {category2}
+        <span className="text-gray-500 text-lg cursor-pointer md:text-base">
+          #
+          <span
+            onClick={(e) => {
+              e.stopPropagation();
+              onClick(e);
+            }}
+          >
+            {category2}
+          </span>
         </span>
         <LikePlaceButton placeId={id} isLiked={is_liked} size={30} className="ml-auto" />
       </div>

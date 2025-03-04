@@ -1,9 +1,10 @@
 import CommentsSection from '../components/detail/comment/CommentsSection';
 import ImageModal from '../components/detail/place/ImageModal';
 import { useState } from 'react';
-import { useGetPlaceInfo } from '../libs/hooks/useGetPlaces';
+import useGetPlaceInfo from '../libs/hooks/useGetPlaces';
 import PlaceSection from '../components/detail/place/PlaceSection';
 import Loading from '../components/common/Loading';
+import useAuthStore from '../stores/useAuthstore';
 
 /**
  * @param {object} : placeInfo place_id에 해당하는 장소정보
@@ -12,7 +13,8 @@ import Loading from '../components/common/Loading';
 const Detail = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState('');
-  const { data: placeInfo, isLoading, error } = useGetPlaceInfo();
+  const userInfo = useAuthStore((state) => state.userInfo);
+  const { data: placeInfo, isLoading, error } = useGetPlaceInfo(userInfo.id);
   // 이미지 모달 열기
   const openModal = (imageSrc) => {
     setModalImage(imageSrc);

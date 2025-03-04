@@ -4,7 +4,7 @@ import Loading from '../../common/Loading';
 import { useGetLikePlaces } from '../../../libs/hooks/useLikes';
 
 export default function LikesSection({ userInfo, navigate }) {
-  // * 장소 목록을 불러오기 위한 useGetPlaces 훅
+  // * 장소 목록을 불러오기 위한 useGetLikePlaces 훅
   const { data: likePlaces, isLoading } = useGetLikePlaces(userInfo?.id);
 
   if (isLoading) {
