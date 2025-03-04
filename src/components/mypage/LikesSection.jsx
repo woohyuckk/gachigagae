@@ -7,7 +7,7 @@ import { useGetLikePlaces } from '../../libs/hooks/useLikes';
 export default function LikesSection({ userInfo, navigate }) {
   // * 장소 목록을 불러오기 위한 useGetLikePlaces 훅
   const { data: likePlaces } = useGetLikePlaces(userInfo?.id);
-
+    console.log(likePlaces)
   return (
     <div className="w-full px-4 md:px-0">
       <h2 className="text-2xl md:text-3xl font-extrabold text-gray-800 mb-6 md:mb-8 flex items-center gap-1 md:gap-2">
@@ -37,11 +37,12 @@ export default function LikesSection({ userInfo, navigate }) {
                       {place.title}
                     </h3>
                   </div>
-                  <div className="flex-1 min-h-[120px]">
-                    <div className="w-full h-full">
+                  <div className="flex">
+                    <div className="w-full">
                       <KaKaoMap
                         latitude={place.coordinates.latitude}
                         longitude={place.coordinates.longitude}
+                        placeInfo={place}
                       />
                     </div>
                   </div>
