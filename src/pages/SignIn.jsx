@@ -64,8 +64,8 @@ const SignIn = () => {
             }
             onClick={handleGoogleLogin}
           >
-            <div className="flex items-center justify-center gap-2">
-              <FcGoogle size={30} className="transition-transform group-hover:rotate-180" />
+            <div className="flex items-center justify-center gap-2 mr-8">
+              <FcGoogle size={30} className="transition-transform group-hover:rotate-180 " />
               <span>구글 로그인</span>
             </div>
           </LoginButton>
