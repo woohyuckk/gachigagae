@@ -3,6 +3,7 @@ import { supabase } from '../libs/api/supabaseClient';
 import { useState } from 'react';
 import AuthForm, { LoginButton } from '../components/auth/AuthForm';
 import { toast } from 'react-toastify';
+import { FcGoogle } from 'react-icons/fc';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -52,8 +53,15 @@ const SignIn = () => {
         <h1 className="text-2xl font-extrabold w-full">로그인</h1>
         <AuthForm mode="login" onSubmit={handleSignIn} errorMessage={errorMessage} />
         <div>
-          <LoginButton type="button" color="grey" className={'w-full'} onClick={handleGoogleLogin}>
-            구글 로그인
+          <LoginButton
+            type="button"
+            className={'w-full bg-grey hover:bg-gray-800'}
+            onClick={handleGoogleLogin}
+          >
+            <div className="flex items-center justify-center gap-2">
+              <FcGoogle size={30} />
+              <span>구글 로그인</span>
+            </div>
           </LoginButton>
           <p className="mt-7">
             계정이 없으신가요?&nbsp;
