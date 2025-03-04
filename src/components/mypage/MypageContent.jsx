@@ -9,7 +9,7 @@ const MypageContent = ({ activeTab, userInfo, setUserInfo, navigate }) => {
           <ProfileSection userInfo={userInfo} setUserInfo={setUserInfo} />
         </div>
       ) : (
-        <div className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl p-8 border border-white/20">
+        <div className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl p-8 border-2">
           <LikesSection userInfo={userInfo} navigate={navigate} />
         </div>
       )}

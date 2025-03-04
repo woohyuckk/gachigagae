@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../../../libs/api/supabaseClient';
 import ProfileImageUpload from './ProfileImageUpload';
 import ProfileForm from './ProfileForm';
+import { toast } from 'react-toastify';
 
 const DEFAULT_IMAGE = '/public/user2.png';
 
@@ -21,6 +22,7 @@ export default function ProfileSection({ userInfo, setUserInfo }) {
   useEffect(() => {
     if (userInfo !== null) {
       setFormData({
+        newNickname: userInfo.nickname,
         imagePreview: userInfo.profile_img_url || DEFAULT_IMAGE,
         file: null,
         oldFilePath: userInfo.profile_img_url ?? null,
@@ -68,9 +70,9 @@ export default function ProfileSection({ userInfo, setUserInfo }) {
 
       setUserInfo({ nickname: newNickname, profile_img_url: fileUrl });
       setFormData((prev) => ({ ...prev, newNickname: '' }));
-      alert('프로필이 성공적으로 업데이트되었습니다!');
+      toast('프로필이 성공적으로 업데이트되었습니다!');
     } catch (error) {
-      alert(error.message);
+      console.error(error.message);
     } finally {
       setIsSubmitting(false);
     }
@@ -112,9 +114,9 @@ export default function ProfileSection({ userInfo, setUserInfo }) {
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto">
-      <div className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl p-8 transition-all hover:shadow-3xl hover:-translate-y-1.5 border border-white/20">
-        <h1 className="text-4xl max-md:text-2xl font-extrabold bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent mb-10 text-center">
+    <div className="w-full max-w-xl mx-auto border-2 rounded-2xl shadow-2xl transition-all hover:shadow-3xl hover:-translate-y-1.5">
+      <div className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl p-8 border border-white/20">
+        <h1 className="text-4xl max-md:text-2xl font-extrabold bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent mb-5 text-center">
           프로필 업데이트
         </h1>
 

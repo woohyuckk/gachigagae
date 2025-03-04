@@ -8,10 +8,10 @@ const PlaceSection = ({ handleModalOpen: openModal, placeInfo }) => {
   } = placeInfo;
 
   return (
-    <div className="w-full md:w-2/3 min-h-[850px] flex flex-col bg-white rounded-xl shadow-lg p-6 border border-gray-200">
-      <h1 className="text-2xl font-bold text-gray-800">{placeInfo.title}</h1>
+    <div className="w-full md:w-2/3 min-h-[850px] flex flex-col bg-white shadow-lg p-6 border-2 rounded-2xl ">
+      <h1 className="text-2xl font-bold p-2 border-b-2 text-gray-800">{placeInfo.title}</h1>
       {/* 카테고리 */}
-      <div className="flex gap-2 mt-2">
+      <div className="flex gap-2 mt-2  ">
         <span className="bg-green-200 text-green-800 text-sm px-3 py-1 rounded-full">
           #{placeInfo.category2}
         </span>

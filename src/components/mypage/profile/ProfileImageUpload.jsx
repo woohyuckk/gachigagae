@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { Camera } from 'lucide-react';
+import { toast } from 'react-toastify';
 
 const MAX_FILE_SIZE = 50 * 1024 * 1024;
 const DEFAULT_IMAGE = '/public/user2.png';
@@ -13,7 +14,7 @@ export default function ProfileImageUpload({ formData, setFormData }) {
     if (!selectedFile) return;
 
     if (selectedFile.size > MAX_FILE_SIZE) {
-      alert('50MB 이하의 파일만 업로드 가능합니다.');
+      toast('50MB 이하의 파일만 업로드 가능합니다.');
       return;
     }
 
@@ -51,7 +52,7 @@ export default function ProfileImageUpload({ formData, setFormData }) {
           <img
             src={formData.imagePreview || DEFAULT_IMAGE}
             alt="이미지 미리보기"
-            className="w-full h-60 max-md:h-48 rounded-lg object-contain"
+            className="w-full h-60 max-md:h-48 rounded-lg object-contain border-2"
           />
           <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
             <Camera className="w-8 h-8 text-white/90" />
