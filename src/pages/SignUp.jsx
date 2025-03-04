@@ -29,7 +29,7 @@ const Signup = () => {
       toast('회원가입이 완료되었습니다!');
       navigate('/signin');
     } catch (error) {
-      setErrorMessage('회원가입 및 닉네임 저장 과정에서 오류가 발생했습니다.');
+      setErrorMessage('오류가 발생했습니다. 다시 시도해 주세요.');
       throw new Error(error);
     }
   };
@@ -42,7 +42,7 @@ const Signup = () => {
         <div>
           <p className="mt-7">
             이미 계정이 있으신가요?&nbsp;
-            <Link to="/signin" className="text-red-500 font-semibold">
+            <Link to="/signin" className="text-red-300 font-semibold hover:text-red-500">
               로그인
             </Link>
           </p>

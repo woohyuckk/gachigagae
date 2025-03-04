@@ -32,6 +32,10 @@ const SignIn = () => {
       toast('로그인에 성공했습니다!');
       navigate('/');
     } catch (err) {
+      if (err.message === 'Invalid login credentials') {
+        setErrorMessage('사용자 아이디 또는 비밀번호가 올바르지 않습니다.');
+        throw err;
+      }
       setErrorMessage('로그인 중 오류가 발생했습니다.');
       throw new Error(err);
     }
@@ -67,7 +71,7 @@ const SignIn = () => {
           </LoginButton>
           <p className="mt-7">
             계정이 없으신가요?&nbsp;
-            <Link to="/signup" className="text-red-500 font-semibold">
+            <Link to="/signup" className="text-red-300 font-semibold hover:text-red-500">
               회원가입
             </Link>
           </p>
