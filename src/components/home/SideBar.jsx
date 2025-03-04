@@ -32,5 +32,4 @@ const SideBar = ({ onClick }) => {
     </aside>
   );
 };
-<img src="0000" alt="default-iamge" />;
 export default SideBar;

@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { Camera } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { TOAST_MSG } from '../../../constants/toastMessages';
-import {DEFAULT_IMAGE} from'/public/user2.png'
+import DEFAULT_IMAGE from'/user2.png'
 
 const MAX_FILE_SIZE = 50 * 1024 * 1024;
 const TOAST_MAX_FILE_SIZE = 50;
