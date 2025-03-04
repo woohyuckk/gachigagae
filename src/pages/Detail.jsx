@@ -1,5 +1,5 @@
 import CommentsSection from '../components/detail/comment/CommentsSection';
-import ImageModal from '../components/detail/ImageModal';
+import ImageModal from '../components/detail/place/ImageModal';
 import { useState } from 'react';
 import { useGetPlaceInfo } from '../libs/hooks/useGetPlaces';
 import PlaceSection from '../components/detail/place/PlaceSection';
