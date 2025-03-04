@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../libs/api/supabaseClient';
 import { useState } from 'react';
 import AuthForm, { LoginButton } from '../components/auth/AuthForm';
+import { toast } from 'react-toastify';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const SignIn = () => {
         throw error;
       }
 
-      alert('로그인에 성공했습니다!');
+      toast('로그인에 성공했습니다!');
       navigate('/');
     } catch (err) {
       setErrorMessage('로그인 중 오류가 발생했습니다.');

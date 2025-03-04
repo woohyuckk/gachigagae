@@ -2,12 +2,13 @@ import { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import Comment from './Comment';
 import { useComment, useInfiniteCommentsQuery } from '../../../libs/hooks/useComment';
+import { toast } from 'react-toastify';
 
 /**
  * @param {number} : idNumber -> place_id useParams로부터 읽은 string 변환
  * @param {string} : comment
  * @param {array} : comments supabase에서 불러온 comment
- * @returns 
+ * @returns
  */
 const CommentsSection = () => {
   const { addCommentMutate } = useComment({});
@@ -28,7 +29,7 @@ const CommentsSection = () => {
       { comment, place_id: idNumber },
       {
         onSuccess: () => {
-          alert('성공적으로 등록되었습니다.');
+          toast('성공적으로 등록되었습니다.');
           commentRef.current.value = '';
         },
       }

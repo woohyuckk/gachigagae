@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import useAuthStore from '../../stores/useAuthstore';
 import { ROUTES } from '../../constants/routes';
 import { useAuthMutate } from '../../libs/hooks/useAuth.api';
+import { toast } from 'react-toastify';
 
 const Header = () => {
   const isLogin = useAuthStore((state) => state.isLogin);
@@ -11,7 +12,7 @@ const Header = () => {
   const handleAuthAction = async () => {
     if (isLogin) {
       logoutUser();
-      alert('로그아웃 되었습니다.');
+      toast('로그아웃 되었습니다.');
       navigate(ROUTES.HOME);
     } else {
       navigate(ROUTES.SIGNIN);

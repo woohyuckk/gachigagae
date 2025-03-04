@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import AuthForm from '../components/auth/AuthForm';
 import { useAuthMutate } from '../libs/hooks/useAuth.api';
+import { toast } from 'react-toastify';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const Signup = () => {
     try {
       await signUp({ email, password }); // 회원가입 처리
       await updateUserInfo({ nickname, email }); // public.users 닉네임 업데이트
-      alert('회원가입이 완료되었습니다!');
+      toast('회원가입이 완료되었습니다!');
       navigate('/signin');
     } catch (error) {
       setErrorMessage('회원가입 및 닉네임 저장 과정에서 오류가 발생했습니다.');
