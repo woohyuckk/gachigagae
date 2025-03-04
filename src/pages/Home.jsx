@@ -67,6 +67,12 @@ const Home = () => {
           );
         })}
       </div>
+      <div
+        className=" hidden cursor-pointer hover: md:block md:fixed md:bottom-12 md:right-12 transition-transform transform hover:scale-110 hover:rotate-12"
+        onClick={homeUtils.scrollToTop}
+      >
+        <img src="/paw.svg" alt="scrollTop" />
+      </div>
     </div>
   );
 };
