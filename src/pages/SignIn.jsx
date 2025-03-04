@@ -56,23 +56,25 @@ const SignIn = () => {
       <div className="bg-white shadow-lg p-8 max-w-md w-full border-2 rounded-2xl">
         <h1 className="text-2xl font-extrabold w-full">로그인</h1>
         <AuthForm mode="login" onSubmit={handleSignIn} errorMessage={errorMessage} />
+
         <div>
           <DefaultButton
-            className="w-full mt-1 h-11 bg-white transition-all duration-300 transform hover:scale-[1.02] active:scale-95 group"
+            className="w-full mt-2 h-11 bg-white transition-all duration-300 transform hover:scale-[1.02] active:scale-95 group flex items-center justify-center"
             onClick={handleGoogleLogin}
           >
-            <div className="flex items-center justify-center gap-2 mr-8">
+            <div className="flex items-center gap-2 mr-8">
               <FcGoogle size={30} className="transition-transform group-hover:rotate-180 " />
               <span>구글 로그인</span>
             </div>
           </DefaultButton>
-          <p className="mt-7">
-            계정이 없으신가요?&nbsp;
-            <Link to="/signup" className="text-red-300 font-semibold hover:text-red-500">
-              회원가입
-            </Link>
-          </p>
         </div>
+
+        <p className="mt-7">
+          계정이 없으신가요?&nbsp;
+          <Link to="/signup" className="text-red-300 font-semibold hover:text-red-500">
+            회원가입
+          </Link>
+        </p>
       </div>
     </div>
   );
