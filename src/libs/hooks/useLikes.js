@@ -24,9 +24,9 @@ export const useGetLikePlaces = (userId) => {
  * @param {string} selectedCategory - 현재 카테고리 (카테고리 관련 없을 시 null 전달)
  * @return {Function} return.toggleLike - 좋아요 토글 mutation 함수
  */
-export const useToggleLikes = (isLiked, userId, selectedCategory) => {
+export const useToggleLikes = (isLiked, userId, selectedCategory, searchValue) => {
   const queryClient = useQueryClient();
-  const queryKey = ['infinitePlaces', userId, selectedCategory];
+  const queryKey = ['infinitePlaces', userId, selectedCategory, searchValue];
 
   // mutation 정의
   const toggleLikeMutation = useMutation({
