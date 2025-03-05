@@ -1,7 +1,7 @@
 ## 📢 프로젝트 소개
 
 <p align="center">
-  <img src="https://private-user-images.githubusercontent.com/192562150/419258877-ce5c89fc-48fd-4c6f-be33-9b5b9519a43e.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDExNDM2MDgsIm5iZiI6MTc0MTE0MzMwOCwicGF0aCI6Ii8xOTI1NjIxNTAvNDE5MjU4ODc3LWNlNWM4OWZjLTQ4ZmQtNGM2Zi1iZTMzLTliNWI5NTE5YTQzZS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwMzA1JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDMwNVQwMjU1MDhaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1iYTVmOWJiZGE5YmQ3OGU4MjkxMWIwYzM3OTA5ZDExMWMzYTZjZmYzYzkwYzkxMDBmNDk1MmM0Y2I0YmI4MmY1JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.m8KmzSKy2e5_w5hPQq8eNeSBlEb93UiiitFHr3UuNAI"/>
+  <img src="https://github.com/user-attachments/assets/e3eac783-7745-47f7-8ddc-2845f9a104dc"/>
 </p>
 동물들과 함께 카페, 음식점을 이용하기 위해 가게마다 일일히 전화해서
 확인해보신적 있으신가요?! 더이상 여러곳을 돌아다니지 않아도 됩니다. 
