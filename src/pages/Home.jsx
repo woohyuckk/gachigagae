@@ -43,6 +43,18 @@ const Home = () => {
     homeUtils.scrollToTop();
   };
 
+  if (places.pages[0]?.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center h-64 text-center rounded-lg  p-6 text-lg font-semibold text-gray-700 translate-y-14">
+        <p className="text-lg font-semibold text-gray-700">
+          "{searchValue}"에 대한 검색 결과가 없습니다.
+        </p>
+        <p className="text-gray-500 text-sm mt-2">다른 검색어를 입력해 보세요.</p>
+        <img src="/sad_dog.png" alt="" className="h-full" />
+      </div>
+    );
+  }
+
   return (
     <div className="flex justify-center w-full">
       <SideBar onClick={handleCategory} />
@@ -66,6 +78,12 @@ const Home = () => {
             </article>
           );
         })}
+      </div>
+      <div
+        className=" hidden cursor-pointer hover: md:block md:fixed md:bottom-12 md:right-12 transition-transform transform hover:scale-110 hover:rotate-12"
+        onClick={homeUtils.scrollToTop}
+      >
+        <img src="/paw.svg" alt="" />
       </div>
     </div>
   );

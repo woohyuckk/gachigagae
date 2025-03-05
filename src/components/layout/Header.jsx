@@ -1,4 +1,4 @@
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import useAuthStore from '../../stores/useAuthstore';
 import { ROUTES } from '../../constants/routes';
 import { useAuthMutate } from '../../libs/hooks/useAuth.api';
@@ -18,18 +18,21 @@ const Header = () => {
   // 쿼리스트링에 따라 데이터 다르게 가져오기
   const category = searchParams.get('category');
   const searchValue = searchParams.get('search');
+  const trimSearch = search.trim();
+  const locate = useLocation();
 
   useInfinitePlaces(category, userInfo.id, searchValue);
 
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
-      const trimSearch = search.trim();
-
-      if(search){
+      if (search) {
         navigate(`/?search=${trimSearch}`);
       }
-
-    }, 1000);
+      if (search === '') {
+        if (locate.pathname !== '/') return;
+        navigate('/');
+      }
+    }, 500);
 
     return () => clearTimeout(debounceTimer);
   }, [search]);
@@ -43,6 +46,7 @@ const Header = () => {
       navigate(ROUTES.SIGNIN);
     }
   };
+
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -66,7 +70,7 @@ const Header = () => {
             type="text"
             value={search}
             onChange={handleSearch}
-            placeholder='🔎 검색'
+            placeholder="🔎 검색"
             onClick={() => setSearch('')}
           />
         </div>
