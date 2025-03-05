@@ -1,7 +1,7 @@
 ## 📢 프로젝트 소개
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/e3eac783-7745-47f7-8ddc-2845f9a104dc"/>
+  <img src="https://github.com/user-attachments/assets/e3eac783-7745-47f7-8ddc-2845f9a104dc" width="700px"/>
 </p>
 동물들과 함께 카페, 음식점을 이용하기 위해 가게마다 일일히 전화해서
 확인해보신적 있으신가요?! 더이상 여러곳을 돌아다니지 않아도 됩니다. 
