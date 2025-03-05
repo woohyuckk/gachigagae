@@ -19,7 +19,7 @@ export default function LikeItem({ place, navigate }) {
           <LikePlaceButton placeId={place.id} isLiked={place.is_liked} size={30} />
         </div>
         <div className="flex">
-          <div className="w-full">
+          <div className="w-full h-[200px] md:h-full rounded-xl overflow-hidden">
             <KaKaoMap
               latitude={place.coordinates.latitude}
               longitude={place.coordinates.longitude}
