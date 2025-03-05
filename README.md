@@ -1,5 +1,4 @@
-![image](https://github.com/user-attachments/assets/31acd21e-d2c1-4a1d-94dc-f34ac9eedf60)## 📢 프로젝트 소개
-
+## 📢 프로젝트 소개
 
 <p align="center">
   <img src="https://private-user-images.githubusercontent.com/192562150/419258877-ce5c89fc-48fd-4c6f-be33-9b5b9519a43e.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDExNDAxNzEsIm5iZiI6MTc0MTEzOTg3MSwicGF0aCI6Ii8xOTI1NjIxNTAvNDE5MjU4ODc3LWNlNWM4OWZjLTQ4ZmQtNGM2Zi1iZTMzLTliNWI5NTE5YTQzZS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwMzA1JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDMwNVQwMTU3NTFaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1kNGFhOWYyZTYwYWUyNzJhYThkMTg4YjAzOWFkZmE0OTBlNDE0Y2MzMTExMmJlNTJiZDgyNzUzNzk3OGZhNmU0JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.6_NltCVNCRutiUn9NIE80fvH1aQyjT0BokTGAy-_Lgc"/>
