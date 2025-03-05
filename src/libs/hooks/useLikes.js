@@ -1,15 +1,19 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { addLikes, deleteLikes, fetchLikePlaces } from '../api/likesData';
+import {
+  LIKES_QUERY_KEY,
+  HOME_QUERY_KEY,
+  DETAIL_QUERY_KEY,
+} from '../../constants/queryKeyConstants';
 
 /**
  * * 유저가 좋아요한 장소 목록을 가져오는 커스텀 쿼리 훅
- * is_liked는 포함되지 않습니다.
  * @param {string} userId - 현재 로그인한 유저의 uuid
  * @returns {Object} useQuery의 결과 객체
  */
 export const useGetLikePlaces = (userId) => {
   return useQuery({
-    queryKey: ['likePlaces'],
+    queryKey: LIKES_QUERY_KEY.LIKE_PLACES,
     queryFn: () => fetchLikePlaces(userId),
     onError: (error) => {
       console.error('fetchLikePlaces 에러 발생 :', error);
@@ -26,7 +30,7 @@ export const useGetLikePlaces = (userId) => {
  */
 export const useToggleLikes = (isLiked, userId, selectedCategory, searchValue) => {
   const queryClient = useQueryClient();
-  const queryKey = ['infinitePlaces', userId, selectedCategory, searchValue];
+  const queryKey = HOME_QUERY_KEY.INFINITE_PLACE(userId, selectedCategory, searchValue);
 
   // mutation 정의
   const toggleLikeMutation = useMutation({
@@ -57,8 +61,9 @@ export const useToggleLikes = (isLiked, userId, selectedCategory, searchValue) =
       return { previousData };
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['infinitePlaces', userId] });
-      queryClient.invalidateQueries({ queryKey: ['likePlaces'] });
+      queryClient.invalidateQueries({ queryKey: HOME_QUERY_KEY.INFINITE_PLACES });
+      queryClient.invalidateQueries({ queryKey: LIKES_QUERY_KEY.LIKE_PLACES });
+      queryClient.invalidateQueries({ queryKey: DETAIL_QUERY_KEY.PLACES });
     },
     onError: (error, _, context) => {
       queryClient.setQueryData(queryKey, context.previousData);
