@@ -5,9 +5,9 @@ const LikeCard = ({ place, onClick, ref }) => {
 
   return (
     <div className="h-full" ref={ref}>
-      <h2 className="text-2xl font-bold">{title}</h2>
-      <p className="text-gray-400 text-lg w-full my-1">{utils.splitAddress(address)}</p>
-      <figure className="flex flex-auto justify-center items-center rounded-2xl bg-gray-100 xl:w-full h-3/4">
+      <h2 className="text-lg md:text-2xl font-bold">{title}</h2>
+      <p className="text-gray-400 text-sm md:text-lg w-full my-1">{utils.splitAddress(address)}</p>
+      <figure className="flex flex-auto justify-center items-center rounded-2xl h-7/10 bg-gray-100 xl:w-full xl:h-3/4">
         {image ? (
           <img className="object-cover w-full h-full border-2 border-solid" src={image} alt="" />
         ) : (
