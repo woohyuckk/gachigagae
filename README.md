@@ -206,8 +206,9 @@
 
 
 ## ERD
-
-![ERD](https://github.com/user-attachments/assets/72a33042-c42e-49da-89f3-bda37084bf03)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/72a33042-c42e-49da-89f3-bda37084bf03">
+</p>
 
 ## 🛠️ 트러블 슈팅
 
