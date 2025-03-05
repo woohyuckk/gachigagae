@@ -70,7 +70,7 @@ export const useComment = (commentInfo = {}) => {
       queryClient.setQueryData(COMMENT_QUERY_KEY.COMMENT_PLACE_ID(place_id), (old) => {
         return {
           ...old,
-          pages: [...old.pages, [optimisticComment]],
+          pages: [[optimisticComment], ...old.pages],
         };
       });
 
