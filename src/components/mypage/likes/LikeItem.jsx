@@ -5,7 +5,7 @@ import LikeCard from './LikeCard';
 
 export default function LikeItem({ place, navigate }) {
   return (
-    <article className="w-full md:w-[420px] flex-shrink-0 bg-white rounded-xl md:rounded-2xl shadow-lg md:shadow-2xl hover:shadow-xl md:hover:shadow-3xl transition-all duration-500 relative group h-[480px] md:h-[580px] border-2 p-5">
+    <article className="w-full md:w-[420px] flex-shrink-0 bg-white rounded-2xl shadow-lg md:shadow-2xl hover:shadow-xl md:hover:shadow-3xl transition-all duration-500 relative group md:h-[580px] h-[400px] border-2 p-5">
       <LikeCard
         place={place}
         className="h-full flex flex-col"

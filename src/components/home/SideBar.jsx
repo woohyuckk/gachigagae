@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import useAuthStore from '../../stores/useAuthstore';
-
+import user2 from '/user2.png'
 const SideBar = ({ onClick }) => {
   const userInfo = useAuthStore((state) => state.userInfo);
 
@@ -22,7 +22,7 @@ const SideBar = ({ onClick }) => {
         {userInfo.id && (
           <Link to="/mypage">
             <img
-              src={userInfo.profile_img_url || '/public/user2.png'}
+              src={userInfo?.profile_img_url || user2}
               alt="/public/user2.png"
               className="hidden md:block border-2 w-[70px] h-[70px] rounded-[35px]  bg-cover bg-center mt-10"
             />
@@ -32,5 +32,4 @@ const SideBar = ({ onClick }) => {
     </aside>
   );
 };
-<img src="0000" alt="default-iamge" />;
 export default SideBar;

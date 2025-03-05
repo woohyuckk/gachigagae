@@ -1,18 +1,16 @@
 ## 📢 프로젝트 소개
 
+동물들과 함께 카페, 음식점을 이용하기 위해 가게마다 일일히 전화해서
+확인해보신적 있으신가요?! 더이상 여러곳을 돌아다니지 않아도 됩니다. 
 반려동물과 함께 방문할 수 있는 식당과 카페를 소개하는 웹 사이트입니다 🐾
 
 <br>
 
 ## 📅 프로젝트 기간
 
-- **2025.02.27 ~ 2025.03.04**
+- **2025.02.27 ~ 2025.03.05**
 
 <br>
-
-## [프로젝트 계기]
-
-- 반려동물과 함께 여행 다니는 1500만 반려인을 위하여 방문이 가능한 장소를 쉽게 찾을 수 있도록 도움을 주고 싶어서 프로젝트를 계기하게 되었습니다.
 
 ## 💏 멤버 소개
 
@@ -120,9 +118,7 @@
 ### 🗄️ **백엔드 및 API 통신**
 
 ![TanStack Query](https://img.shields.io/badge/TanstackQuery-FF4154?style=flat-square&logo=TanstackQuery&logoColor=white)
-
 ![Kakao Map API](https://img.shields.io/badge/KakaoMapAPI-FFCD00?style=flat-square&logo=kakao&logoColor=black)
-
 ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white)
 
 - **BaaS** (PostgreSQL 기반 Backend as a Service)
@@ -138,7 +134,7 @@
 
 ### 🚀 **배포**
 
-[같이가개 🐾](nbc-outsourcing-project.vercel.app)
+[같이가개 🐾 이용하러가기](https://nbc-outsourcing-project.vercel.app/)
 
 <br>
 
@@ -351,22 +347,23 @@ const useAuthListener = () => {
 
 - useAuthListener에서 useQuery를 사용하는 useGetUserInfo를 호출했으나, QueryClientProvider가 감싸고 있지 않아 QueryClient가 설정되지 않음.
 
+
+#### 💡 해결 방법
 ```
 const App = () => {
   const queryClient = new QueryClient();
-  useAuthListener(); // 실행 위치
+  useAuthListener(); // 기존 실행 위치
 
   return (
     <>
       <QueryClientProvider client={queryClient}>
+        <AuthListener />; // 컴포넌트화 이후 실행 위치
         <Router />
       </QueryClientProvider
     </>
   )
 }
 ```
-
-#### 💡 해결 방법
 
 - QueryClientProvider를 App.jsx에서 최상위에 배치.
 - useAuthListener를 QueryClientProvider 내부에서 실행되도록 별도 AuthListener 컴포넌트로 분리.
