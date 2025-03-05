@@ -54,7 +54,7 @@
         <b>좋아요, 외부 API</b> <br/>
       </td>
       <td align="center">
-        <b>Home 화면 구현</b> <br/>
+        <b>홈 화면 구현</b> <br/>
       </td>
     </tr>
     <tr>
@@ -77,7 +77,7 @@
     </tr>
     <tr>
       <td align="center">
-        <b>로그인 및 회원가입구현 </b> <br/>
+        <b>로그인 및 회원가입 구현 </b> <br/>
       </td>
       <td align="center">
         <b>마이페이지 구현 </b> <br/>
