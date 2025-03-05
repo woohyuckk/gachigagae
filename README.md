@@ -1,7 +1,7 @@
 ## 📢 프로젝트 소개
 
 <p align="center">
-  <img src="https://private-user-images.githubusercontent.com/192562150/419258877-ce5c89fc-48fd-4c6f-be33-9b5b9519a43e.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDExNDI3MzEsIm5iZiI6MTc0MTE0MjQzMSwicGF0aCI6Ii8xOTI1NjIxNTAvNDE5MjU4ODc3LWNlNWM4OWZjLTQ4ZmQtNGM2Zi1iZTMzLTliNWI5NTE5YTQzZS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwMzA1JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDMwNVQwMjQwMzFaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1iOGQ5MGY4ODI1ZGNjZWQzN2M1YmU1MDJkNzU1ZmVhYzRlYTZmMWMyMTAyMzQwY2RkMzAwMjNkNTY5OGVjY2JhJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.eOSskVXXW9yN3p2OzpG67lOTA4meGOshjFqLGd5eDyY"/>
+  <img src="https://private-user-images.githubusercontent.com/192562150/419258877-ce5c89fc-48fd-4c6f-be33-9b5b9519a43e.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDExNDM2MDgsIm5iZiI6MTc0MTE0MzMwOCwicGF0aCI6Ii8xOTI1NjIxNTAvNDE5MjU4ODc3LWNlNWM4OWZjLTQ4ZmQtNGM2Zi1iZTMzLTliNWI5NTE5YTQzZS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwMzA1JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDMwNVQwMjU1MDhaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1iYTVmOWJiZGE5YmQ3OGU4MjkxMWIwYzM3OTA5ZDExMWMzYTZjZmYzYzkwYzkxMDBmNDk1MmM0Y2I0YmI4MmY1JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.m8KmzSKy2e5_w5hPQq8eNeSBlEb93UiiitFHr3UuNAI"/>
 </p>
 동물들과 함께 카페, 음식점을 이용하기 위해 가게마다 일일히 전화해서
 확인해보신적 있으신가요?! 더이상 여러곳을 돌아다니지 않아도 됩니다. 
@@ -125,6 +125,10 @@
   - **Authentication:** 사용자 로그인 및 회원가입 관리
   - **Storage:** 프로필 이미지 등 파일 업로드 관리
 
+- **외부 API 통신**
+  - [문화공공데이터광장](https://www.culture.go.kr/data/openapi/openapiView.do?id=585&category=D&keyword=%EA%B5%AD%20%EB%B0%98%EB%A0%A4%EB%8F%99%EB%AC%BC%20%EB%8F%99%EB%B0%98%EA%B0%80%EB%8A%A5%20%EB%AC%B8%ED%99%94%EC%8B%9C%EC%84%A4%20%EC%9C%84%EC%B9%98&searchField=all&gubun=A)
+  - [kakaoMap](https://developers.kakao.com/product/map)
+    
 ### 🗃️ **버전 관리**
 
 ![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
