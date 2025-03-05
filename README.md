@@ -120,9 +120,7 @@
 ### 🗄️ **백엔드 및 API 통신**
 
 ![TanStack Query](https://img.shields.io/badge/TanstackQuery-FF4154?style=flat-square&logo=TanstackQuery&logoColor=white)
-
 ![Kakao Map API](https://img.shields.io/badge/KakaoMapAPI-FFCD00?style=flat-square&logo=kakao&logoColor=black)
-
 ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white)
 
 - **BaaS** (PostgreSQL 기반 Backend as a Service)
