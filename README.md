@@ -137,6 +137,30 @@
 
 <br>
 
+<table>
+  <tr>
+    <th>로그인</th>
+    <th>회원가입</th>
+    <th>홈화면</th>
+  </tr>
+  <tr>
+    <td><img src="https://via.placeholder.com/250" width="250px"></td>
+    <td><img src="https://via.placeholder.com/250" width="250px"></td>
+    <td><img src="https://via.placeholder.com/250" width="250px"></td>
+  </tr>
+  <tr>
+    <th>마이페이지</th>
+    <th>디테일</th>
+    <th>검색페이지</th>
+  </tr>
+  <tr>
+    <td><img src="https://via.placeholder.com/250" width="250px"></td>
+    <td><img src="https://via.placeholder.com/250" width="250px"></td>
+    <td><img src="https://via.placeholder.com/250" width="250px"></td>
+  </tr>
+</table>
+
+
 ## 📝 **주요 기능**
 
 ### 🔐 로그인 및 회원가입 기능
