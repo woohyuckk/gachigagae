@@ -1,8 +1,12 @@
+import { useSearchParams } from 'react-router-dom';
 import utils from '../../libs/utils/homeUtils';
 import { LikePlaceButton } from '../buttons/LikeButton';
 
 const HomeCard = ({ place, onClick, ref }) => {
   const { id, title, category2, address, image, is_liked } = place;
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get('category');
+  const searchValue = searchParams.get('search');
 
   return (
     <div className="h-full" ref={ref}>
@@ -33,7 +37,7 @@ const HomeCard = ({ place, onClick, ref }) => {
             {category2}
           </span>
         </span>
-        <LikePlaceButton placeId={id} isLiked={is_liked} size={30} className="ml-auto" />
+        <LikePlaceButton placeId={id} isLiked={is_liked} type="home" args={{category, searchValue}} size={30} className="ml-auto" />
       </div>
     </div>
   );

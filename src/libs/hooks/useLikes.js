@@ -25,41 +25,90 @@ export const useGetLikePlaces = (userId) => {
  * * 좋아요를 추가하거나 삭제하는 커스텀 훅
  * @param {boolean} isLiked - 현재 장소의 좋아요 여부
  * @param {string} userId - 현재 로그인한 유저의 uuid
- * @param {string} selectedCategory - 현재 카테고리 (카테고리 관련 없을 시 null 전달)
+ * @param {string} queryType - 현재 페이지 "home", "detail", "likes"
+ * @param {Object} args
+ *   queryType="home"일 경우 args = { selectedCategory, searchValue }
+ *   queryType="detail"일 경우 args = { placeId }
+ *   queryType="likes"일 경우 args = null
+ *
  * @return {Function} return.toggleLike - 좋아요 토글 mutation 함수
  */
-export const useToggleLikes = (isLiked, userId, selectedCategory, searchValue) => {
+export const useToggleLikes = (isLiked, userId, queryType, args) => {
   const queryClient = useQueryClient();
-  const queryKey = HOME_QUERY_KEY.INFINITE_PLACE(userId, selectedCategory, searchValue);
+
+  // * 홈 뮤테이션
+  const homeMutation = async ({ placeId }) => {
+    await queryClient.cancelQueries({ queryKey });
+    const previousData = queryClient.getQueryData(queryKey);
+    queryClient.setQueryData(queryKey, (oldData) => {
+      return {
+        ...oldData,
+        pages: oldData.pages?.map((pages) => {
+          return pages.map((place) => {
+            if (place.id === placeId) {
+              return {
+                ...place,
+                is_liked: !isLiked,
+              };
+            } else {
+              return place;
+            }
+          });
+        }),
+      };
+    });
+    return { previousData };
+  };
+
+  // * 디테일 뮤테이션
+  const detailMutation = async () => {
+    await queryClient.cancelQueries({ queryKey });
+    const previousData = queryClient.getQueryData(queryKey);
+    queryClient.setQueryData(queryKey, (oldData) => {
+      return {
+        ...oldData,
+        is_liked: !isLiked,
+      };
+    });
+    return { previousData };
+  };
+
+  // * 좋아요 리스트 뮤테이션
+  const likesMutation = async ({ placeId }) => {
+    await queryClient.cancelQueries({ queryKey });
+    const previousData = queryClient.getQueryData(queryKey);
+    queryClient.setQueryData(queryKey, (oldData) => {
+      return oldData.filter((place) => {
+        return place.id !== placeId;
+      });
+    });
+    return { previousData };
+  };
+
+  let queryKey, mutateFunc;
+  switch (queryType) {
+    case 'home':
+      queryKey = HOME_QUERY_KEY.INFINITE_PLACE(userId, args.category, args.searchValue);
+      mutateFunc = homeMutation;
+      break;
+    case 'detail':
+      queryKey = DETAIL_QUERY_KEY.PLACE_PLACE_ID(args.placeId);
+      mutateFunc = detailMutation;
+      break;
+    case 'likes':
+      queryKey = LIKES_QUERY_KEY.LIKE_PLACES;
+      mutateFunc = likesMutation;
+      break;
+    default:
+      queryKey = [];
+      mutateFunc = homeMutation;
+  }
 
   // mutation 정의
   const toggleLikeMutation = useMutation({
     mutationFn: isLiked ? deleteLikes : addLikes,
     // * 옵티미스틱 업데이트를 위한 onMutate 함수
-    onMutate: async ({ placeId }) => {
-      // 진행중인 쿼리 취소 및 현재 상태 저장
-      await queryClient.cancelQueries({ queryKey });
-      const previousData = queryClient.getQueryData(queryKey);
-      // 클라이언트(캐시) 상태 업데이트
-      queryClient.setQueryData(queryKey, (oldData) => {
-        return {
-          ...oldData,
-          pages: oldData.pages?.map((pages) => {
-            return pages.map((place) => {
-              if (place.id === placeId) {
-                return {
-                  ...place,
-                  is_liked: !isLiked,
-                };
-              } else {
-                return place;
-              }
-            });
-          }),
-        };
-      });
-      return { previousData };
-    },
+    onMutate: mutateFunc,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: HOME_QUERY_KEY.INFINITE_PLACES });
       queryClient.invalidateQueries({ queryKey: LIKES_QUERY_KEY.LIKE_PLACES });

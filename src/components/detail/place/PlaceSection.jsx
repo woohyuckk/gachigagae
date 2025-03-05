@@ -12,7 +12,13 @@ const PlaceSection = ({ handleModalOpen: openModal, placeInfo }) => {
     <div className="w-full md:w-2/3 min-h-[850px] flex flex-col bg-white shadow-lg p-6 border-2 rounded-2xl ">
       <div className="flex border-b-2 items-center justify-between">
         <h1 className="text-2xl font-bold p-2 text-gray-800">{placeInfo.title}</h1>
-        <LikePlaceButton size={30} isLiked={placeInfo.is_liked} placeId={placeInfo.id} />
+        <LikePlaceButton
+          size={30}
+          placeId={placeInfo.id}
+          isLiked={placeInfo.is_liked}
+          args={{ placeId: placeInfo.id }}
+          type="detail"
+        />
       </div>
       {/* 카테고리 */}
       <div className="flex gap-2 mt-2  ">
