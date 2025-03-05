@@ -1,5 +1,8 @@
 ## 📢 프로젝트 소개
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/e3eac783-7745-47f7-8ddc-2845f9a104dc" width="600px"/>
+</p>
 동물들과 함께 카페, 음식점을 이용하기 위해 가게마다 일일히 전화해서
 확인해보신적 있으신가요?! 더이상 여러곳을 돌아다니지 않아도 됩니다. 
 반려동물과 함께 방문할 수 있는 식당과 카페를 소개하는 웹 사이트입니다 🐾
@@ -44,16 +47,13 @@
     </tr>
     <tr>
       <td align="center">
-        <b>역할 1</b> <br/>
-        <b>역할 2</b> <br/>
+        <b>상세정보 및 댓글 구현</b> <br/>
       </td>
       <td align="center">
-        <b>역할 1</b> <br/>
-        <b>역할 2</b> <br/>
+        <b>좋아요, 외부 API</b> <br/>
       </td>
       <td align="center">
-        <b>역할 1</b> <br/>
-        <b>역할 2</b> <br/>
+        <b>홈 화면 구현</b> <br/>
       </td>
     </tr>
     <tr>
@@ -76,12 +76,10 @@
     </tr>
     <tr>
       <td align="center">
-        <b>역할 1</b> <br/>
-        <b>역할 2</b> <br/>
+        <b>로그인 및 회원가입 구현 </b> <br/>
       </td>
       <td align="center">
-        <b>역할 1</b> <br/>
-        <b>역할 2</b> <br/>
+        <b>마이페이지 구현 </b> <br/>
       </td>
       <td align="center">
     </tr>
@@ -120,6 +118,7 @@
 ![TanStack Query](https://img.shields.io/badge/TanstackQuery-FF4154?style=flat-square&logo=TanstackQuery&logoColor=white)
 ![Kakao Map API](https://img.shields.io/badge/KakaoMapAPI-FFCD00?style=flat-square&logo=kakao&logoColor=black)
 ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white)
+![axios](https://img.shields.io/badge/Axios-5A29E4?style=flat-square&logo=axios&logoColor=white)
 
 - **BaaS** (PostgreSQL 기반 Backend as a Service)
 
@@ -127,6 +126,10 @@
   - **Authentication:** 사용자 로그인 및 회원가입 관리
   - **Storage:** 프로필 이미지 등 파일 업로드 관리
 
+- **외부 API 통신**
+  - [문화공공데이터광장](https://www.culture.go.kr/data/openapi/openapiView.do?id=585&category=D&keyword=%EA%B5%AD%20%EB%B0%98%EB%A0%A4%EB%8F%99%EB%AC%BC%20%EB%8F%99%EB%B0%98%EA%B0%80%EB%8A%A5%20%EB%AC%B8%ED%99%94%EC%8B%9C%EC%84%A4%20%EC%9C%84%EC%B9%98&searchField=all&gubun=A)
+  - [kakaoMap](https://developers.kakao.com/product/map)
+    
 ### 🗃️ **버전 관리**
 
 ![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
@@ -137,6 +140,30 @@
 [같이가개 🐾 이용하러가기](https://nbc-outsourcing-project.vercel.app/)
 
 <br>
+
+<table>
+  <tr>
+    <th>로그인</th>
+    <th>회원가입</th>
+    <th>홈화면</th>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/835fbcf7-bd66-4677-b4d8-0477dea4efac" width="250px"></td>
+    <td><img src="https://github.com/user-attachments/assets/b30daa8c-209b-49b9-beee-9301e6cbc718" width="250px"></td>
+    <td><img src="https://github.com/user-attachments/assets/c5a7815d-3505-4028-9a52-3625a70dc584" width="250px"></td>
+  </tr>
+  <tr>
+    <th>마이페이지</th>
+    <th>디테일</th>
+    <th>검색페이지</th>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/88c722ef-da44-4058-9c43-2be2e7adf30c" width="250px"></td>
+    <td><img src="https://github.com/user-attachments/assets/d487a2dd-e59c-4476-a6df-5527548c960e" width="250px"></td>
+    <td><img src="https://github.com/user-attachments/assets/41e39396-920b-4032-be8b-0ab5cc00f663" width="250px"></td>
+  </tr>
+</table>
+
 
 ## 📝 **주요 기능**
 
@@ -201,14 +228,12 @@
 각 스타일 컴포넌트는 page 명칭에 맞는 pageStyle 폴더로 관리
 예) page 폴더에 page.jsx / pageStyle 폴더로 페이지에 사용된 스타일 컴포넌트를 한 곳에서 확인할 수 있도록 설계
 
-## 와이어 프레임
+## 와이어 프레임, ERD
 
-![image](https://github.com/user-attachments/assets/78fb31d5-9312-4d57-a159-e6db9d7ea0e8)
-
-
-## ERD
-
-![ERD](https://github.com/user-attachments/assets/72a33042-c42e-49da-89f3-bda37084bf03)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/bb8e4dcf-390a-4eb2-a5fd-b75320c0aa11" width = "500px">
+  <img src="https://github.com/user-attachments/assets/ac2816d8-4d2c-465d-bc50-27092f0941b3" width = "500px">
+</p>
 
 ## 🛠️ 트러블 슈팅
 
