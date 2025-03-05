@@ -13,7 +13,7 @@ export default function LikesSection({ userInfo, navigate }) {
 
   return (
     <div className="w-full px-4 pb-6 md:px-0">
-      <h2 className="text-2xl md:text-3xl font-extrabold text-gray-800 mb-6 md:mb-8 flex items-center gap-1 md:gap-2">
+      <h2 className="text-2xl md:text-3xl font-extrabold text-gray-800 mt-3 mb-4 md:mb-8 flex items-center gap-1 md:gap-2">
         <Heart className="w-6 h-6 md:w-8 md:h-8 text-rose-500" />
         좋아요 한 장소
         <span className="text-blue-500/90 text-xl md:text-2xl">({likePlaces.length})</span>
