@@ -342,7 +342,7 @@ const fetchPlacesData = async () => {
 - useQuery를 통해 탠스택쿼리로 BaaS 서버에서 데이터를 가져오는 로직 작성.
 - onAuthStateChange를 통한 인증 상태를 전역 상태에 반영하는 커스텀 훅 생성.
 
-```
+```javascript
 const useAuthListener = () => {
   const setUserInfo = useAuthStore().setUserInfo;
   const { data: userData } = useGetUserInfo();
@@ -374,7 +374,7 @@ const useAuthListener = () => {
 
 
 #### 💡 해결 방법
-```
+```javascript
 const App = () => {
   const queryClient = new QueryClient();
   useAuthListener(); // 기존 실행 위치
