@@ -1,4 +1,4 @@
-## 📢 프로젝트 소개
+![image](https://github.com/user-attachments/assets/31acd21e-d2c1-4a1d-94dc-f34ac9eedf60)## 📢 프로젝트 소개
 
 
 <p align="center">
@@ -144,9 +144,9 @@
     <th>홈화면</th>
   </tr>
   <tr>
-    <td><img src="https://via.placeholder.com/250" width="250px"></td>
-    <td><img src="https://via.placeholder.com/250" width="250px"></td>
-    <td><img src="https://via.placeholder.com/250" width="250px"></td>
+    <td><img src="https://github.com/user-attachments/assets/835fbcf7-bd66-4677-b4d8-0477dea4efac" width="250px"></td>
+    <td><img src="https://github.com/user-attachments/assets/b30daa8c-209b-49b9-beee-9301e6cbc718" width="250px"></td>
+    <td><img src="https://github.com/user-attachments/assets/c5a7815d-3505-4028-9a52-3625a70dc584" width="250px"></td>
   </tr>
   <tr>
     <th>마이페이지</th>
@@ -154,9 +154,9 @@
     <th>검색페이지</th>
   </tr>
   <tr>
-    <td><img src="https://via.placeholder.com/250" width="250px"></td>
-    <td><img src="https://via.placeholder.com/250" width="250px"></td>
-    <td><img src="https://via.placeholder.com/250" width="250px"></td>
+    <td><img src="https://github.com/user-attachments/assets/88c722ef-da44-4058-9c43-2be2e7adf30c" width="250px"></td>
+    <td><img src="https://github.com/user-attachments/assets/d487a2dd-e59c-4476-a6df-5527548c960e" width="250px"></td>
+    <td><img src="https://github.com/user-attachments/assets/41e39396-920b-4032-be8b-0ab5cc00f663" width="250px"></td>
   </tr>
 </table>
 
