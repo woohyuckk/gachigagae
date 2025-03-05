@@ -127,7 +127,7 @@ export default function ProfileSection({ userInfo, setUserInfo }) {
           }}
           onKeyDown={handleKeyDown}
         >
-          <ProfileImageUpload formData={formData} setFormData={setFormData} />
+          <ProfileImageUpload formData={formData} setFormData={setFormData} isSubmitting={isSubmitting} />
           <ProfileForm formData={formData} setFormData={setFormData} isSubmitting={isSubmitting} />
         </form>
       </div>
